@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>adminAside</title>
+</head>
+<body>
+<!--左侧导航-->
+<aside th:fragment="adminAside">
+
+    <!-- logo -->
+    <div id="logo" class="sidebar-header">
+        <a href="index.html"><img src="images/logo-sidebar.png" title="LightYear" alt="LightYear" /></a>
+    </div>
+    <div class="lyear-layout-sidebar-scroll">
+
+        <nav class="sidebar-main">
+            <ul class="nav nav-drawer">
+                <li class="nav-item active"> <a href="index.html"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+                <li class="nav-item nav-item-has-subnav">
+                    <a href="javascript:void(0)"><i class="mdi mdi-format-align-justify"></i> 商品管理</a>
+                    <ul class="nav nav-subnav">
+                        <li> <a th:href="@{/admin/shop/shopType.html}">类目管理</a> </li>
+                        <li> <a th:href="@{/admin/shop/shopList.html}">商品列表</a></li>
+                        <li> <a href="lyear_forms_checkbox.html">规格管理</a> </li>
+                        <li> <a href="shopRecommend.html">商品推荐</a> </li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-item-has-subnav">
+                    <a href="javascript:void(0)"><i class="mdi mdi-palette"></i> 订单管理</a>
+                    <ul class="nav nav-subnav">
+                        <li> <a href="orderList.html">订单列表</a> </li>
+                        <li> <a href="address.html">发货地址</a> </li>
+                        <li> <a href="lyear_ui_grid.html">格栅</a> </li>
+                        <li> <a href="lyear_ui_icons.html">图标</a> </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-item-has-subnav">
+                    <a href="javascript:void(0)"><i class="mdi mdi-account"></i>用户管理</a>
+                    <ul class="nav nav-subnav">
+                        <li> <a href="userList.html">用户列表</a> </li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-item-has-subnav">
+                    <a href="javascript:void(0)"><i class="mdi mdi-language-javascript"></i>营业情况统计</a>
+                    <ul class="nav nav-subnav">
+                        <li> <a href="shopCount.html">销量统计</a> </li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-item-has-subnav">
+                    <a href="javascript:void(0)"><i class="mdi mdi-menu"></i> 多级菜单</a>
+                    <ul class="nav nav-subnav">
+                        <li> <a href="#!">一级菜单</a> </li>
+                        <li class="nav-item nav-item-has-subnav">
+                            <a href="#!">一级菜单</a>
+                            <ul class="nav nav-subnav">
+                                <li> <a href="#!">二级菜单</a> </li>
+                                <li class="nav-item nav-item-has-subnav">
+                                    <a href="#!">二级菜单</a>
+                                    <ul class="nav nav-subnav">
+                                        <li> <a href="#!">三级菜单</a> </li>
+                                        <li> <a href="#!">三级菜单</a> </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li> <a href="#!">一级菜单</a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <p class="copyright">Copyright &copy; 2019. <a target="_blank" href="http://lyear.itshubao.com">IT书包</a> All rights reserved.</p>
+        </div>
+    </div>
+
+</aside>
+
+
+
+
+</body>
+</html>

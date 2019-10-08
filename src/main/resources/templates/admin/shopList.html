@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>首页 - 光年(Light Year Admin)后台管理系统模板</title>
+<link rel="icon" href="favicon.ico" type="image/ico">
+<meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
+<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+<meta name="author" content="yinqi">
+  <div th:replace="common/adminstatic :: adminstatic"></div>
+<style type="text/css">
+
+.table tbody tr td{
+            vertical-align: middle;
+        }
+        th {
+          text-align: center;
+        }
+.table tbody tr td img{
+  width:100px;
+  height: 50px;
+}
+table{
+  table-layout:fixed;
+}
+        </style>
+</head>
+  
+<body>
+<div class="lyear-layout-web">
+  <div class="lyear-layout-container">
+    <aside th:include="common/adminAside :: adminAside" class="lyear-layout-sidebar"></aside>
+    <header th:include="common/adminHead :: adminHead" class="lyear-layout-header"></header>
+    <!--页面主要内容-->
+    <main class="lyear-layout-content">
+      
+      <div class="container-fluid">
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-toolbar clearfix">
+                <form class="pull-right search-bar" method="get" action="#!" role="form">
+                  <div class="input-group">
+                    <div class="input-group-btn">
+                      <input type="hidden" name="search_field" id="search-field" value="title">
+                      <button class="btn btn-default dropdown-toggle" id="search-btn" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
+                      商品编码 <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li> <a tabindex="-1" href="javascript:void(0)" data-field="title">商品编码</a> </li>
+                        <li> <a tabindex="-1" href="javascript:void(0)" data-field="cat_name">商品名称</a> </li>
+                        <li> <a tabindex="-1" href="javascript:void(0)" data-field="title">商品类型</a> </li>
+                      </ul>
+                    </div>
+                    <input type="text" class="form-control" value="" name="keyword" placeholder="请输入编码">
+                  </div>
+                </form>
+                <div class="toolbar-btn-action">
+                  <a class="btn btn-primary m-r-5" href="shopAddShow.html"><i class="mdi mdi-plus"></i> 新增</a>
+                  <a class="btn btn-success m-r-5" href="#!"><i class="mdi mdi-check"></i> 上架</a>
+                  <a class="btn btn-warning m-r-5" href="#!"><i class="mdi mdi-block-helper"></i> 下架</a>
+                  <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 删除</a>
+                </div>
+              </div>
+
+
+              <div class="card-body">
+                
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th style='width:4%;'>
+                          <label class="lyear-checkbox checkbox-primary">
+                            <input type="checkbox" id="check-all"><span></span>
+                          </label>
+                        </th>
+                        <th style='width:10%;'>商品编码</th>
+                        <th style='width:15%;'>商品图片</th>
+                        <th>商品名称</th>
+                        <th>商品类型</th>
+                        <th>商品价格</th>
+                        <th>热门</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="text-center" th:each="product : ${pageInfo.list}">
+                        <td>
+                          <label class="lyear-checkbox checkbox-primary">
+                            <input type="checkbox" name="ids[]" value="1"><span></span>
+                          </label>
+                        </td>
+                        <td th:text="${product.code}">123456789</td>
+                        <td>
+                            <img  th:src="${product.picId[1].url}" th:alt="${product.picId[1].title}">
+                        </td>
+                        <td th:text="${product.title}">火龙果</td>
+                        <td th:text="${product.typeId.name}">水果</td>
+                        <td th:text="${product.price}">30￥</td>
+                        <td>
+                          <font class="text-success" th:if="${product.hot==1}">热门</font>
+                          <font class="text-warning" th:if="${product.hot==2}">不热门</font>
+                        </td>
+                        <td>
+                          <font class="text-success" th:if="${product.status==1}">上架</font>
+                          <font class="text-warning" th:if="${product.status==2}">下架</font>
+                        </td>
+                        <td>
+                          <div class="btn-group">
+                            <a class="btn btn-xs btn-default" th:href="@{${'shopUpdate.html'}(id=${product.id})}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
+                            <a class="btn btn-xs btn-default" th:href="@{${'deleteByIdShop'}(id=${product.id})}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <ul class="pagination">
+
+                  <li>
+                    <a th:if="${not pageInfo.isFirstPage}" th:href="@{${'shopType.html'}(pageNum=${pageInfo.pageNum-1},pageSize=${pageInfo.pageSize})}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    <a th:if="${pageInfo.isFirstPage}" href="javascript:void(0);" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+
+                  <li th:each="pageNo : ${#numbers.sequence(1, pageInfo.pages)}">
+                    <a th:if="${pageInfo.pageNum eq pageNo}" class="bg-info" href="javascript:void(0);">
+                      <span th:text="${pageNo}"></span>
+                    </a>
+
+                    <a  th:if="${not (pageInfo.pageNum eq pageNo)}" th:href="@{${'shopType.html'}(pageNum=${pageNo},pageSize=${pageInfo.pageSize})}">
+                      <span th:text="${pageNo}"></span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a th:if="${not pageInfo.isLastPage}" th:href="@{${'shopType.html'}(pageNum=${pageInfo.pageNum+1},pageSize=${pageInfo.pageSize})}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    <a th:if="${pageInfo.isLastPage}" href="javascript:void(0);" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+       
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </main>
+    <!--End 页面主要内容-->
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+    $('.search-bar .dropdown-menu a').click(function() {
+        var field = $(this).data('field') || '';
+        $('#search-field').val(field);
+        $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+    });
+});
+</script>
+</body>
+</html>

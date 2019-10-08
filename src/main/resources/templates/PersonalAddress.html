@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="./css/base.min.css">
+    <link rel="stylesheet" href="./css/main.min.css">
+    <link rel="stylesheet" type="text/css" href="css/checkOut.css">
+    <link rel="stylesheet" href="./css/reset1.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+</head>
+<body>
+<div id="head" th:include="common/head :: common_head"></div>
+<style>
+    .grzxbj {
+        width: 100%;
+        height: 500px;
+    }
+    .grzxbj .selfinfo .rtcont {
+        height: 500px;
+    }
+    .input-text{
+        height: auto;
+}
+    .btn-primary {
+        background: #ff6700;
+        border-color: #ff6700;
+        color: #fff;
+    }
+    .btn2 {
+        display: inline-block;
+        *zoom: 1;
+        *display: inline;
+        width: 158px;
+        height: 38px;
+        padding: 0;
+        margin: 0;
+        border: 1px solid #b0b0b0;
+        font-size: 14px;
+        line-height: 38px;
+        text-align: center;
+        cursor: pointer;
+        -webkit-transition: all .4s;
+        transition: all .4s;
+    }
+    .btn-gray {
+        background: #b0b0b0;
+        border-color: #b0b0b0;
+        color: #fff;
+    }
+    .btn-gray:hover {
+        background-color: #757575;
+        border-color: #757575;
+        color: #fff;
+    }
+    .modal-header, .modal-hd {
+        height: auto;
+        position: relative;
+        padding: 14px 20px;
+        background-color: #f5f5f5;
+    }
+    .modal-edit-address .modal-footer {
+        margin-top: 41px;
+    }
+    .modal-footer, .modal-ft {
+        height: auto;
+        padding: 20px 0;
+        border-top: 1px solid #e0e0e0;
+        text-align: center;
+        background-color: #f5f5f5;
+        zoom: 1;
+    }
+    .modal-edit-address .modal-body .form-four-address .input-text {
+        cursor: auto;
+    }
+    .xm-address-list .item .edit-btn {
+        display: block;
+    }
+
+</style>
+<!-- self_info -->
+<div class="grzxbj">
+    <div class="selfinfo center">
+        <div class="lfnav fl">
+            <div class="ddzx">个人中心</div>
+            <div class="subddzx">
+                <ul>
+                    <li><a href="./PersonalInfo.html">我的个人中心</a></li>
+                    <li><a href="./PersonalOrder.html">我的订单</a></li>
+                    <li><a href="">消息通知</a></li>
+                    <li><a href="./PersonalAddress.html" style="color:#ff6700;font-weight:bold;">收货地址</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="rtcont fr">
+            <div class="ddzxbt">收货地址</div>
+            <!-- 收货地址 -->
+            <div class="xm-box">
+                <div class="box-bd">
+                    <div class="clearfix xm-address-list" id="checkoutAddrList">
+                        <dl class="item">
+                            <input hidden="hidden" id="1"/>
+                            <dt>
+                                <strong class="itemConsignee">潘骏杰</strong>
+                                <span class="itemTag tag">家</span>
+                            </dt>
+                            <dd>
+                                <p class="tel itemTel">15961726437</p>
+                                <p class="itemRegion">江苏 无锡市 北塘区</p>
+                                <p class="itemStreet">民丰西苑82号202室(214045)</p>
+                                <span class="edit-btn J_editAddr" onclick="updateAddress(1)">编辑</span>
+                            </dd>
+                        </dl>
+                        <dl class="item">
+                            <input hidden="hidden" id="2"/>
+                            <dt>
+                                <strong class="itemConsignee">潘骏杰</strong>
+                                <span class="itemTag tag">家</span>
+                            </dt>
+                            <dd>
+                                <p class="tel itemTel">15961726437</p>
+                                <p class="itemRegion">江苏 无锡市 北塘区</p>
+                                <p class="itemStreet">民丰西苑82号202室(214045)</p>
+                                <span class="edit-btn J_editAddr" onclick="updateAddress(2)">编辑</span>
+                            </dd>
+                        </dl>
+                        <dl class="item">
+                            <dt>
+                                <strong class="itemConsignee">潘骏杰</strong>
+                                <span class="itemTag tag">家</span>
+                            </dt>
+                            <dd>
+                                <p class="tel itemTel">15961726437</p>
+                                <p class="itemRegion">江苏 无锡市 北塘区</p>
+                                <p class="itemStreet">民丰西苑82号202室(214045)</p>
+                                <span class="edit-btn J_editAddr" onclick="updateAddress(3)">编辑</span>
+                            </dd>
+                        </dl>
+
+                        <div class="item use-new-addr" id="J_useNewAddr" data-state="off" onclick="addAddress()">
+                            <span class="iconfont icon-add"><img src="images/add_cart.png"></span>
+                            使用新地址
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-hide fade modal-edit-address in" id="J_modalEditAddress" aria-hidden="false"
+         style="display: none;">
+        <div class="modal-header">
+            <span class="title">添加收货地址</span>
+        </div>
+        <div class="modal-body">
+            <div class="form-box clearfix">
+                <div class="form-section form-name">
+                    <input class="input-text J_addressInput" type="text" id="J_addressNameInput" name="user_name" value="请输入姓名"  onfocus="if(value=='请输入姓名') {value=''}" onblur="if(value=='') {value='请输入姓名'}"/>
+                </div>
+                <div class="form-section form-phone">
+                    <input class="input-text J_addressInput" type="text" id="J_addressPhoneInput" name="user_phone" value="11位手机号" onfocus="if(value=='11位手机号') {value=''}" onblur="if(value=='') {value='11位手机号'}"/>
+                </div>
+                <div class="form-section form-four-address form-section-active">
+                    <input id="J_selectAddressTrigger" class="input-text J_addressInput" type="text" name="four_address" value="请输入省 / 市 / 区 / 街道" onfocus="if(value=='请输入省 / 市 / 区 / 街道') {value=''}" onblur="if(value=='') {value='请输入省 / 市 / 区 / 街道'}"/>
+                </div>
+                <div class="form-section form-address-detail">
+                    <textarea class="input-text J_addressInput" type="text" id="J_addressDetailInput" name="user_adress"  onfocus="if(value=='详细地址，路名或街道名称，门牌号') {value=''}" onblur="if(value=='') {value='详细地址，路名或街道名称，门牌号'}">详细地址，路名或街道名称，门牌号</textarea>
+                </div>
+                <div class="form-section form-zipcode">
+                    <input class="input-text J_addressInput" type="text" id="J_addressZipcodeInput" name="user_zipcode" value="请输入邮政编码" onfocus="if(value=='请输入邮政编码') {value=''}" onblur="if(value=='') {value='请输入邮政编码'}"/>
+                </div>
+                <div class="form-section form-tag">
+                    <input class="input-text J_addressInput" type="text" id="J_addressTagInput" name="user_tag" value="如&quot;家&quot;、&quot;公司&quot;。限5个字内" onfocus="if(value=='如&quot;家&quot;、&quot;公司&quot;。限5个字内') {value=''}" onblur="if(value=='') {value='如&quot;家&quot;、&quot;公司&quot;。限5个字内'}"/>
+                </div>
+                <input type="hidden" id="addressId" value=""/>
+                <div class="form-section form-tip-msg clearfix" id="J_formTipMsg"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="javascript:void(0);" class="btn2 btn-primary" onclick="">保存</a>
+            <a href="" class="btn2 btn-gray" onclick="">取消</a>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+<script>
+    function  addAddress() {
+        var J_modalEditAddress = document.getElementById("J_modalEditAddress");
+        J_modalEditAddress.style.display = "block";
+    }
+    function updateAddress(id) {
+        console.log(id);
+        var addressId = document.getElementById("addressId");
+        addressId.value =id;
+        addAddress();
+    }
+</script>
+</html>

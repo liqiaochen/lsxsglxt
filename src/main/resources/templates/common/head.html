@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <footer th:fragment="common_head">
+        <!--顶部导航-->
+        <div class="site-topbar ">
+            <div class="container clearfix">
+                <!--顶部导航-->
+                <div class="topbar-nav pull-left">
+                    <a class="active" href="javascript:;"></a>
+                    <a href="javascript:;">欢迎来到零食中心</a>
+                </div>
+                <!--购物车-->
+                <div class="topbar-cart pull-right">
+                    <a href="carts.html" class="btn cart">
+                        <i class="icon iconfont"></i>
+                        购物车(<span>0</span>)
+                    </a>
+                </div>
+                <!--登入、注册-->
+                <div class="topbar-user pull-right">
+                    <a href="login.html">登录</a>
+                    <span class="sep">|</span>
+                    <a href="register.html">注册</a>
+                </div>
+            </div>
+        </div>
+
+        <!--页面header-->
+        <div class="site-header">
+            <div class="container clearfix">
+                <!--网站logo-->
+                <div class="header-logo pull-left">
+                    <a href="javascript:;">
+                        <img src="./images/logo.png">
+                    </a>
+                </div>
+                <ul class="header-nav pull-left clearfix">
+                    <li class="item-category"></li>
+                    <li class="nav-item"><a class="link" href="index.html">商城首页</a></li>
+                    <li class="nav-item"><a class="link"  href="javascript:;">关于我们</a></li>
+                    <li class="nav-item"><a class="link"  href="javascript:;">产品中心</a></li>
+                    <li class="nav-item"><a class="link"  href="javascript:;">生活常识</a></li>
+                    <li class="nav-item"><a class="link"  href="javascript:;">在线反馈</a></li>
+                    <li class="nav-item"><a class="link"  href="javascript:;">联系我们</a></li>
+                </ul>
+                <!--搜索框-->
+                <div class="header-search pull-right">
+                    <form class="search-form">
+                        <input type="text" class="search-text" id="search-text"/>
+                        <a href="javascript:;" class="btn-search">
+                            <i class="icon iconfont1"></i>
+                        </a>
+                        <div class="search-keywords" id="search-keywords">
+                            <a href="javascript:;">肯德基</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </footer>
+</head>
+</html>
+<body>

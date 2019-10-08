@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+        <meta charset="UTF-8">
+        <title>模仿小米的登录页面</title>
+        <style>
+        /**样式重置***/
+        *{margin:0px;padding:0px;}
+        /**指定字体**/
+        body{
+        font-size:12px;
+        font-family:arial,sans-serif;
+        color: #757575;
+        background: #fff;
+        }
+        .header{
+        height: 96px;
+        color: #FFFFFF;
+        }
+        .header .header-logo{
+        width:300px;
+        height:90px;
+        background: url(img/mistore_logo.png) no-repeat;
+        margin-left: 80px;
+        }
+        .container{
+        position: relative;
+        width: 100%;
+        height: 500px;
+        text-align: center;
+        background: url(img/section01_img.jpg) no-repeat top center;
+        background-color: #14212B;
+        }
+        .container .login-form{
+        height: 420px;
+        width:410px;
+        background: #FFFFFF;
+        position: absolute;
+        top:34px;
+        right:40px;
+        text-align: center;
+        margin: 0 auto;
+        }
+        .login-form input{
+        color: #333;
+        font-size:14px;
+        height: 22px;
+        line-height: 22px;
+        padding: 13px 16px 13px 14px;
+        width: 320px;
+
+        }
+        .login-form input:focus{
+        border:1px solid #757575;
+        outline:none;
+        }
+        .row{
+        text-align: center;
+        margin: 20px auto;
+        }
+        .login-type{
+        font-size: 24px;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        }
+        .login-type .active{
+        color: #f56600;
+        }
+        .split:after{
+        content:'|';
+        color: #757575;
+        margin-left:10px;
+        margin-right:10px;
+        }
+        .login-btn{
+        width:356px;
+        height:60px;
+        background: #F56600;
+        color: #FFFFFF;
+        outline: none;
+        border: none;
+        }
+        .forget{
+        margin-top: 10px;
+        }
+        .forget a{
+        text-decoration: none;
+        color: #757575;
+        }
+        /***底部样式定义****/
+        .footer{
+        position: relative;
+        margin-top:20px auto;
+        text-align: center;
+        }
+        .footer a{display: block;color: #757575;text-decoration: none;font-size: 14px;}
+        .footer ul{list-style-type: none;margin: 10px auto;}
+        .footer ul li{display:inline-block;margin-right: 10px;}
+        </style>
+    </head>
+    <body>
+        <!--顶部导航区域 -->
+        <div class="header">
+            <div class="header-logo"></div>
+        </div>
+        <!--内容区域-->
+        <div class="container">
+            <!--登录表单 -->
+            <form class="login-form" action="index.html" method="post">
+                <div class="login-type">
+                    <a class="active">账号登录</a>
+                </div>
+                <div class="row">
+                    <input type="text"  name="user_name" placeholder="用户名/手机号码" />
+                </div>
+                <div class="row">
+                    <input type="password"  name="user_password" placeholder="密码" />
+                </div>
+
+                <button class="login-btn" onclick="return login_vertify()">立即登录</button>
+                <div class="forget">
+                    <a href="register.html" class="split">注册账号</a>
+                    <a href="#">忘记密码</a>
+                </div>
+            </form>
+        </div>
+        <!--底部导航区域 -->
+        <div class="footer">
+            <ul>
+                <li><a href="#" class="split">简体</a></li>
+                <li><a href="#" class="split">繁体</a></li>
+                <li><a href="#" class="split">English</a></li>
+                <li><a href="#">常见问题</a></li>
+            </ul>
+            <p>小米公司版权所有-京ICP备10046444-京公网安备11010802020134号-京ICP证110507号</p>
+        </div>
+        <script>
+        function login_vertify(){
+        alert("正在拼命登录中...");
+        return true;
+        }
+        </script>
+    </body>
+</html>

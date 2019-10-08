@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>新增文档 - 光年(Light Year Admin)后台管理系统模板</title>
+<link rel="icon" href="favicon.ico" type="image/ico">
+<meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
+<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+<meta name="author" content="yinqi">
+
+  <div th:replace="common/adminstatic :: adminstatic"></div>
+
+<!--标签插件-->
+  <link rel="stylesheet" th:href="@{/js/jquery-tags-input/jquery.tagsinput.min.css}">
+  <script th:src="@{/js/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+</head>
+  
+<body>
+<div class="lyear-layout-web">
+  <div class="lyear-layout-container">
+
+    <aside th:include="common/adminAside :: adminAside" class="lyear-layout-sidebar"></aside>
+    <header th:include="common/adminHead :: adminHead" class="lyear-layout-header"></header>
+    <!--页面主要内容-->
+    <main class="lyear-layout-content">
+      
+      <div class="container-fluid">
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                
+                <form action="#" method="post" class="row" onsubmit="return false">
+                  <input hidden="hidden" th:value="${product.id}" id="id">
+                  <div class="form-group col-md-3">
+                    <label for="title">商品编码</label>
+                    <input type="text" class="form-control" id="code" name="code" th:value="${product.code}" value="123456789" />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="type">商品类别</label>
+                    <div class="form-controls">
+                      <select  name="type" class="form-control" id="type">
+                        <option  th:each="type : ${productTypes}"  th:text="*{type.name}" th:value="*{type.id}" th:selected="${product.typeId.id eq type.id}" ></option>
+                      </select>
+                    </div>
+                  </div> 
+                  <div class="form-group col-md-3">
+                    <label for="title">商品名称</label>
+                    <input type="text" class="form-control" id="title" name="title" th:value="${product.title}" value="火龙果"/>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="title">商品价格</label>
+                    <input type="text" class="form-control" id="price" name="price" th:value="${product.price}" value="80"/>
+                  </div>
+                   
+                  <div class="form-group col-md-12">
+                    <label>食品图片</label>
+                    <div class="form-controls">
+                      
+                      <ul class="list-inline clearfix lyear-uploads-pic" id="uploads-pic">
+                        <li class="col-xs-4 col-sm-3 col-md-2" th:each="img:${product.picId}" th:id="${img.id}">
+                          <figure>
+                            <img th:src="${img.url}" src="images/gallery/15.jpg" th:alt="${img.title}" alt="图片一">
+                            <figcaption>
+                              <a class="btn btn-round btn-square btn-danger" onclick="deleteImg(${img.id})"><i class="mdi mdi-delete"></i></a>
+                            </figcaption>
+                          </figure>
+                        </li>
+                        <li class="col-xs-4 col-sm-3 col-md-2">
+                          <a class="pic-add" id="add-pic-btn" title="点击上传" onclick="upfile.click()"></a>
+                          <input type="file" id="upfile" onchange="uploadFile()" style="visibility: hidden; position: relative;"/>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3 ">
+                    <label for="turnover">成交量</label>
+                    <div></div>
+                    <input type="text" class="form-control" disabled id="turnover" name="turnover" th:value="${product.turnover}" value="10"/>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="stock">库存</label>
+                    <input type="text" class="form-control" id="stock" name="stock" th:value="${product.stock}" value="300"/>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="createname">创建者</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" th:value="${product.createAdminName}" value="admin" />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="createname">创建时间</label>
+                    <input type="text" class="form-control" disabled id="createtime" name="createtime" th:value="${#dates.format(product.createTime,'yyyy-MM-dd HH:mm:ss')}" value="2019:7" />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="unit">单位</label>
+                    <input type="text" class="form-control" id="unit" name="unit" th:value="${product.unit}" value="瓶" />
+                  </div>
+                  <div class="form-group col-md-3" th:switch="${product.recommend}">
+                    <label>推荐</label>
+                    <input th:case="1" th:id="recommend" type="text" class="form-control" name="recommend"  value="是" />
+                    <input th:case="2" th:id="recommend" type="text" class="form-control" name="recommend"  value="否" />
+                    <input th:case="*" th:id="recommend" id="recommend" type="text" class="form-control" name="recommend"  value="否">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="updater">修改者</label>
+                    <input type="text" class="form-control" disabled id="updater" name="updater"  value="admin" />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="updatetime">修改时间</label>
+                    <input type="text" class="form-control" disabled id="updatetime" name="updatetime" th:value="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss')}" value="2019:8" />
+                  </div>
+                  
+
+                   <div class="form-group col-md-6">
+                    <label>状态</label>
+                    <div class="clearfix">
+                      <label class="lyear-radio radio-inline radio-primary">
+                        <input type="radio" name="status" value="1" th:checked="${product.status==1}"/><span>上架</span>
+                        <input type="radio" name="status" value="2" th:checked="${product.status==2}"/><span>下架</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label>是否热门</label>
+                    <div class="clearfix">
+                      <label class="lyear-radio radio-inline radio-primary">
+                        <input type="radio" name="hot" value="1" th:checked="${product.hot==1}"/><span>热门</span>
+                        <input type="radio" name="hot" value="2" th:checked="${product.hot==2}"/><span>不热门</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-12">
+                    <label for="seo_description">描述</label>
+                    <textarea class="form-control" id="seo_description" name="note" rows="5" value="" th:text="${product.note}">非常好</textarea>
+                  </div>
+                 
+
+                 
+                  <div class="form-group col-md-12">
+                    <button type="submit" id="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
+                    <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
+                  </div>
+                </form>
+       
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </main>
+    <!--End 页面主要内容-->
+  </div>
+</div>
+</body>
+</html>
+<script>
+  function uploadFile() {
+    var formData = new FormData();
+    formData.append('file', $('#upfile')[0].files[0]);
+    $.ajax({
+      url: "[[@{/file/upload}]]",
+      type: "POST",
+      data: formData,
+      /**
+       *必须false才会自动加上正确的Content-Type
+       */
+      contentType: false,
+      /**
+       * 必须false才会避开jQuery对 formdata 的默认处理
+       * XMLHttpRequest会对 formdata 进行正确的处理
+       */
+      processData: false,
+      success: function (data) {
+        var randomNum = Math.round(Math.random() * 10);
+        console.log(randomNum);
+        var url  = data.data;
+        var src  = '[[@{/upload/}]]'+url;
+        $('#uploads-pic').prepend('<li id='+randomNum+' class="col-xs-4 col-sm-3 col-md-2">'
+                +'<figure>'
+                +'<img src='+src+'>'
+                +'<figcaption>'
+                +'<a class="btn btn-round btn-square btn-danger" onclick="deleteImg('+randomNum+')"><i class="mdi mdi-delete">'
+                +'</i></a>'
+                +'</figcaption>'
+                +'</figure>'
+                +'</li>');
+
+      },
+      error: function (data) {
+        alert(data.msg);
+
+      }
+    });
+
+  }
+
+  function  deleteImg(id){
+    var img = $("#"+id);
+    img.remove();
+  }
+
+  $("#submit").click(function () {
+    var code = $("#code").val();
+    var title = $("#title").val();
+    var price = $("#price").val();
+    var options=$("#type option:selected");  //获取选中的项
+    var type = options.val();
+    var imgs= [];
+    $.each($('#img').find('img'),function(i){
+      //获取src属性
+      var oldSrc = $(this).attr('src');
+      imgs[i]=oldSrc;
+    });
+    var stock = $("#stock").val();
+    var unit = $("#unit").val();
+    var status =$('#status input[name="status"]:checked ').val();
+    var hot =$('#hot input[name="hot"]:checked ').val();
+    var description = $("#seo_description").val();
+    var shop= new Object();
+    shop.code=code;
+    shop.title=title;
+    shop.price=price;
+    shop.typeId=type;
+    shop.imgs=imgs;
+    shop.unit=unit;
+    shop.status=status;
+    shop.hot=hot;
+    shop.stock=stock;
+    shop.description=description;
+    console.log(shop);
+
+    $.ajax({
+      type: 'POST',
+      url: "[[@{/admin/shop/shopUpdate}]]",
+      contentType: "application/json;charset=utf-8",
+      data: JSON.stringify(shop),
+      dataType: "json",
+      success: function (res) {
+        alert(res.msg+""+res.data);
+      },
+      error:function (res) {
+        alert(res.msg);
+      }
+    })
+
+
+  });
+
+
+</script>

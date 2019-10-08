@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bysj.lsxsglxt.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.bysj.lsxsglxt.model.Product">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="stock" jdbcType="BIGINT" property="stock" />
+    <result column="recommend" jdbcType="TINYINT" property="recommend" />
+    <result column="turnover" jdbcType="INTEGER" property="turnover" />
+    <result column="hot" jdbcType="TINYINT" property="hot" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result property="updateAdminName" jdbcType="VARCHAR" column="updateAdmin_name"/>
+    <association property="typeId" column="type_id" javaType="com.bysj.lsxsglxt.model.Producttype"
+     fetchType="lazy"      select="com.bysj.lsxsglxt.mapper.ProducttypeMapper.showByIdType">
+    </association>
+    <collection column="id" property="picId" ofType="com.bysj.lsxsglxt.model.Picture"
+       select="com.bysj.lsxsglxt.mapper.PictureMapper.selectByProductId"
+       fetchType="lazy">
+    </collection>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, code, title, price, note, stock, recommend, turnover, hot, unit, Star, createTime,
+    updateAdmin_name,type_id
+  </sql>
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="integer">
+    select product.*
+    from product
+    where product.id=#{id};
+  </select>
+
+  <resultMap id="BaseResultMap2" type="com.bysj.lsxsglxt.model.Product">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="stock" jdbcType="BIGINT" property="stock" />
+    <result column="recommend" jdbcType="TINYINT" property="recommend" />
+    <result column="turnover" jdbcType="INTEGER" property="turnover" />
+    <result column="hot" jdbcType="TINYINT" property="hot" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result property="createAdminName" jdbcType="VARCHAR" column="createAdmin_name"/>
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result property="updateAdminName" jdbcType="VARCHAR" column="updateAdmin_name"/>
+    <association property="typeId" column="type_id" javaType="com.bysj.lsxsglxt.model.Producttype"
+                 fetchType="lazy">
+      <id column="ptid" property="id" />
+      <result column="name" property="name"/>
+      <result column="status" property="status"/>
+    </association>
+    <collection column="id" property="picId" ofType="com.bysj.lsxsglxt.model.Picture"
+                fetchType="lazy">
+      <id column="picid" property="id" />
+      <result column="level" property="level"/>
+      <result column="pictitle" property="title"/>
+      <result column="time" property="time"/>
+      <result column="url" property="url"/>
+      <result column="admin_name" property="adminName"/>
+      <result column="product_id" property="productId"/>
+    </collection>
+  </resultMap>
+
+
+  <select id="selectById2" resultMap="BaseResultMap2" parameterType="integer">
+    SELECT product.* ,
+    pt.id ptid,pt.`name`,pt.`status`,
+    pic.id picid,pic.`level`,pic.title pictitle,pic.time,pic.url,pic.admin_name,pic.product_id
+    FROM product INNER JOIN  producttype pt ON product.type_id = pt.id INNER JOIN picture pic ON pic.product_id = product.id
+    WHERE product.id = #{id}
+  </select>
+
+  <select id="selectListProduct" resultMap="BaseResultMap">
+    select product.*
+    from product
+  </select>
+
+</mapper>

@@ -1,0 +1,1187 @@
+.modal.modal-luckybag {
+    background: none;
+    height: 600px;
+    margin-top: -300px
+}
+
+.modal.modal-luckybag .close {
+    width: 44px;
+    height: 44px;
+    background: url("//i1.mifile.cn/f/i/2018/011801/close.png")
+}
+
+.modal.modal-luckybag .close:hover {
+    background-color: none
+}
+
+.modal.modal-luckybag .con {
+    height: 464px;
+    background: url("//i1.mifile.cn/f/i/2018/011801/bg.png?2") no-repeat center
+}
+
+.modal.modal-luckybag .btn-excrete {
+    background: url("//i1.mifile.cn/f/i/2018/011801/btn.png?2") no-repeat center;
+    width: 240px;
+    height: 67px;
+    display: block;
+    margin: 40px auto;
+    border: none
+}
+
+.modal.modal-luckybagpro {
+    height: 680px;
+    width: 1130px;
+    margin-left: -565px;
+    margin-top: -340px;
+    background-color: #ff3333;
+    border-radius: 10px
+}
+
+.modal.modal-luckybagpro .close {
+    width: 44px;
+    height: 44px;
+    right: -60px;
+    top: 10px;
+    background: url("//i1.mifile.cn/f/i/2018/011801/close.png")
+}
+
+.modal.modal-luckybagpro .close:hover {
+    background-color: none
+}
+
+.modal.modal-luckybagpro .con {
+    color: #ffff99;
+    text-align: center;
+    padding-top: 80px
+}
+
+.modal.modal-luckybagpro .con h3 {
+    background: url("//i1.mifile.cn/f/i/2018/011801/title.png");
+    height: 102px;
+    width: 287px;
+    margin: 0 auto 30px
+}
+
+.modal.modal-luckybagpro .con p {
+    position: relative;
+    width: 385px;
+    font-size: 16px;
+    margin: 0 auto 40px
+}
+
+.modal.modal-luckybagpro .con p:after, .modal.modal-luckybagpro .con p:before {
+    width: 108px;
+    height: 1px;
+    background: #ee7c61;
+    position: absolute;
+    top: 12px;
+    content: ''
+}
+
+.modal.modal-luckybagpro .con p:after {
+    right: 0
+}
+
+.modal.modal-luckybagpro .con p:before {
+    left: 0
+}
+
+.modal.modal-luckybagpro .con ul {
+    margin: 0;
+    padding: 0
+}
+
+.modal.modal-luckybagpro .con ul img, .modal.modal-luckybagpro .con ul span {
+    display: block;
+    margin: 0 auto
+}
+
+.modal.modal-luckybagpro .con ul img {
+    width: 492px;
+    height: 292px;
+    margin-bottom: 25px
+}
+
+.modal.modal-luckybagpro .con ul .name {
+    font-size: 20px;
+    margin-bottom: 14px
+}
+
+.modal.modal-luckybagpro .con ul span {
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    _zoom: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.modal.modal-luckybagpro .con ul li {
+    width: 100%;
+    margin: 0 5px;
+    display: inline-block;
+    *zoom: 1;
+    *display: inline
+}
+
+.order-view-box .uc-order-item .subtitle {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 400;
+    color: #333
+}
+
+.order-view-box .uc-order-item .order-detail {
+    padding: 25px 0;
+    margin-bottom: 5px
+}
+
+.order-view-box .uc-order-item .order-status {
+    margin-bottom: 25px
+}
+
+.order-view-box .uc-order-item .order-desc {
+    margin: -15px 0 25px
+}
+
+.order-view-box .uc-order-item .order-desc .delivery-link {
+    color: #333
+}
+
+.order-view-box .uc-order-item .order-desc .delivery-link:hover {
+    color: #ff6700
+}
+
+.order-view-box .uc-order-item .order-desc .delivery-link:hover .tri {
+    border-top-color: #ff6700
+}
+
+.order-view-box .uc-order-item .order-desc .tri {
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    margin-top: 1px;
+    border: 4px solid #fff;
+    border-top-color: #757575;
+    vertical-align: middle
+}
+
+.order-view-box .uc-order-item .order-progress {
+    height: 65px;
+    margin-bottom: 15px
+}
+
+.order-view-box .uc-order-item .progress-list {
+    width: 880px;
+    height: 20px;
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+    border-radius: 20px;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    color: #424242;
+    background-color: #eee
+}
+
+.order-view-box .uc-order-item .progress-list .step {
+    float: left;
+    width: 176px;
+    height: 20px
+}
+
+.order-view-box .uc-order-item .progress-list .step-first {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px
+}
+
+.order-view-box .uc-order-item .progress-list .step-last {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px
+}
+
+.order-view-box .uc-order-item .progress-list .step-done {
+    background-color: #83c44e;
+    color: #fff
+}
+
+.order-view-box .uc-order-item .progress-list .step-active {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #83c44e;
+    color: #fff
+}
+
+.order-view-box .uc-order-item .progress-list .step .info {
+    margin-top: 15px;
+    color: #757575
+}
+
+.order-view-box .uc-order-item .progress-list-col-4 .step {
+    width: 220px
+}
+
+.order-view-box .uc-order-item .progress-list-col-3 .step {
+    width: 293px
+}
+
+.order-view-box .uc-order-item .progress-list-col-3 .step-first {
+    width: 294px
+}
+
+.order-view-box .uc-order-item .progress-list-col-2 .step {
+    width: 440px
+}
+
+.order-view-box .uc-order-item .progress-list-6 {
+    width: 876px
+}
+
+.order-view-box .uc-order-item .progress-list-6 .step {
+    width: 146px
+}
+
+.order-view-box .uc-order-item .order-urge {
+    margin-bottom: 14px;
+    border: 1px solid #e0e0e0;
+    padding: 10px 0;
+    text-align: center;
+    cursor: pointer
+}
+
+.order-view-box .uc-order-item .order-urge .init {
+    display: inline-block;
+    *zoom: 1;
+    *display: inline
+}
+
+.order-view-box .uc-order-item .order-urge .succ, .order-view-box .uc-order-item .order-urge .loader {
+    display: none
+}
+
+.order-view-box .uc-order-item .order-urge-loading .loader {
+    display: block
+}
+
+.order-view-box .uc-order-item .order-urge-loading .init, .order-view-box .uc-order-item .order-urge-loading .succ {
+    display: none
+}
+
+.order-view-box .uc-order-item .order-urge-success {
+    border-color: #83c44e;
+    cursor: default
+}
+
+.order-view-box .uc-order-item .order-urge-success .init, .order-view-box .uc-order-item .order-urge-success .loader {
+    display: none
+}
+
+.order-view-box .uc-order-item .order-urge-success .succ {
+    display: inline-block;
+    *zoom: 1;
+    *display: inline
+}
+
+.order-view-box .uc-order-item .order-items-table {
+    width: 100%
+}
+
+.order-view-box .uc-order-item .order-items-table .col {
+    height: 90px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+    color: #333
+}
+
+.order-view-box .uc-order-item .order-items-table .col-thumb {
+    width: 100px
+}
+
+.order-view-box .uc-order-item .order-items-table .col-name {
+    width: 290px
+}
+
+.order-view-box .uc-order-item .order-items-table .col-name a {
+    color: #333
+}
+
+.order-view-box .uc-order-item .order-items-table .col-name a:hover {
+    color: #ff6700
+}
+
+.order-view-box .uc-order-item .order-items-table .col-actions {
+    width: 120px;
+    padding: 0;
+    text-align: right
+}
+
+.order-view-box .uc-order-item .order-items-table .col-offset {
+    padding-left: 20px
+}
+
+.order-view-box .uc-order-item .order-items-table .figure-thumb {
+    width: 80px
+}
+
+.order-view-box .uc-order-item .order-items-table .figure-thumb a {
+    display: block
+}
+
+.order-view-box .uc-order-item .order-items-table .figure-thumb img {
+    width: 80px;
+    height: 80px
+}
+
+.order-view-box .uc-order-item .order-items-table .name {
+    margin: 0
+}
+
+.order-view-box .uc-order-item .order-items-table .name a {
+    color: #333
+}
+
+.order-view-box .uc-order-item .order-items-table .name a:hover {
+    color: #ff6700
+}
+
+.order-view-box .uc-order-item .order-items-table .price {
+    margin: 0
+}
+
+.order-view-box .uc-order-item .order-detail-info {
+    position: relative;
+    _height: 120px;
+    height: auto;
+    min-height: 120px;
+    padding: 6px 0 12px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e0e0e0
+}
+
+.order-view-box .uc-order-item .order-detail-info h3 {
+    margin: 0 0 15px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #333
+}
+
+.order-view-box .uc-order-item .order-detail-info .info-table {
+    color: #757575
+}
+
+.order-view-box .uc-order-item .order-detail-info .info-table th, .order-view-box .uc-order-item .order-detail-info .info-table td {
+    padding: 3px 0;
+    text-align: left
+}
+
+.order-view-box .uc-order-item .order-detail-info .info-table th {
+    width: 80px;
+    font-weight: 400
+}
+
+.order-view-box .uc-order-item .order-detail-info .info-table p {
+    margin: 0
+}
+
+.order-view-box .uc-order-item .order-detail-info .info-table .beta {
+    color: #b0b0b0
+}
+
+.order-view-box .uc-order-item .order-detail-info .info-table-premoney th {
+    width: 394px
+}
+
+.order-view-box .uc-order-item .order-detail-info .info-table-premoney .special {
+    color: #ff6700
+}
+
+.order-view-box .uc-order-item .order-detail-info .actions {
+    position: absolute;
+    top: 5px;
+    right: 0
+}
+
+.order-view-box .uc-order-item .order-detail-info .actions .btn {
+    display: block;
+    margin: 0 0 10px auto
+}
+
+.order-view-box .uc-order-item .order-detail-info .info-detail-table {
+    width: 100%;
+    color: #757575
+}
+
+.order-view-box .uc-order-item .order-detail-info .info-detail-table th, .order-view-box .uc-order-item .order-detail-info .info-detail-table td {
+    text-align: left
+}
+
+.order-view-box .uc-order-item .order-detail-info .info-detail-table th {
+    padding: 8px 20px 8px 40px;
+    font-weight: 400;
+    background: #e0e0e0
+}
+
+.order-view-box .uc-order-item .order-detail-info .info-detail-table td {
+    min-width: 90px;
+    padding: 10px 20px 0 40px
+}
+
+.order-view-box .uc-order-item .order-detail-info .info-detail-table .warning {
+    color: #ff6700
+}
+
+.order-view-box .uc-order-item .order-detail-total .total-table {
+    width: 255px;
+    margin: 0 0 0 auto;
+    color: #757575
+}
+
+.order-view-box .uc-order-item .order-detail-total .total-table th, .order-view-box .uc-order-item .order-detail-total .total-table td {
+    padding: 5px 0;
+    text-align: left
+}
+
+.order-view-box .uc-order-item .order-detail-total .total-table th.total, .order-view-box .uc-order-item .order-detail-total .total-table td.total {
+    padding-top: 25px;
+    vertical-align: text-bottom
+}
+
+.order-view-box .uc-order-item .order-detail-total .total-table th.total .num, .order-view-box .uc-order-item .order-detail-total .total-table td.total .num {
+    font-size: 30px;
+    font-weight: 200;
+    line-height: 1
+}
+
+.order-view-box .uc-order-item .order-detail-total .total-table th {
+    width: 100px;
+    font-weight: 400;
+    text-align: right
+}
+
+.order-view-box .uc-order-item .order-detail-total .total-table td {
+    text-align: right;
+    color: #ff6700
+}
+
+.order-view-box .uc-order-item .order-detail-total .num {
+    margin-right: .125em
+}
+
+.modal-edit-time {
+    width: 718px;
+    margin-left: 718 / 2
+}
+
+.modal-edit-time .field-edit-time {
+    text-align: center
+}
+
+.modal-edit-time .field-edit-time h3 {
+    margin: 20px 0;
+    font-size: 18px;
+    font-weight: 400
+}
+
+.modal-edit-time .time-list {
+    width: 612px;
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none
+}
+
+.modal-edit-time .time-list li {
+    float: left;
+    _display: inline;
+    width: 188px;
+    padding: 15px 0;
+    margin: 0 7px;
+    border: 1px solid #e0e0e0;
+    font-size: 14px;
+    text-align: center;
+    color: #757575;
+    cursor: pointer;
+    -webkit-transition: all .2s;
+    transition: all .2s
+}
+
+.modal-edit-time .time-list li:hover {
+    border-color: #b0b0b0
+}
+
+.modal-edit-time .time-list li.active {
+    border-color: #ff6700
+}
+
+.modal-edit-time .time-list li.active, .modal-edit-time .time-list li.active b {
+    color: #ff6700
+}
+
+.modal-edit-time .time-list b {
+    display: block;
+    font-size: 18px;
+    font-weight: 400;
+    color: #333
+}
+
+.modal-verify {
+    height: 460px;
+    margin-top: -230px
+}
+
+.modal-verify .modal-bd {
+    height: 320px;
+    padding: 0 60px;
+    text-align: center;
+    color: #757575;
+    overflow: hidden;
+    _zoom: 1
+}
+
+.modal-verify .authcode-box {
+    margin: 10px 0
+}
+
+.modal-verify .authcode-box .content-order, .modal-verify .authcode-box .account-tel {
+    display: none
+}
+
+.modal-verify .authcode-box .content {
+    color: #424242
+}
+
+.modal-verify .get-code-tip {
+    margin-top: 20px;
+    color: #e53935
+}
+
+.modal-verify .msg-tip {
+    margin: 10px 0 0
+}
+
+.modal-verify .authcode-box-order .content-order, .modal-verify .authcode-box-order .account-tel {
+    display: inline
+}
+
+.modal-verify .authcode-box-order .content-account, .modal-verify .authcode-box-order .order-tel {
+    display: none
+}
+
+.modal-verify .tel-section {
+    width: 394px;
+    margin: 40px auto 14px;
+    text-align: left
+}
+
+.modal-verify .tel-section .change-tel {
+    float: right;
+    width: 160px;
+    text-align: center;
+    cursor: pointer;
+    color: #ff6700
+}
+
+.modal-verify .form-authocode {
+    width: 394px;
+    margin: 0 auto
+}
+
+.modal-verify .form-authocode .form-section {
+    float: left
+}
+
+.modal-verify .form-authocode .btn-authocode {
+    float: left;
+    margin-left: 14px
+}
+
+.modal-verify .form-row {
+    margin-left: -14px
+}
+
+.modal-verify .form-update-addr {
+    margin: 20px 0
+}
+
+.modal-verify .form-update-addr .form-section {
+    float: left;
+    display: block;
+    margin-left: 14px
+}
+
+.modal-verify .form-update-addr .form-section .input-text {
+    width: 229px
+}
+
+.modal-verify .form-update-addr .form-section textarea.input-text {
+    width: 506px;
+    height: 20px;
+    line-height: 20px
+}
+
+.modal-verify .form-update-addr .tip-msg {
+    color: #e53935
+}
+
+.modal-verify .form-section-province, .modal-verify .form-section-city, .modal-verify .form-section-district, .modal-verify .form-section-area {
+    width: 262px
+}
+
+.modal-verify .form-section-province .xm-select, .modal-verify .form-section-city .xm-select, .modal-verify .form-section-district .xm-select, .modal-verify .form-section-area .xm-select {
+    width: 262px;
+    margin-right: 0
+}
+
+.modal-verify .refund-box {
+    padding-top: 20px;
+    text-align: left
+}
+
+.modal-verify .refund-box textarea.input-text {
+    width: 400px;
+    height: 80px;
+    line-height: 20px
+}
+
+.modal-verify .refund-box p {
+    margin: 0 0 20px
+}
+
+.modal-verify .refund-box .form-section {
+    margin-bottom: 20px
+}
+
+.modal-verify .servive-box {
+    margin-top: 50px
+}
+
+.modal-verify .servive-box ul {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+.modal-insurance {
+    width: 760px;
+    margin-left: -380px
+}
+
+.modal-insurance .modal-hd small {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #ffac13
+}
+
+.modal-insurance .modal-bd {
+    max-height: 450px;
+    padding: 0 30px;
+    overflow: auto
+}
+
+.modal-insurance .modal-ft {
+    height: 40px;
+    padding: 40px 30px;
+    background: #eee
+}
+
+.modal-insurance .modal-ft .insurance-info {
+    float: left;
+    margin: 0;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: left;
+    color: #424242
+}
+
+.modal-insurance .modal-ft .insurance-info a {
+    text-decoration: underline;
+    color: #424242
+}
+
+.modal-insurance .modal-ft .btn {
+    float: right
+}
+
+.modal-insurance .modal-ft .btn-disabled {
+    background-color: #6d6d6d;
+    border-color: #6d6d6d;
+    color: #fff
+}
+
+.modal-insurance .insurance-item {
+    position: relative;
+    height: 200px;
+    padding-left: 40px;
+    border-top: 1px solid #e0e0e0
+}
+
+.modal-insurance .insurance-item:first-child {
+    border-top: 0
+}
+
+.modal-insurance .insurance-item .icon-check {
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+    width: 30px;
+    height: 30px;
+    background: url("//c1.mifile.cn/f/i/2014/cn/uc/icons-radio.png") no-repeat 0 0
+}
+
+.modal-insurance .insurance-item .item-checkbox {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    padding: 85px 10px
+}
+
+.modal-insurance .insurance-item .item-checkbox:hover .icon-check {
+    background-position: -30px 0
+}
+
+.modal-insurance .insurance-item .item-checkbox:focus {
+    outline: 0
+}
+
+.modal-insurance .insurance-item .item-thumb {
+    float: left;
+    width: 160px;
+    height: 160px;
+    padding: 20px 0
+}
+
+.modal-insurance .insurance-item .item-info {
+    float: left;
+    padding-top: 55px;
+    color: #424242
+}
+
+.modal-insurance .insurance-item .item-info h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400
+}
+
+.modal-insurance .insurance-item .item-info p {
+    margin: 0;
+    font-size: 12px
+}
+
+.modal-insurance .insurance-item .item-info .price {
+    margin-top: 15px;
+    font-size: 14px;
+    font-family: avenir, helvetica, arial, sans-serif;
+    font-weight: 200;
+    color: #ffac13
+}
+
+.modal-insurance .insurance-item .item-info .num {
+    margin: 0 2px;
+    font-size: 24px;
+    line-height: 1
+}
+
+.modal-insurance .insurance-item-selected .item-checkbox .icon-check, .modal-insurance .insurance-item-selected .item-checkbox:hover .icon-check {
+    background-position: -60px 0
+}
+
+.modal-invoice {
+    margin-top: -310px
+}
+
+.modal-invoice ul, .modal-invoice li, .modal-invoice p {
+    margin: 0;
+    padding: 0
+}
+
+.modal-invoice ul, .modal-invoice li {
+    list-style: none
+}
+
+.modal-invoice .modal-body {
+    padding: 19px 0 0 40px;
+    max-height: 460px;
+    height: 520px
+}
+
+.modal-invoice .in-section {
+    padding-left: 76px;
+    position: relative
+}
+
+.modal-invoice .tit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 76px;
+    line-height: 40px
+}
+
+.modal-invoice .in-section-con {
+    line-height: 40px
+}
+
+.modal-invoice .options li {
+    float: left;
+    height: 38px;
+    line-height: 38px;
+    border: 1px solid #fff;
+    color: #333
+}
+
+.modal-invoice .options li span {
+    color: #757575
+}
+
+.modal-invoice .options .selected {
+    border-color: #fff;
+    color: #ff6700
+}
+
+.modal-invoice .options .selected span {
+    color: #ff6700
+}
+
+.modal-invoice .options-list li {
+    width: 235px;
+    margin-right: 14px;
+    margin-bottom: 14px;
+    border-color: #e0e0e0;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition: all .3s;
+    transition: all .3s
+}
+
+.modal-invoice .options-list li:hover {
+    border-color: #b0b0b0
+}
+
+.modal-invoice .options-list .selected {
+    border-color: #ff6700
+}
+
+.modal-invoice .options-list .selected:hover {
+    border-color: #ff6700
+}
+
+.modal-invoice .icon-qa {
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 3px;
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+    background-color: #ff6700;
+    font-style: normal;
+    cursor: pointer
+}
+
+.modal-invoice .invoice-tip {
+    margin: 0 41px 14px 0;
+    color: #757575;
+    font-size: 12px
+}
+
+.modal-invoice .invoice-tip.active span {
+    color: #ff6700
+}
+
+.modal-invoice .invoice-tip a {
+    color: #ff6700
+}
+
+.modal-invoice .invoice-paper-tip {
+    color: #ff6700
+}
+
+.modal-invoice .qa-detail {
+    width: 264px;
+    padding: 17px 20px;
+    position: absolute;
+    top: 39px;
+    right: 0;
+    border: 1px solid #e0e0e0;
+    font-size: 12px;
+    color: #757575;
+    background-color: #fff;
+    -webkit-box-shadow: 0 3px 4px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.18);
+    z-index: 10
+}
+
+.modal-invoice .qa-detail a {
+    color: #ff6700
+}
+
+.modal-invoice .qa-detail:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -9px;
+    left: 257px;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    _zoom: 1;
+    border-width: 0 9px 9px;
+    border-style: dashed dashed solid;
+    border-color: transparent transparent #e0e0e0;
+    z-index: 2
+}
+
+.modal-invoice .qa-detail:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -8px;
+    left: 258px;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    _zoom: 1;
+    border-width: 0 8px 8px;
+    border-style: dashed dashed solid;
+    border-color: transparent transparent #fff;
+    z-index: 3
+}
+
+.modal-invoice a:focus {
+    outline: none
+}
+
+.modal-invoice .invoice-company-code-tip {
+    margin-bottom: 14px
+}
+
+.modal-invoice .invoice-company-code-tip span {
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+    color: #757575
+}
+
+.modal-invoice .input-text-big {
+    width: 454px
+}
+
+.modal-invoice .more {
+    padding-left: 76px;
+    position: relative
+}
+
+.modal-invoice .more dl, .modal-invoice .more dd, .modal-invoice .more dt {
+    margin: 0;
+    padding: 0
+}
+
+.modal-invoice .more a {
+    color: #ff6700
+}
+
+.modal-invoice .more dt {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 76px
+}
+
+.modal-invoice .more dd {
+    -webkit-transition: color .3s;
+    transition: color .3s;
+    font-size: 12px;
+    color: #757575;
+    line-height: 1.8
+}
+
+.modal-invoice .more .active {
+    color: #ff6700
+}
+
+.modal-invoice .submit-tip {
+    position: absolute;
+    left: 40px;
+    bottom: 14px;
+    width: 580px;
+    text-align: center;
+    color: #e53935
+}
+
+.modal-glass .loading {
+    padding: 100px 0
+}
+
+.modal-glass .modal-info, .modal-glass .modal-footer {
+    display: none
+}
+
+.modal-glass .row {
+    position: relative;
+    margin: 0
+}
+
+.modal-glass .row + .row {
+    margin-top: 24px
+}
+
+.modal-glass .row .cell {
+    position: relative;
+    width: 100%;
+    float: left
+}
+
+.modal-glass .row label {
+    font-size: 18px;
+    padding-bottom: 10px;
+    display: block
+}
+
+.modal-glass .row label span {
+    color: #8c8c8c;
+    font-size: 14px;
+    margin-left: 5px;
+    vertical-align: 2px
+}
+
+.modal-glass .row p {
+    margin: 0
+}
+
+.modal-glass .modal-header h2 a, .modal-glass .modal-header h2 span, .modal-glass .modal-header .tips a, .modal-glass .modal-header .tips span, .modal-glass .modal-body h2 a, .modal-glass .modal-body h2 span, .modal-glass .modal-body .tips a, .modal-glass .modal-body .tips span {
+    font-size: 14px;
+    color: #b0b0b0
+}
+
+.modal-glass .modal-header h2 a i, .modal-glass .modal-header h2 span i, .modal-glass .modal-header .tips a i, .modal-glass .modal-header .tips span i, .modal-glass .modal-body h2 a i, .modal-glass .modal-body h2 span i, .modal-glass .modal-body .tips a i, .modal-glass .modal-body .tips span i {
+    font-style: normal;
+    border: 2px solid #b0b0b0;
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+    width: 15px;
+    height: 15px;
+    border-radius: 8px;
+    line-height: 16px;
+    text-align: center;
+    margin-left: 5px;
+    vertical-align: 1px
+}
+
+.modal-glass .modal-body {
+    max-height: 390px !important
+}
+
+.modal-glass .modal-body .base-choose {
+    border-bottom: 1px solid #e0e0df
+}
+
+.modal-glass .modal-body .base-choose .tips {
+    padding: 20px 0 20px 0
+}
+
+.modal-glass .modal-body .other-choose h2 {
+    font-size: 18px;
+    padding-top: 10px;
+    display: block;
+    font-weight: normal
+}
+
+.modal-glass .modal-body .other-choose ul li {
+    margin-right: 12px;
+    margin-bottom: 12px;
+    width: 283px;
+    padding: 20px 0px;
+    text-align: center
+}
+
+.modal-glass .modal-body .other-choose ul li em {
+    font-style: normal;
+    display: block;
+    font-size: 18px
+}
+
+.modal-glass .modal-body .other-choose ul li p {
+    padding-top: 5px;
+    color: #757575;
+    margin: 0
+}
+
+.modal-glass .modal-body .other-choose ul li.disabled {
+    cursor: not-allowed;
+    background: #f7f7f7;
+    color: rgba(0, 0, 0, 0.25);
+    border: 1px solid #f7f7f7
+}
+
+.modal-glass .modal-body .other-choose ul li.disabled p {
+    color: rgba(0, 0, 0, 0.25)
+}
+
+.modal-glass .modal-body .other-choose ul li.last {
+    margin-right: 0
+}
+
+.modal-glass .modal-body .other-choose ul li.active em, .modal-glass .modal-body .other-choose ul li.active p {
+    color: #ff6700
+}
+
+.modal-glass .modal-footer {
+    border: none;
+    color: #ff6700;
+    text-align: left;
+    font-size: 18px;
+    padding-left: 60px;
+    position: relative
+}
+
+.modal-glass .modal-footer p {
+    margin: 5px 0 0 0
+}
+
+.modal-glass .modal-footer a.btn {
+    position: absolute;
+    top: 20px;
+    right: 60px;
+    margin: 0
+}
+
+.fanscard-info {
+    position: absolute
+}
+
+.modal-check .modal-body {
+    text-align: center;
+    max-height: 600px
+}
+
+.modal-check .modal-body .choose-eye, .modal-check .modal-body .choose-glass {
+    padding: 20px 0 0 0
+}
+
+.modal-check .modal-body .choose-eye .subTitle, .modal-check .modal-body .choose-glass .subTitle {
+    color: #8c8c8c
+}
+
+.modal-check .modal-body .choose-eye table, .modal-check .modal-body .choose-glass table {
+    width: 530px;
+    margin: 20px auto
+}
+
+.modal-check .modal-body .choose-eye table tr, .modal-check .modal-body .choose-eye table td, .modal-check .modal-body .choose-glass table tr, .modal-check .modal-body .choose-glass table td {
+    border: 1px solid #e0e0df;
+    height: 50px
+}
+
+.modal-check .modal-body .choose-eye {
+    border-bottom: 1px solid #e0e0df;
+    padding: 20px 0
+}

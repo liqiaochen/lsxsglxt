@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/css.css">
+    <link rel="stylesheet" href="./css/display.css">
+    <link rel="stylesheet" href="./css/reset1.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./iconfont/iconfont.css">
+    <!--<script type="text/javascript" src="./js/display.js"></script>-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <link rel="icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon" />
+
+    <title>小米商城</title>
+</head>
+
+<body>
+
+<div id="head" th:include="common/head :: common_head"></div>
+
+<!-- 单品 -->
+<div class="product">
+    <div class="shops">
+
+        <div class="left-bar">
+            <div class="img-box">
+                <img src="./images/baishi2.jpg" alt="">
+            </div>
+            <div class="clip-box" style=""></div>
+        </div>
+        <div class="shops-message">
+            <div class="name">百事可乐</div>
+            <br>
+            <div class="mes">你有百事，我就可乐，百事可乐，事事可乐，百事可乐。</div>
+            <br>
+            <div class="price1"><span class="commspan">市场价：</span>20.00元/罐</div>
+            <div class="price2"><span class="commspan">售&nbsp;&nbsp;&nbsp;价：</span>15.00元/罐</div>
+            <div class="price2"><span class="commspan">销&nbsp;&nbsp;&nbsp;量：</span>200<span>罐</span></div>
+            <!--<div class="song">
+                <span class="ka">赠品</span>
+                <span class="feng">赠米粉卡</span>
+            </div>-->
+            <div class="city">
+                <div class="chengshi">
+                    <i class="iconfont">&#xe684;</i>
+                    <div>
+                        <div class="address-info">
+                            <span>北京</span>
+                            <span>北京市</span>
+                            <span>昌平区</span>
+                            <span>沙阳路</span>
+                        </div>
+                        <span class="item">修改</span>
+                    </div>
+                </div>
+            </div>
+            <div class="addCart">
+                <div class="biglarge">加入购物车</div>
+            </div>
+        </div>
+        <div class="right-bar">
+            <img src="" alt="">
+        </div>
+
+    </div>
+</div>
+
+<!-- 遮罩层 -->
+<div class="zhezhaoceng">
+</div>
+<div class="mod_layer">
+    <div class="mod_layer_hd"><i class="close_ico" data-mpopup-close=""></i></div>
+
+    <div class="mod_layer_bd">
+        <i class="suc_ico"></i>
+        <p class="prompt_txt J_get_status">添加成功！</p>
+    </div>
+
+    <div class="mod_layer_ft">
+        <a href="javascript:void(0)" class="layer_btn J_close_text" data-mpopup-close="">继续购物</a>
+        <a class="layer_btn J_get_href" data-mpopup-confirm="" href="./carts.html">去结算</a>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".zhezhaoceng").css({"height":document.documentElement.clientHeight})
+
+        $(".shops").on("click",".biglarge",()=>{
+            $(".mod_layer").addClass("show")
+        $(".zhezhaoceng").addClass("show")
+    })
+        $(".J_close_text").on("click",()=>{
+            $(".mod_layer").removeClass("show")
+        $(".zhezhaoceng").removeClass("show")
+    })
+        $(".close_ico").on("click",()=>{
+            $(".mod_layer").removeClass("show")
+        $(".zhezhaoceng").removeClass("show")
+    })
+    })
+</script>
+</body>
+
+</html>

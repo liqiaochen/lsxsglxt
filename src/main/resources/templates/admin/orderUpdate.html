@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>新增文档 - 光年(Light Year Admin)后台管理系统模板</title>
+<link rel="icon" href="favicon.ico" type="image/ico">
+<meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
+<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+<meta name="author" content="yinqi">
+  <div th:replace="common/adminstatic :: adminstatic"></div>
+<!--标签插件-->
+  <link rel="stylesheet" th:href="@{/js/jquery-tags-input/jquery.tagsinput.min.css}">
+  <script th:src="@{/js/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+</head>
+  
+<body>
+<div class="lyear-layout-web">
+  <div class="lyear-layout-container">
+    <aside th:include="common/adminAside :: adminAside" class="lyear-layout-sidebar"></aside>
+    <header th:include="common/adminHead :: adminHead" class="lyear-layout-header"></header>
+    <!--页面主要内容-->
+    <main class="lyear-layout-content">
+      
+      <div class="container-fluid">
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                
+                <form action="#!" method="post" class="row">    
+                <h3>基本信息：</h3> 
+                <br>
+                <div class="form-group col-md-3 ">
+                    <label for="turnover">联系人</label>
+                    <div></div>
+                    <input type="text" class="form-control" id="turnover" name="turnover" value="里斯"/>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label for="title">电话</label>
+                    <input type="text" class="form-control" id="price" name="price" value="17670849877"/>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label for="title">收货地址</label>
+                    <input type="text" class="form-control" id="code" name="code" value="湖南" />
+                  </div>
+                 
+                  <div class="form-group col-md-3">
+                    <label for="title">邮编</label>
+                    <input type="text" class="form-control" id="title" name="title" value="31101"/>
+                  </div>
+                  
+                  <div class="form-group col-md-3">
+                    <label for="createname">创建时间</label>
+                    <input type="text" class="form-control" disabled id="createtime" name="createtime" value="2019:7" />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="createname">付款时间</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="2019:7" />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="createname">发货时间</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="2019:7" />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="createname">收货时间</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="2019:7" />
+                  </div>
+                  
+              <br>
+             <h3>商品信息：</h3> 
+                <br>
+                <div>
+                  <div class="form-group col-md-2">
+                    <label for="type">商品名称</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="火水果" />
+                  </div> 
+                  <div class="form-group col-md-2">
+                    <label for="type">商品编码</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="1313213" />
+                  </div> 
+                  <div class="form-group col-md-2">
+                    <label for="type">商品类别</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="水果" />
+                  </div> 
+                  <div class="form-group col-md-2">
+                    <label for="type">商品单价</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="30" />
+                  </div> 
+                  <div class="form-group col-md-2">
+                    <label for="type">商品数量</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="4" />
+                  </div> 
+                  <div class="form-group col-md-2">
+                    <label for="type">商品总价</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="120" />
+                  </div> 
+                </div>
+                <div>
+                  <div class="form-group col-md-2">
+                    <label for="type">商品名称</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="火水果" />
+                  </div> 
+                  <div class="form-group col-md-2">
+                    <label for="type">商品编码</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="1313213" />
+                  </div> 
+                  <div class="form-group col-md-2">
+                    <label for="type">商品类别</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="水果" />
+                  </div> 
+                  <div class="form-group col-md-2">
+                    <label for="type">商品单价</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="30" />
+                  </div> 
+                  <div class="form-group col-md-2">
+                    <label for="type">商品数量</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="4" />
+                  </div> 
+                  <div class="form-group col-md-2">
+                    <label for="type">商品总价</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="120" />
+                  </div> 
+
+                </div>
+                
+                  <br>
+                <h3>操作者：</h3> 
+                <br>
+
+                  <div class="form-group col-md-4">
+                    <label for="updater">修改者</label>
+                    <input type="text" class="form-control" disabled id="updater" name="updater" value="admin" />
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="updatetime">修改时间</label>
+                    <input type="text" class="form-control" disabled id="updatetime" name="updatetime" value="2019:8" />
+                  </div>
+                 <div class="form-group col-md-4">
+                    <label for="type">总计</label>
+                    <input type="text" class="form-control" disabled id="createname" name="createname" value="240" />
+                  </div>
+
+                  <div class="form-group col-md-12">
+                    <label for="seo_description">卖家备注：</label>
+                    <textarea class="form-control" id="seo_description" name="note" rows="5" value="">非常好</textarea>
+                  </div>
+
+
+
+                  <div class="form-group col-md-12 col-md-offset-5">
+                    <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
+                    <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
+                  </div>
+
+                  
+                </form>
+       
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </main>
+    <!--End 页面主要内容-->
+  </div>
+</div>
+</body>
+</html>

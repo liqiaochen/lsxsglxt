@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>首页 - 光年(Light Year Admin)后台管理系统模板</title>
+<link rel="icon" href="favicon.ico" type="image/ico">
+<meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
+<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+<meta name="author" content="yinqi">
+  <div th:replace="common/adminstatic :: adminstatic"></div>
+<style type="text/css">
+.table tbody tr td{
+            vertical-align: middle;
+        }
+        th {
+          text-align: center;
+        }
+.table tbody tr td img{
+  width:100px;
+  height: 50px;
+}
+table{
+  table-layout:fixed;
+}
+        </style>
+</head>
+  
+<body>
+<div class="lyear-layout-web">
+  <div class="lyear-layout-container">
+    <aside th:include="common/adminAside :: adminAside" class="lyear-layout-sidebar"></aside>
+    <header th:include="common/adminHead :: adminHead" class="lyear-layout-header"></header>
+
+    <!--页面主要内容-->
+    <main class="lyear-layout-content">
+
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-toolbar clearfix">
+                <form class="pull-right search-bar" method="get" action="#!" role="form">
+                  <div class="input-group">
+                    <div class="input-group-btn">
+                      <input type="hidden" name="search_field" id="search-field" value="title">
+                      <button class="btn btn-default dropdown-toggle" id="search-btn" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
+                        类别名称 <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li> <a tabindex="-1" href="javascript:void(0)" data-field="type_name">类别名称</a> </li>
+                        <li> <a tabindex="-1" href="javascript:void(0)" data-field="type_status">类别状态</a> </li>
+                      </ul>
+                    </div>
+                    <input type="text" class="form-control" value="" name="keyword" placeholder="请输入">
+                  </div>
+                </form>
+                <div class="toolbar-btn-action">
+                  <a class="btn btn-primary m-r-5" data-toggle="modal" data-target="#gridSystemModaladd"><i class="mdi mdi-plus"></i> 新增</a>
+                  <a class="btn btn-success m-r-5" id="start"><i class="mdi mdi-check"></i> 启用</a>
+                  <a class="btn btn-warning m-r-5" id="stop"><i class="mdi mdi-block-helper"></i> 禁用</a>
+                  <a class="btn btn-danger" id="delete"><i class="mdi mdi-window-close"></i> 删除</a>
+                </div>
+              </div>
+              <!-- 弹出模态框 -->
+              <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="gridSystemModaladd">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">增加类目</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-md-2" >类目名称：</div>
+                        <div class="col-md-5 form-group"><input type="text" name="typename" class="form-control" id="typeName"></div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <div class="col-md-2">类目状态：</div>
+                        <div class="col-md-5 form-controls">
+                          <select name="type" class="form-control" id="typeStatus">
+                            <option value="1">启用</option>
+                            <option value="2">禁用</option>
+                          </select>
+                        </div>
+                      </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                      <button type="button" class="btn btn-primary" id="save">点击保存</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body">
+
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                      <th>
+                        <label class="lyear-checkbox checkbox-primary">
+                          <input type="checkbox" id="check-all"><span></span>
+                        </label>
+                      </th>
+                      <th>类别名称</th>
+                      <th>状态</th>
+                      <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr  class="text-center" th:each="type : ${pageInfo.list}" >
+                      <td>
+                        <label class="lyear-checkbox checkbox-primary">
+                          <input type="checkbox" name="ids[]" th:value="${type.id}"><span></span>
+                        </label>
+                      </td>
+                      <td th:text="${type.name}"></td>
+                      <td>
+                        <font class="text-success" th:if="${type.status==1}">启用</font>
+                        <font class="text-warning" th:if="${type.status==2}">禁用</font>
+                      </td>
+                      <td>
+                        <div class="btn-group">
+                          <a class="btn btn-xs btn-default" data-toggle="modal" data-target="#gridSystemModalupdate" title="编辑"  th:onclick="updateType([[${type.id}]],[[${type.status}]],[[${type.name}]]);" id="updateType"><i class="mdi mdi-pencil"></i></a>
+
+                          <!-- 弹出模态框 -->
+                          <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="gridSystemModalupdate">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <h4 class="modal-title">修改类目</h4>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row">
+                                    <input type="hidden" id="hiddenId" value="">
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-2">类目名称：</div>
+                                    <div class="col-md-5 form-group"><input type="text" name="typename" value="水果" class="form-control" id="updateTypeName"></div>
+                                  </div>
+                                  <br>
+                                  <div class="row">
+                                    <div class="col-md-2">类目状态：</div>
+                                    <div class="col-md-5 form-controls">
+                                      <select name="status" class="form-control" id="updateStaus">
+                                        <option value="1">启用</option>
+                                        <option value="2">禁用</option>
+                                      </select>
+                                    </div>
+                                  </div>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                  <button type="button" class="btn btn-primary" id="update">点击保存</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <a class="btn btn-xs btn-default"  th:href="@{${'deleteIdType'}(id=${type.id})}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <ul class="pagination">
+
+                  <li>
+                    <a th:if="${not pageInfo.isFirstPage}" th:href="@{${'shopType.html'}(pageNum=${pageInfo.pageNum-1},pageSize=${pageInfo.pageSize})}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    <a th:if="${pageInfo.isFirstPage}" href="javascript:void(0);" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+
+                  <li th:each="pageNo : ${#numbers.sequence(1, pageInfo.pages)}">
+                    <a th:if="${pageInfo.pageNum eq pageNo}" class="bg-info" href="javascript:void(0);">
+                      <span th:text="${pageNo}"></span>
+                    </a>
+
+                    <a  th:if="${not (pageInfo.pageNum eq pageNo)}" th:href="@{${'shopType.html'}(pageNum=${pageNo},pageSize=${pageInfo.pageSize})}">
+                      <span th:text="${pageNo}"></span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a th:if="${not pageInfo.isLastPage}" th:href="@{${'shopType.html'}(pageNum=${pageInfo.pageNum+1},pageSize=${pageInfo.pageSize})}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    <a th:if="${pageInfo.isLastPage}" href="javascript:void(0);" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+    <!--End 页面主要内容-->
+  </div>
+</div>
+<script type="text/javascript">
+
+  /**
+   * 添加商品类型
+   */
+$("#save").click(function () {
+  var options=$("#typeStatus option:selected");  //获取选中的项
+  var status = options.val();
+  console.log(status);   //拿到选中项的值
+  /*console.log(options.text());   //拿到选中项的文本*/
+  var name=$("#typeName").val();
+//添加类别的ajax
+  $.ajax({
+    type: 'POST',
+    url: "saveType",
+    data: {"name":name,"status":status},
+    dataType: "json",
+    success: function (res) {
+      alert(res.msg);
+      window.location.href="shopType.html";
+    },
+    error:function (res) {
+      alert(res.msg);
+    }
+  });
+})
+  $("#start").click(function () {
+    //定义一个空数组
+    var checkID = [];
+    //把所有被选中的复选框的值存入数组
+    $("input[name='ids[]']:checked").each(function(i){
+      checkID[i] =$(this).val();
+    });
+    console.log(checkID)
+    $.ajax({
+      type: 'POST',
+      url: "startType",
+      traditional: true,
+      data: {"ids":checkID},
+      dataType: "json",
+      success: function (res) {
+        alert(res.msg+""+res.data+"个");
+        window.location.href="shopType.html";
+      },
+      error:function (res) {
+        alert(res.msg);
+      }
+            })
+  });
+
+  $("#stop").click(function () {
+    //定义一个空数组
+    var checkID = [];
+    //把所有被选中的复选框的值存入数组
+    $("input[name='ids[]']:checked").each(function(i){
+      checkID[i] =$(this).val();
+    });
+    console.log(checkID)
+    $.ajax({
+      type: 'POST',
+      url: "stopType",
+      traditional: true,
+      data: {"ids":checkID},
+      dataType: "json",
+      success: function (res) {
+        alert(res.msg+""+res.data+"个");
+        window.location.href="shopType.html";
+      },
+      error:function (res) {
+        alert(res.msg);
+      }
+    })
+  });
+
+  $("#delete").click(function () {
+    //定义一个空数组
+    var checkID = [];
+    //把所有被选中的复选框的值存入数组
+    $("input[name='ids[]']:checked").each(function(i){
+      checkID[i] =$(this).val();
+    });
+    console.log(checkID)
+    $.ajax({
+      type: 'POST',
+      url: "deleteType",
+      traditional: true,
+      data: {"ids":checkID},
+      dataType: "json",
+      success: function (res) {
+        alert(res.msg+""+res.data+"个");
+        window.location.href="shopType.html";
+      },
+      error:function (res) {
+        alert(res.msg);
+      }
+    })
+  });
+  function updateType(id,status,name){
+    console.log(id,status,name);
+    $("#updateTypeName").val(name);
+    $("#hiddenId").val(id);
+    $("#updateStaus  option[value="+status+"] ").attr("selected",true)
+    console.log($("#updateTypeName").val());
+  }
+
+  $("#update").click(function () {
+  var  name =  $("#updateTypeName").val();
+  var   id  =  $("#hiddenId").val();
+  var options=$("#updateStaus option:selected");
+  var  status = options.val();
+  console.log(options);
+    $.ajax({
+      type: 'POST',
+      url: "updateType",
+      data: {"id":id,"name":name,"status":status},
+      dataType: "json",
+      success: function (res) {
+        alert(res.msg);
+        window.location.href="shopType.html";
+      },
+      error:function (res) {
+        alert(res.msg);
+      }
+    })
+  })
+
+$(function(){
+    $('.search-bar .dropdown-menu a').click(function() {
+        var field = $(this).data('field') || '';
+        $('#search-field').val(field);
+        $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+    });
+});
+</script>
+</body>
+</html>

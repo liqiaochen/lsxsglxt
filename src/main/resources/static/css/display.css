@@ -1,0 +1,250 @@
+.product {
+    width: 1226px;
+    margin: 0 auto;
+    overflow: hidden
+}
+
+.product .shops:after {
+    content: "";
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    display: block;
+    visibility: hidden
+}
+
+.left-bar {
+    width: 500px;
+    height: 500px;
+    box-shadow: 0 0 5px #ddd;
+    margin: 40px;
+    overflow: hidden;
+    position: relative;
+    float: left
+}
+
+.shops-message {
+    width: 500px;
+    height: 600px;
+    margin: 40px;
+    margin-right: 80px;
+    position: relative;
+    float: right
+}
+
+.shops-message .name {
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    font-weight: 400;
+    color: #212121
+}
+
+.shops-message .mes {
+    color: rgba(23, 3, 12, 0.87);
+    margin: 0;
+    padding: 0;
+    padding-top: 8px;
+    font-size: 16px;
+}
+
+/*.shops-message .company {
+    margin: 1em 0;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #ff6700
+}*/
+
+.shops-message .price1 {
+    display: block;
+    font-size: 24px;
+    line-height: 1;
+    color: #ff6700;
+    /*border-bottom: 1px solid #e0e0e0;*/
+    padding: 0px 0 15px;
+}
+.shops-message .price2 {
+    display: block;
+    font-size: 30px;
+    line-height: 1;
+    color: red;
+    /*border-bottom: 1px solid #e0e0e0;*/
+    padding: 0px 0 15px;
+}
+.shops-message .commspan{
+    font-size: 20px;
+    line-height: 1;
+    color: rgb(0, 0, 0);
+    /*border-bottom: 1px solid #e0e0e0;*/
+    padding:0px 50px 10px 0px;
+}
+
+.shops-message .song {
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0
+}
+
+.shops-message .song .ka {
+    width: 80px;
+    padding: 5px 0;
+    text-align: center;
+    font-size: 16px;
+    background: #ff6700;
+    color: #fff;
+    display: inline-block
+}
+
+.shops-message .song .feng {
+    width: 230px;
+    font-size: 16px;
+    line-height: 26px;
+    margin-left: 5px;
+    display: inline-block
+}
+
+.shops-message .city {
+    margin-top: 40px;
+    margin-bottom: 40px
+}
+
+.shops-message .city .chengshi {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    padding-left: 50px;
+    padding: 30px 40px 30px 32px;
+    border-top: 1px solid #e0e0e0;
+    position: relative
+}
+
+.shops-message .city .chengshi i {
+    left: 20px;
+    position: absolute;
+    top: 26px;
+    font-size: 20px;
+    color: #999
+}
+
+.address-info {
+    margin-left: 20px;
+    display: inline-block
+}
+
+.address-info span {
+    font-size: 16px;
+    margin-right: 14px
+}
+
+.shops-message .city .item {
+    font-size: 16px;
+    line-height: 1;
+    color: #ff6700;
+    cursor: pointer
+}
+
+.addCart {
+    padding: 0;
+    margin: 10px 0 20px 0
+}
+
+.addCart .biglarge {
+    cursor: pointer;
+    background: #ff6700;
+    border-color: #ff6700;
+    color: #fff;
+    width: 100%;
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+    font-size: 20px;
+    user-select: none
+}
+
+.addCart .biglarge:hover {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, .18)
+}
+
+.clip-box {
+    width: 160px;
+    height: 160px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    background-size: 500px 500px;
+    box-shadow: 0 0 5px #000
+}
+
+.img-box {
+    transition: all .5s
+}
+
+.img-box img {
+    width: 100%;
+    height: 100%
+}
+
+.right-bar {
+    display: none;
+    width: 600px;
+    height: 600px;
+    position: absolute;
+    right: 400px;
+    top: 180px;
+    overflow: hidden
+}
+
+.right-bar img {
+    display: block;
+    position: absolute;
+    width: 2000px;
+    height: 2000px
+}
+
+.infor-con {
+    padding-top: 20px;
+    padding-bottom: 50px;
+    background: #f5f5f5
+}
+
+.container {
+    width: 1226px;
+    margin-right: auto;
+    margin-left: auto
+}
+
+.container h3 {
+    font-size: 22px;
+    font-weight: 400;
+    margin: 1em 0
+}
+
+.waterFall {
+    position: absolute;
+    margin: 0 auto;
+    width: 100%
+}
+
+#contianer {
+    position: relative;
+    font-size: 0;
+    margin: 0 auto
+}
+
+.box {
+    padding: 5px;
+    float: left;
+    box-sizing: border-box
+}
+
+.boximg {
+    padding: 5px;
+    box-shadow: 0 0 5px #ccc;
+    border: 1px solid #ccc;
+    border-radius: 5px
+}
+
+.boximg img {
+    width: 350px;
+    height: auto
+}

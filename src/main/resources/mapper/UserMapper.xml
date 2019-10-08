@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bysj.lsxsglxt.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.bysj.lsxsglxt.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="passWord" />
+    <result column="balance" jdbcType="DOUBLE" property="balance" />
+    <result column="Signature" jdbcType="VARCHAR" property="signature" />
+    <result column="hobby" jdbcType="VARCHAR" property="hobby" />
+    <result column="telPhone" jdbcType="VARCHAR" property="telPhone" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, password, balance, Signature, hobby, telPhone, remark
+  </sql>
+</mapper>

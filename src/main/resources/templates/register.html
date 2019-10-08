@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/registera.css">
+    <title>注册小米账号</title>
+</head>
+<body>
+    <div id="myRegister">
+        <div><a href="#" class='ercode'></a></div>
+        <ul>
+            <li><a href="#"><img src="img/mistore_logo.png"></a></li>
+            <li style="font-size: 30px"><h4>注册小米账号</h4></li>
+        </ul>
+        <br>
+        <div>
+            <div class='register_area' >
+                <form id="register_form" action="login.html" method="post" autocomplete="on">
+                    <label for="user_name" class='labelbox'>
+                        <input type="text" placeholder="请输入用户名"  name="uname" id="uname">
+                    </label>
+                    <br><br>
+                    <label for="user_pwd" class='valibox'>
+                        <input type="password" placeholder="请输入密码" name="upwd" id="upwd">
+                    </label>
+                    <br><br>   
+                    <label for="user_rePwd" class='valibox'>
+                        <input type="password" placeholder="请再次输入密码" name="upwda" id="upwda">
+                    </label>
+                    <br><br>
+                    <input type="button" class="btn" value="立即注册" onclick="regiset()">
+                </form>
+            </div>
+            <div class='msg'>
+                <div>
+                    <span>点击“立即注册”，即表示您同意遵守小米 <a href="#" class='outer_link'><b>用户协议</b> 和 <b>隐私政策</b></a></span>
+                </div>
+            </div>   
+        </div>
+    </div>
+    <div class='foot_info'>
+        <ul>
+            <li><a href="#" class='current'>简体</a>|</li>
+            <li><a href="#">繁体</a>|</li>
+            <li><a href="#">English</a>|</li>
+            <li><a href="#">常见问题</a></li>
+        </ul>
+        <p><span>小米公司版权所有-京ICP备10046444-</span>京公网安备11010802020134号</p>
+    </div>
+    <script type="text/javascript">
+    function regiset()
+    {
+
+        window.location.href='login.html';
+    }
+
+    </script>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+</body>
+</html>

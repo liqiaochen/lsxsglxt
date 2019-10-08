@@ -1,0 +1,595 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0
+}
+
+a {
+    text-decoration: none
+}
+
+body {
+    font: 14px/1.5 "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+    color: #333;
+    background-color: #fff;
+    min-width: 1226px
+}
+
+.goods-big-pic>img {
+    width: 482px;
+    height: 482px
+}
+
+.site-mini-header {
+    font-size: 12px;
+    border-bottom: 2px solid #ff6700;
+    background: #fff;
+    color: #b0b0b0
+}
+
+.site-header {
+    position: relative;
+    z-index: 20;
+    height: 100px
+}
+
+.container {
+    width: 1226px;
+    margin-right: auto;
+    margin-left: auto
+}
+
+.site-mini-header .logo {
+    width: 48px;
+    height: 48px
+}
+
+.site-header .logo {
+    position: relative;
+    display: block;
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+    background-color: #ff6700
+}
+
+.site-mini-header a {
+    color: #757575
+}
+
+.site-header .header-logo {
+    float: left;
+    width: 62px;
+    margin-top: 22px
+}
+
+.site-header .logo:before {
+    /* background: url(../images/logo-footer.png) no-repeat 50% 50%; */
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0)
+}
+
+.site-header .logo:after, .site-header .logo:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 55px;
+    height: 55px;
+    content: '';
+    -webkit-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transition: all .2s;
+    transition: all .2s
+}
+
+.site-mini-header .has-more {
+    height: 48px
+}
+
+.site-mini-header .header-title {
+    float: left;
+    margin-top: 26px
+}
+
+.site-mini-header .has-more h2 {
+    float: left;
+    line-height: 48px;
+    font-size: 28px;
+    margin-bottom: 0;
+    font-weight: 400;
+    color: #424242;
+    margin-left: 41px
+}
+
+.site-mini-header .has-more p {
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    margin-top: 20px;
+    margin-left: 15px;
+    color: #757575
+}
+
+.site-mini-header .topbar-info {
+    margin-top: 40px
+}
+
+.site-mini-header .topbar-info {
+    line-height: 13px
+}
+
+.topbar-info {
+    position: relative;
+    float: right;
+    height: 40px
+}
+
+.site-mini-header .topbar-info .link, .site-mini-header .topbar-info .message, .site-mini-header .topbar-info .sep, .site-mini-header .topbar-info .user {
+    float: left
+}
+
+.site-mini-header .topbar-info .link {
+    padding: 0 5px
+}
+
+.site-mini-header .topbar-info .sep {
+    color: #e0e0e0
+}
+
+.page-main {
+    padding-top: 38px;
+    padding-bottom: 38px;
+    position: relative
+}
+
+.page-main {
+    background: #f5f5f5
+}
+
+.cart-goods-list {
+    background-color: #fff;
+    max-height: 600px;
+    overflow: auto
+}
+
+.cart-goods-list .list-head {
+    height: 70px;
+    line-height: 70px;
+    padding-right: 26px;
+    color: #424242
+}
+
+.cart-goods-list .list-head .col {
+    float: left
+}
+
+.cart-goods-list .col-check {
+    width: 110px
+}
+
+.col-check .icon-checkbox {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border: 1px solid #e0e0e0;
+    margin-left: 24px;
+    background-color: #fff;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    cursor: pointer
+}
+
+.icon-checkbox {
+    margin-right: 15px
+}
+
+.cart-goods-list .list-head .col-img {
+    width: 120px
+}
+
+.cart-goods-list .list-head .col {
+    float: left
+}
+
+.cart-goods-list .list-head .col-name {
+    width: 380px;
+    overflow: hidden
+}
+
+.cart-goods-list .col-price {
+    width: 75px;
+    padding-right: 84px;
+    text-align: right;
+    color: #424242
+}
+
+.cart-goods-list .col-num {
+    width: 150px;
+    text-align: center;
+    color: #424242
+}
+
+.cart-goods-list .col-total {
+    width: 120px;
+    padding-right: 81px;
+    text-align: right
+}
+
+.cart-goods-list .list-head .col {
+    float: left
+}
+
+.cart-goods-list .col-action {
+    width: 60px;
+    text-align: center
+}
+
+.cart-goods-list .item-box {
+    padding: 15px 26px 15px 0;
+    border-top: 1px solid #e0e0e0
+}
+
+.cart-goods-list .item-table {
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+.cart-goods-list .item-table .item-row {
+    display: table-row
+}
+
+.cart-goods-list .item-table .col {
+    display: table-cell;
+    vertical-align: middle
+}
+
+.cart-goods-list .col-check {
+    width: 110px
+}
+
+.cart-goods-list .col-check .icon-checkbox {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border: 1px solid #e0e0e0;
+    margin-left: 24px;
+    background-color: #fff;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    cursor: pointer
+}
+
+.cart-goods-list .item-box .col-img {
+    width: 80px;
+    height: 80px;
+    padding-right: 40px;
+    overflow: hidden
+}
+
+.cart-goods-list .item-table .col {
+    display: table-cell;
+    vertical-align: middle
+}
+
+.cart-goods-list .col-name {
+    width: 380px;
+    overflow: hidden!important
+}
+
+.cart-goods-list .item-box .col-img {
+    width: 80px;
+    height: 80px;
+    padding-right: 40px;
+    overflow: hidden
+}
+
+.cart-goods-list .col-name {
+    width: 380px;
+    overflow: hidden!important
+}
+
+.cart-goods-list .col-name .name {
+    line-height: 1;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden
+}
+
+.cart-goods-list .col-name .desc, .cart-goods-list .col-name .name {
+    width: 380px;
+    margin: 0
+}
+
+.cart-goods-list .col-name .name a {
+    color: #424242
+}
+
+.col {
+    font-size: 14px
+}
+
+.cart-goods-list .item-table .col {
+    display: table-cell;
+    vertical-align: middle
+}
+
+.cart-goods-list .item-box .col-num, .cart-goods-list .item-sub-box .col-num {
+    font-size: 16px
+}
+
+.item-table .col-name {
+    color: #424242;
+    font-size: 18px;
+    line-height: 1;
+    overflow: hidden
+}
+
+.item-table .col-action a {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 700;
+    color: #333;
+    border-radius: 50%;
+    user-select: none
+}
+
+.cart-goods-list .col-num {
+    width: 150px;
+    text-align: center;
+    color: #424242
+}
+
+.item-table .col-action a:hover {
+    background: red;
+    color: #fff
+}
+
+.change-goods-num {
+    width: 148px;
+    height: 38px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+    background-color: #fff;
+    position: relative;
+    zoom: 1
+}
+
+.change-goods-num a {
+    float: left;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    color: #757575;
+    font-size: 20px;
+    -webkit-transition: all .3s;
+    transition: all .3s
+}
+
+.change-goods-num a:hover {
+    background: #757575;
+    color: #fff
+}
+
+.change-goods-num input {
+    float: left;
+    width: 72px;
+    height: 38px;
+    line-height: 38px;
+    padding: 0;
+    border-width: 0;
+    color: #424242;
+    font-size: 16px;
+    text-align: center
+}
+
+.cart-goods-list .item-table .col {
+    display: table-cell;
+    vertical-align: middle
+}
+
+.cart-goods-list .item-box .col-total, .cart-goods-list .item-sub-box .col-total {
+    color: #ff6700;
+    font-size: 16px
+}
+
+.cart-goods-list .col-total {
+    width: 120px;
+    padding-right: 81px;
+    text-align: right
+}
+
+.cart-goods-list .col-action {
+    width: 60px;
+    text-align: center
+}
+
+.cart-bar {
+    height: 50px;
+    text-align: right;
+    background-color: #fff;
+    -webkit-transition: background .3s ease, top .3s ease;
+    transition: background .3s ease, top .3s ease;
+    position: relative;
+    margin-top: 50px
+}
+
+.cart-bar .section-left {
+    float: left
+}
+
+.cart-bar .back-shopping {
+    line-height: 50px;
+    margin-left: 32px;
+    font-size: 15px
+}
+
+.cart-bar .cart-totalC {
+    margin-left: 16px;
+    padding-left: 16px;
+    border-left: 1px solid #eee;
+    color: #757575;
+    font-size: 15px
+}
+
+.cart-bar .cart-totalC i {
+    color: #ff6700
+}
+
+.cart-bar i {
+    font-style: normal
+}
+
+.cart-bar .cart-totalC i {
+    color: #ff6700
+}
+
+.cart-bar i {
+    font-style: normal
+}
+
+.cart-bar .total-price {
+    color: #ff6700;
+    position: absolute;
+    right: 250px;
+    top: 10px
+}
+
+.cart-bar .total-price em {
+    font-style: normal;
+    font-size: 30px
+}
+
+.cart-bar .btn {
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    margin-left: 50px;
+    vertical-align: top;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    background: #ff6700;
+    color: #fff;
+    cursor: pointer
+}
+
+.cart-bar .btn:hover {
+    background-color: #f25807;
+    border-color: #f25807;
+    color: #fff;
+    cursor: pointer
+}
+
+.cart-bar .no-select-tip {
+    width: 200px;
+    height: 48px;
+    line-height: 48px;
+    position: absolute;
+    top: -58px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ff6700;
+    color: #ff6700;
+    text-align: center
+}
+
+.cart-bar .no-select-tip .arrow-a {
+    bottom: -8px;
+    margin-left: -10px;
+    border-width: 8px 10px 0;
+    border-color: #ff6700 transparent transparent;
+    z-index: 1
+}
+
+.cart-bar .no-select-tip .arrow {
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid dashed dashed;
+    overflow: hidden;
+    position: absolute;
+    left: 50%
+}
+
+.cart-bar .no-select-tip .arrow-b {
+    bottom: -7px;
+    margin-left: -8px;
+    border-width: 7px 8px 0;
+    border-color: #fff transparent transparent;
+    z-index: 2
+}
+
+.cart-bar .no-select-tip .arrow {
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid dashed dashed;
+    overflow: hidden;
+    position: absolute;
+    left: 50%
+}
+
+.list-body {
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+.item-table {
+    display: table-row
+}
+
+.item-table .col-img a {
+    color: #333;
+    padding-right: 40px
+}
+
+.item-table .col-img img {
+    width: 80px;
+    overflow: hidden;
+    height: 80px
+}
+
+.change-goods-num {
+    width: 148px;
+    height: 38px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+    background-color: #fff;
+    position: relative
+}
+
+.ipt {
+    text-align: center
+}
+
+.ipt>input {
+    width: 20px;
+    height: 20px
+}
+
+.del-all {
+    user-select: none
+}

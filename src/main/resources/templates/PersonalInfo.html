@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="./css/reset1.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+
+    <script type="text/javascript">
+        function showelement(element) {
+            var oldhtml = element.innerText;
+            console.log(oldhtml);
+            //创建新的input元素
+            var newobj = document.createElement('input');
+            //为新增元素添加类型
+                newobj.type = 'text';
+            //为新增元素添加value值
+            newobj.value = oldhtml;
+            //为新增元素添加光标离开事件
+            newobj.onblur = function() {
+                if (this.value!=""){
+                    this.parentNode.innerHTML="<span>"+this.value+"</span>"
+                }else {
+                    this.parentNode.innerHTML="<span style='color: red'>不能为空</span>"
+                }
+            }
+            //设置该标签的子节点为span
+            element.innerHTML = '';
+            //添加该标签的子节点，input对象
+            element.appendChild(newobj)
+            //设置选择文本的内容或设置光标位置（两个参数：start,end；start为开始位置，end为结束位置；如果开始位置和结束位置相同则就是光标位置）
+            newobj.setSelectionRange(0, oldhtml.length);
+            //设置获得光标
+            newobj.focus();
+        }
+
+        function   update(){
+            var username = document.getElementById("username").innerText;
+            var signature = document.getElementById("Signature").innerText;
+            var hobby = document.getElementById("hobby").innerText;
+            var telPhone = document.getElementById("telPhone").innerText;
+            var  user = new Object();
+            user.username=username;
+            user.signature=signature;
+            user.hobby=hobby;
+            user.telPhone=telPhone;
+            console.log(user);
+            var userJson = JSON.stringify(user);
+            console.log("userJson:"+userJson);
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("POST","saveInfo",true);
+            xmlHttp.setRequestHeader("Content-type","application/json; charset=UTF-8");
+            xmlHttp.send(userJson);
+            xmlHttp.onreadystatechange=function()
+            {
+                if (xmlHttp.readyState==4 && xmlHttp.status==200)
+                {
+                    alert("保存成功");
+                }
+            }
+        }
+
+
+    </script>
+
+</head>
+<style>
+    .grzxbj {
+        width: 100%;
+        height: 500px;
+    }
+    .grzxbj .selfinfo .rtcont {
+        height: 500px;
+    }
+    .table{
+        width: 938px;
+    }
+    .td1{
+
+    }
+    .td2{
+
+    }
+    .btn2 {
+        display:inline-block;
+        *display:inline;
+        *zoom:1;
+        margin: 10px 20px 30px 80px;
+        font-size:14px;
+        height:38px;
+        line-height:38px;
+        text-align:center;
+        cursor:pointer;
+        background-color:#fff;
+        border:1px solid #ff4a00;
+        color:#333;
+        padding:0;
+        width:148px
+    }
+    .save_btn {
+        margin-right: 20px;
+        padding: 7px 30px;
+        color: #FFF;
+        border-radius: 3px;
+    }
+
+</style>
+<body>
+<div id="head" th:include="common/head :: common_head"></div>
+
+<!-- self_info -->
+<div class="grzxbj">
+    <div class="selfinfo center">
+        <div class="lfnav fl">
+            <div class="ddzx">个人中心</div>
+            <div class="subddzx">
+                <ul>
+                    <li><a href="./PersonalInfo.html" style="color:#ff6700;font-weight:bold;">我的个人中心</a></li>
+                    <li><a href="./PersonalOrder.html">我的订单</a></li>
+                    <li><a href="">消息通知</a></li>
+                    <li><a href="./PersonalAddress.html">收货地址</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="rtcont fr">
+            <div class="grzlbt ml40">我的资料</div>
+            <div class="ml40"><span style="color:red">注意：修改后需要点击保存会生效(双击修改)</span></div>
+            <form>
+            <table class="table ml40">
+                <tr>
+                    <td class="td1">昵称：</td>
+                    <td class="td2">
+                        <div ondblclick="showelement(this)">
+                            <span id="username">啦啦维吉尔</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td1">手机号：</td>
+                    <td class="td2">
+                        <div  ondblclick="showelement(this)">
+                            <span id="telPhone">15669097417</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td1">个性签名：</td>
+                    <td class="td2">
+                        <div  ondblclick="showelement(this)">
+                            <span id="Signature">一支穿云箭，千军万马来相见！</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td1">我的爱好：</td>
+                    <td class="td2">
+                        <div  ondblclick="showelement(this)">
+                            <span id="hobby">游戏，音乐，旅游，健身</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr onclick="update()" class="save_btn">
+                    <td colspan="2"><div class="btn2">保存</div></td>
+                </tr>
+            </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="./css/base.min.css">
+    <link rel="stylesheet" href="./css/main.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/order-view.min.css">
+    <link rel="stylesheet" href="./css/reset1.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div id="head" th:include="common/head :: common_head"></div>
+
+<!-- self_info -->
+<div class="grzxbj">
+    <div class="selfinfo center">
+        <div class="lfnav fl">
+            <div class="ddzx">个人中心</div>
+            <div class="subddzx">
+                <ul>
+                    <li><a href="./PersonalInfo.html">我的个人中心</a></li>
+                    <li><a href="./PersonalOrder.html" style="color:#ff6700;font-weight:bold;">我的订单</a></li>
+                    <li><a href="">消息通知</a></li>
+                    <li><a href="./PersonalAddress.html">收货地址</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="rtcont fr">
+        <!--<div class="span16">
+            <div class="uc-box uc-main-box">
+                <div class="uc-content-box order-list-box">
+                    <div class="box-hd">
+                        <h1 class="title">我的订单<small>请谨防钓鱼链接或诈骗电话，<a href="https://www.mi.com/service/buy/antifraud/" target="_blank" data-stat-id="c46a318fa0357711" onclick="">了解更多&gt;</a></small></h1>
+                        <div class="more clearfix">
+                            <ul class="filter-list J_orderType">
+                                <li class="first"><a href="#" onclick="">全部有效订单</a></li>
+                                <li class=""><a href="#" onclick="">待支付（1）</a></li>
+                                <li class="active"><a href="#" onclick="">待收货</a></li>
+                                <li class=""><a href="#" data-type="20"onclick="">已完成订单</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="box-bd">
+                        <div id="J_orderList"><p class="empty">当前没有待收货订单。</p></div>
+                        <div id="J_orderListPages"></div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+         <!--   <div class="span16">
+                <div class="uc-box uc-main-box">
+                    <div class="uc-content-box order-list-box">
+                        <div class="box-hd">
+                            <h1 class="title">我的订单<small>请谨防钓鱼链接或诈骗电话，<a href="https://www.mi.com/service/buy/antifraud/" target="_blank" data-stat-id="c46a318fa0357711" onclick="">了解更多&gt;</a></small></h1>
+                            <div class="more clearfix">
+                                <ul class="filter-list J_orderType">
+                                    <li class="first"><a href="#" onclick="">全部有效订单</a></li>
+                                    <li class=""><a href="#" onclick="">待支付（1）</a></li>
+                                    <li class="active"><a href="#" onclick="">待收货</a></li>
+                                    <li class=""><a href="#" data-type="20"onclick="">已完成订单</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="box-bd">
+                            <div id="J_orderList">
+                                <ul class="order-list">
+                                    <li class="uc-order-item uc-order-item-pay">
+                                        <div class="order-detail">
+                                            <div class="order-summary">
+                                                <div class="order-status">等待付款</div>
+                                            </div>
+                                            <table class="order-detail-table">
+                                                <thead>
+                                                <tr>
+                                                    <th class="col-main">
+                                                        <p class="caption-info">2019年09月29日 16:21<span
+                                                                class="sep">|</span>李巧郴<span class="sep">|</span>订单号： <a
+                                                                href="#">5190929780318251</a><span
+                                                                class="sep">|</span>在线支付</p>
+                                                    </th>
+                                                    <th class="col-sub"><p class="caption-price">应付金额：<span class="num">1599.00</span>元
+                                                    </p></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td class="order-items">
+                                                        <ul class="goods-list">
+                                                            <li>
+                                                                <div class="figure figure-thumb"><a
+                                                                        href="#"
+                                                                        target="_blank"> <img
+                                                                        src=""
+                                                                        width="80" height="80"
+                                                                        alt="Redmi Note 8 Pro 6GB+128GB 冰翡翠"> </a></div>
+                                                                <p class="name"><a target="_blank"
+                                                                                   href="">Redmi
+                                                                    Note 8 Pro 6GB+128GB 冰翡翠</a></p>
+                                                                <p class="price"> 1599元 × 1 </p></li>
+                                                        </ul>
+                                                    </td>
+                                                    <td class="order-actions"><a class="btn btn-small btn-primary"
+                                                                                 href="#"
+                                                                                 target="_blank">立即付款</a> <a
+                                                            class="btn btn-small btn-line-gray"
+                                                            href="">订单详情</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="J_orderListPages">
+                                <div class="xm-pagenavi"><span class="numbers first"><span
+                                        class="iconfont"></span></span> <span class="numbers current">1</span> <span
+                                        class="numbers last"><span class="iconfont"></span></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>-->
+            <div class="span16">
+                <div class="uc-box uc-main-box">
+                    <div class="uc-content-box order-view-box">
+                        <div class="box-hd">
+                            <h1 class="title">订单详情<small>请谨防钓鱼链接或诈骗电话</small></h1>
+                            <div class="more clearfix">
+                                <h2 class="subtitle">订单号：5190929775307636                        <span class="tag tag-subsidy"></span>
+                                </h2>
+                                <div class="actions">
+                                    <a id="J_cancelOrder" class="btn btn-small btn-line-gray" title="取消订单">取消订单</a><a id="J_payOrder" class="btn btn-small btn-primary" title="立即付款" href="" target="_blank"  onclick="">立即付款</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-bd">
+                            <div class="uc-order-item uc-order-item-pay">
+                                <div class="order-detail">
+
+                                    <div class="order-summary">
+                                        <div class="order-status">
+                                            等待付款
+                                        </div>
+                                        <div class="order-progress">
+                                            <ol class="progress-list clearfix progress-list-5">
+                                                <li class="step step-first step-active">
+                                                    <div class="progress"><span class="text">下单</span></div>
+                                                    <div class="info">09月29日 15:19</div>
+                                                </li>
+                                                <li class="step">
+                                                    <div class="progress"><span class="text">付款</span></div>
+                                                    <div class="info"></div>
+                                                </li>
+                                                <li class="step">
+                                                    <div class="progress"><span class="text">发货</span></div>
+                                                    <div class="info"></div>
+                                                </li>
+                                                <li class="step">
+                                                    <div class="progress"><span class="text">收货时间</span></div>
+                                                    <div class="info"></div>
+                                                </li>
+                                                <li class="step step-last">
+                                                    <div class="progress"><span class="text">交易成功</span></div>
+                                                    <div class="info"></div>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <table class="order-items-table">
+                                        <tbody>
+                                            <tr>
+                                            <td class="col col-thumb">
+                                                <div class="figure figure-thumb">
+
+                                                    <a target="_blank" href="" onclick="">
+                                                        <img src="" width="80" height="80" alt="">
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td class="col col-name">
+                                                <p class="name">
+                                                    <a target="_blank" href=""  onclick="">小米手环4 NFC版 黑色</a>
+                                                </p>
+                                            </td>
+                                            <td class="col col-price">
+                                                <p class="price">229元 × 1</p>
+                                            </td>
+                                            <td class="col col-actions">
+                                            </td>
+                                        </tr>
+                                            <tr>
+                                                <td class="col col-thumb">
+                                                    <div class="figure figure-thumb">
+
+                                                        <a target="_blank" href="" onclick="">
+                                                            <img src="" width="80" height="80" alt="">
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td class="col col-name">
+                                                    <p class="name">
+                                                        <a target="_blank" href=""  onclick="">小米手环4 NFC版 黑色</a>
+                                                    </p>
+                                                </td>
+                                                <td class="col col-price">
+                                                    <p class="price">229元 × 1</p>
+                                                </td>
+                                                <td class="col col-actions">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col col-thumb">
+                                                    <div class="figure figure-thumb">
+
+                                                        <a target="_blank" href="" onclick="">
+                                                            <img src="" width="80" height="80" alt="">
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td class="col col-name">
+                                                    <p class="name">
+                                                        <a target="_blank" href=""  onclick="">小米手环4 NFC版 黑色</a>
+                                                    </p>
+                                                </td>
+                                                <td class="col col-price">
+                                                    <p class="price">229元 × 1</p>
+                                                </td>
+                                                <td class="col col-actions">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="order-detail-total">
+                                    <table class="total-table">
+                                        <!-- 预售 开始支付定金 -->
+                                        <tbody><tr>
+                                            <th>商品总价：</th>
+                                            <td><span class="num">229.00</span>元</td>
+                                        </tr>
+                                        <tr>
+                                            <th>运费：</th>
+                                            <td><span class="num">0</span>元</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="total">应付金额：</th>
+                                            <td class="total"><span class="num">229.00</span>元</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/index.js"></script>
+</html>
