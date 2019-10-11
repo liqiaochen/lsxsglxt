@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>个人信息页</title>
+    <div th:replace="common/adminstatic :: adminstatic"></div>
+</head>
+<body>
+<div class="lyear-layout-web">
+    <div class="lyear-layout-container">
+
+
+        <aside th:include="common/adminAside :: adminAside('Personal.html')" class="lyear-layout-sidebar"></aside>
+        <header th:include="common/adminHead :: adminHead" class="lyear-layout-header"></header>
+
+        <!--页面主要内容-->
+        <main class="lyear-layout-content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="edit-avatar" onclick="upfile.click()">
+                                    <img id="img" th:src="${session.admin.url}" alt="图片" class="img-avatar">
+                                    <div class="avatar-divider"></div>
+                                    <div class="edit-avatar-content">
+                                        <button class="btn btn-default">修改头像</button>
+                                        <p class="m-0">选择一张你喜欢的图片，裁剪后会自动生成264x264大小，上传图片大小不能超过2M。</p>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="id" th:value="${session.admin.id}">
+                                <input type="file" id="upfile" onchange="uploadFile()" style="visibility: hidden; position: relative;"/>
+                                <hr>
+                                <form method="post" th:action="@{/admin/updateAdmin}" class="site-form">
+                                    <div class="form-group">
+                                        <label for="username">用户名</label>
+                                        <input type="text" class="form-control" name="username" id="username" th:value="${session.admin.userName}" value="lightyear" disabled="disabled" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nickname">昵称</label>
+                                        <input type="text" class="form-control" name="nickname" id="nickname" th:value="${session.admin.nickName}" placeholder="输入您的昵称" value="笔下光年">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">邮箱</label>
+                                        <input type="email" class="form-control" name="email" id="email" th:value="${session.admin.email}" aria-describedby="emailHelp" placeholder="请输入正确的邮箱地址" value="3331653644@qq.com">
+                                        <small id="emailHelp" class="form-text text-muted">请保证您填写的邮箱地址是正确的。</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="remark">简介</label>
+                                        <textarea class="form-control" name="remark" id="remark" rows="3" th:text="${session.admin.remark}"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">保存</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+</div>
+</body>
+
+</html>
+
+<script>
+    function uploadFile() {
+        var formData = new FormData();
+        formData.append('file', $('#upfile')[0].files[0]);
+        $.ajax({
+            url: "[[@{/file/upload}]]",
+            type: "POST",
+            data: formData,
+            /**
+             *必须false才会自动加上正确的Content-Type
+             */
+            contentType: false,
+            /**
+             * 必须false才会避开jQuery对 formdata 的默认处理
+             * XMLHttpRequest会对 formdata 进行正确的处理
+             */
+            processData: false,
+            success: function (data) {
+                alert("图片上传成功")
+                var url  = data.data;
+                var src  = '[[@{/upload/}]]'+url;
+                $("#img").attr("src", src);
+
+                //将图片路径保存到数据库
+                var id = $("#id").val();
+                $.ajax({
+                    type: 'POST',
+                    url: "[[@{/admin/updateUrl}]]",
+                    contentType: "application/json;charset=utf-8",
+                    data: {"url":url,"id":id},
+                    dataType: "json",
+                    success: function (res) {
+                        alert(res.msg+""+res.data);
+                    },
+                    error:function (res) {
+                        alert(res.msg);
+                    }
+
+
+                });
+
+            },
+            error: function (data) {
+                alert(data.msg);
+
+            }
+        });
+
+    }
+    
+</script>

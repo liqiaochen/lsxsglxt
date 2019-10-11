@@ -32,6 +32,16 @@ public interface PictureMapper {
     @Select("select * from picture where id=#{id}")
     public Picture selectById(Integer id);
 
+
+    /**
+     * 根据图片id查询产品
+     * @param url
+     * @return
+     */
+    @ResultMap(value = "selectByProductId")
+    @Select("select * from picture where url=#{url}")
+    public Picture selectByUrl(String url);
+
     /**
      * 添加一个图片
      * @param picture
@@ -41,5 +51,12 @@ public interface PictureMapper {
     @Options(useGeneratedKeys=true, keyProperty="id")
     public Integer savePicture(Picture picture);
 
-
+    /**
+     * 通过Id修改图片的Level
+     * @param id
+     * @param level
+     * @return
+     */
+    @Update("update picture set `level` = #{level} where id=#{id}")
+    public Integer updateByIdLevelPicture(@Param("id") Integer id,@Param("level") Integer level);
 }

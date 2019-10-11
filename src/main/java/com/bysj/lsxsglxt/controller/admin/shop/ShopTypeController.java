@@ -1,6 +1,7 @@
 package com.bysj.lsxsglxt.controller.admin.shop;
 
 
+import com.bysj.lsxsglxt.annotation.LoginRequired;
 import com.bysj.lsxsglxt.model.Producttype;
 import com.bysj.lsxsglxt.service.shop.ShopTypeService;
 import com.bysj.lsxsglxt.utils.ServerResponse;
@@ -26,7 +27,8 @@ public class ShopTypeController {
     @Autowired
     private ShopTypeService shopTypeService;
 
-    @RequestMapping("shopType.html")
+    @LoginRequired(name = "admin")
+    @RequestMapping("/shopType.html")
     public ModelAndView reAdminShopType(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize , ModelAndView modelAndView){
         PageInfo<Producttype> pageInfo = shopTypeService.showTypePage(pageNum, pageSize);
         System.out.println(pageInfo);
@@ -35,7 +37,7 @@ public class ShopTypeController {
         return modelAndView;
     }
 
-    @RequestMapping("saveType")
+    @RequestMapping("/saveType")
     @ResponseBody
     public ServerResponse saveType(Producttype producttype){
         System.out.println(producttype);
@@ -43,14 +45,14 @@ public class ShopTypeController {
         return serverResponse;
     }
 
-    @RequestMapping("startType")
+    @RequestMapping("/startType")
     @ResponseBody
     public ServerResponse startType(int[] ids){
         System.out.println(ids);
         ServerResponse serverResponse = shopTypeService.updateType(ids,1);
         return serverResponse;
     }
-    @RequestMapping("stopType")
+    @RequestMapping("/stopType")
     @ResponseBody
     public ServerResponse stopType(int[] ids){
         System.out.println(ids);
@@ -71,9 +73,9 @@ public class ShopTypeController {
         String msg = serverResponse.getMsg();
         System.out.println(msg);
         if (serverResponse.checkIsSuccess()) {
-            return "redirect:shopType.html?msg="+msg;
+            return "redirect:shopType.html";
         }
-        return "redirect:shopType.html?msg="+msg;
+        return "redirect:shopType.html";
     }
 
     @RequestMapping("updateType")

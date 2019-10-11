@@ -12,6 +12,10 @@ public class User {
      */
     private String passWord;
     /**
+     * 邮箱
+     */
+    private String email;
+    /**
      * 账户余额
      */
     private Double balance;

@@ -3,11 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>首页 - 光年(Light Year Admin)后台管理系统模板</title>
-<link rel="icon" href="favicon.ico" type="image/ico">
-<meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
-<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
-<meta name="author" content="yinqi">
+<title>商品列表</title>
   <div th:replace="common/adminstatic :: adminstatic"></div>
 <style type="text/css">
 
@@ -30,7 +26,7 @@ table{
 <body>
 <div class="lyear-layout-web">
   <div class="lyear-layout-container">
-    <aside th:include="common/adminAside :: adminAside" class="lyear-layout-sidebar"></aside>
+    <aside th:include="common/adminAside :: adminAside('shopList.html')" class="lyear-layout-sidebar"></aside>
     <header th:include="common/adminHead :: adminHead" class="lyear-layout-header"></header>
     <!--页面主要内容-->
     <main class="lyear-layout-content">
@@ -59,9 +55,9 @@ table{
                 </form>
                 <div class="toolbar-btn-action">
                   <a class="btn btn-primary m-r-5" href="shopAddShow.html"><i class="mdi mdi-plus"></i> 新增</a>
-                  <a class="btn btn-success m-r-5" href="#!"><i class="mdi mdi-check"></i> 上架</a>
-                  <a class="btn btn-warning m-r-5" href="#!"><i class="mdi mdi-block-helper"></i> 下架</a>
-                  <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 删除</a>
+                  <a class="btn btn-success m-r-5" id="start"><i class="mdi mdi-check"></i> 上架</a>
+                  <a class="btn btn-warning m-r-5" id="stop"><i class="mdi mdi-block-helper"></i> 下架</a>
+                  <a class="btn btn-danger" id="delete"><i class="mdi mdi-window-close"></i> 删除</a>
                 </div>
               </div>
 
@@ -91,7 +87,7 @@ table{
                       <tr class="text-center" th:each="product : ${pageInfo.list}">
                         <td>
                           <label class="lyear-checkbox checkbox-primary">
-                            <input type="checkbox" name="ids[]" value="1"><span></span>
+                            <input type="checkbox" name="ids[]" th:value="${product.id}" value="1"><span></span>
                           </label>
                         </td>
                         <td th:text="${product.code}">123456789</td>
@@ -163,6 +159,95 @@ table{
   </div>
 </div>
 <script type="text/javascript">
+  $("#start").click(function () {
+    //定义一个空数组
+    var checkID = [];
+    //把所有被选中的复选框的值存入数组
+    $("input[name='ids[]']:checked").each(function(i){
+      checkID[i] =$(this).val();
+    });
+    if (checkID!=false) {
+      console.log(checkID)
+      $.ajax({
+        type: 'POST',
+        url: "startStatus",
+        traditional: true,
+        data: {"ids": checkID},
+        dataType: "json",
+        success: function (res) {
+          alert(res.msg + "" + res.data + "个");
+          window.location.href = "shopList.html";
+        },
+        error: function (res) {
+          alert(res.msg);
+        }
+      });
+    }else {
+      alert("您现在一个都没有选");
+    }
+  });
+
+  $("#stop").click(function () {
+    //定义一个空数组
+    var checkID = [];
+    //把所有被选中的复选框的值存入数组
+    $("input[name='ids[]']:checked").each(function(i){
+      checkID[i] =$(this).val();
+    });
+    if (checkID!=false){
+    console.log(checkID)
+    $.ajax({
+      type: 'POST',
+      url: "stopStatus",
+      traditional: true,
+      data: {"ids":checkID},
+      dataType: "json",
+      success: function (res) {
+        alert(res.msg+""+res.data+"个");
+        window.location.href="shopList.html";
+      },
+      error:function (res) {
+        alert(res.msg);
+      }
+    });
+  }else {
+    alert("您现在一个都没有选");
+  }
+  });
+
+  $("#delete").click(function () {
+    //定义一个空数组
+    var checkID = [];
+    //把所有被选中的复选框的值存入数组
+    $("input[name='ids[]']:checked").each(function(i){
+      checkID[i] =$(this).val();
+    });
+    if (checkID!=false){
+    console.log(checkID)
+    $.ajax({
+      type: 'POST',
+      url: "deleteStatus",
+      traditional: true,
+      data: {"ids":checkID},
+      dataType: "json",
+      success: function (res) {
+        alert(res.msg+""+res.data+"个");
+        window.location.href="shopList.html";
+      },
+      error:function (res) {
+        alert(res.msg);
+      }
+    });
+    }else {
+    alert("您现在一个都没有选");
+    }
+  });
+
+
+
+
+
+
 $(function(){
     $('.search-bar .dropdown-menu a').click(function() {
         var field = $(this).data('field') || '';

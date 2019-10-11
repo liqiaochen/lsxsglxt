@@ -3,11 +3,7 @@
 <head>
 <meta charset="utf-8" >
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>首页 - 光年(Light Year Admin)后台管理系统模板</title>
-<link rel="icon" href="favicon.ico" type="image/ico">
-<meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
-<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
-<meta name="author" content="yinqi">
+<title>零食销售管理系统首页</title>
 <div th:replace="common/adminstatic :: adminstatic"></div>
 </head>
 <body>
@@ -15,13 +11,13 @@
   <div class="lyear-layout-container">
 
 
-    <aside th:include="common/adminAside :: adminAside" class="lyear-layout-sidebar"></aside>
+    <aside th:include="common/adminAside :: adminAside('index.html')" class="lyear-layout-sidebar"></aside>
     <header th:include="common/adminHead :: adminHead" class="lyear-layout-header"></header>
     <!--页面主要内容-->
     <main class="lyear-layout-content">
-      
+
       <div class="container-fluid">
-        
+
         <div class="row">
           <div class="col-sm-6 col-lg-3">
             <div class="card bg-primary">
@@ -34,7 +30,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="col-sm-6 col-lg-3">
             <div class="card bg-danger">
               <div class="card-body clearfix">
@@ -46,7 +42,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="col-sm-6 col-lg-3">
             <div class="card bg-success">
               <div class="card-body clearfix">
@@ -58,7 +54,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="col-sm-6 col-lg-3">
             <div class="card bg-purple">
               <div class="card-body clearfix">
@@ -71,10 +67,10 @@
             </div>
           </div>
         </div>
-        
+
         <div class="row">
-          
-          <div class="col-lg-6"> 
+
+          <div class="col-lg-6">
             <div class="card">
               <div class="card-header">
                 <h4>每周用户</h4>
@@ -84,8 +80,8 @@
               </div>
             </div>
           </div>
-          
-          <div class="col-lg-6"> 
+
+          <div class="col-lg-6">
             <div class="card">
               <div class="card-header">
                 <h4>交易历史记录</h4>
@@ -95,11 +91,11 @@
               </div>
             </div>
           </div>
-           
+
         </div>
-        
+
         <div class="row">
-          
+
           <div class="col-lg-12">
             <div class="card">
               <div class="card-header">
@@ -221,11 +217,11 @@
               </div>
             </div>
           </div>
-          
+
         </div>
-        
+
       </div>
-      
+
     </main>
     <!--End 页面主要内容-->
   </div>
@@ -237,7 +233,7 @@
 $(document).ready(function(e) {
     var $dashChartBarsCnt  = jQuery( '.js-chartjs-bars' )[0].getContext( '2d' ),
         $dashChartLinesCnt = jQuery( '.js-chartjs-lines' )[0].getContext( '2d' );
-    
+
     var $dashChartBarsData = {
 		labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
 		datasets: [
@@ -266,12 +262,12 @@ $(document).ready(function(e) {
 			}
 		]
 	};
-    
+
     new Chart($dashChartBarsCnt, {
         type: 'bar',
         data: $dashChartBarsData
     });
-    
+
     var myLineChart = new Chart($dashChartLinesCnt, {
         type: 'line',
         data: $dashChartLinesData,

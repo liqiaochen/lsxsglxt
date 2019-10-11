@@ -1,4 +1,4 @@
-package com.bysj.lsxsglxt.mybatisconfig;
+package com.bysj.lsxsglxt.config;
 
 
 import org.apache.ibatis.mapping.BoundSql;

@@ -5,6 +5,10 @@
     <title>js和css</title>
 </head>
 <th:block th:fragment="adminstatic">
+<link rel="icon" th:href="@{/img/favicon.ico}" type="image/ico">
+<meta name="keywords" content="使用LightYear后台管理系统实现的零食销售管理系统">
+<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+<meta name="author" content="yinqi">
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/css/materialdesignicons.min.css}" rel="stylesheet">
 <link th:href="@{/css/style.min.css}" rel="stylesheet">
@@ -12,6 +16,15 @@
 <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/perfect-scrollbar.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/main.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.cookie.min.js}"></script>
+    <script>
+        $(function () {
+            var parent = $(".active").parent().parent();
+            console.log(parent);
+            parent.addClass("open");
+        })
+
+    </script>
 </th:block>
 <body>
 

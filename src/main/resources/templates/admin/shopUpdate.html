@@ -3,12 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>新增文档 - 光年(Light Year Admin)后台管理系统模板</title>
-<link rel="icon" href="favicon.ico" type="image/ico">
-<meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
-<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
-<meta name="author" content="yinqi">
-
+<title>商品更新</title>
   <div th:replace="common/adminstatic :: adminstatic"></div>
 
 <!--标签插件-->
@@ -20,7 +15,7 @@
 <div class="lyear-layout-web">
   <div class="lyear-layout-container">
 
-    <aside th:include="common/adminAside :: adminAside" class="lyear-layout-sidebar"></aside>
+    <aside th:include="common/adminAside :: adminAside('shopUpdate')" class="lyear-layout-sidebar"></aside>
     <header th:include="common/adminHead :: adminHead" class="lyear-layout-header"></header>
     <!--页面主要内容-->
     <main class="lyear-layout-content">
@@ -57,14 +52,14 @@
                    
                   <div class="form-group col-md-12">
                     <label>食品图片</label>
-                    <div class="form-controls">
+                    <div class="form-controls" id="img">
                       
                       <ul class="list-inline clearfix lyear-uploads-pic" id="uploads-pic">
                         <li class="col-xs-4 col-sm-3 col-md-2" th:each="img:${product.picId}" th:id="${img.id}">
                           <figure>
                             <img th:src="${img.url}" src="images/gallery/15.jpg" th:alt="${img.title}" alt="图片一">
                             <figcaption>
-                              <a class="btn btn-round btn-square btn-danger" onclick="deleteImg(${img.id})"><i class="mdi mdi-delete"></i></a>
+                              <a class="btn btn-round btn-square btn-danger" th:onclick="deleteImg([[${img.id}]]);"><i class="mdi mdi-delete"></i></a>
                             </figcaption>
                           </figure>
                         </li>
@@ -86,48 +81,59 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="createname">创建者</label>
-                    <input type="text" class="form-control" disabled id="createname" name="createname" th:value="${product.createAdminName}" value="admin" />
+                    <input type="text" class="form-control" disabled id="createname" name="createName" th:id="createAdminName" th:value="${product.createAdminName!=null?product.createAdminName:''}" value="admin" />
                   </div>
                   <div class="form-group col-md-3">
                     <label for="createname">创建时间</label>
-                    <input type="text" class="form-control" disabled id="createtime" name="createtime" th:value="${#dates.format(product.createTime,'yyyy-MM-dd HH:mm:ss')}" value="2019:7" />
+                    <input type="text" class="form-control" disabled id="createtime" name="createTime" th:id="createTime" th:value="${#dates.format(product.createTime,'yyyy-MM-dd HH:mm:ss')}" value="2019:7" />
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-6">
                     <label for="unit">单位</label>
                     <input type="text" class="form-control" id="unit" name="unit" th:value="${product.unit}" value="瓶" />
                   </div>
-                  <div class="form-group col-md-3" th:switch="${product.recommend}">
-                    <label>推荐</label>
-                    <input th:case="1" th:id="recommend" type="text" class="form-control" name="recommend"  value="是" />
-                    <input th:case="2" th:id="recommend" type="text" class="form-control" name="recommend"  value="否" />
-                    <input th:case="*" th:id="recommend" id="recommend" type="text" class="form-control" name="recommend"  value="否">
-                  </div>
                   <div class="form-group col-md-3">
                     <label for="updater">修改者</label>
-                    <input type="text" class="form-control" disabled id="updater" name="updater"  value="admin" />
+                    <input type="text" class="form-control" disabled id="updater" name="updater" th:id="updateAdminName"  value="admin" />
                   </div>
                   <div class="form-group col-md-3">
                     <label for="updatetime">修改时间</label>
-                    <input type="text" class="form-control" disabled id="updatetime" name="updatetime" th:value="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss')}" value="2019:8" />
+                    <input type="text" class="form-control" disabled id="updatetime" name="updatetime" th:id="updateTime" th:value="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss')}" value="2019:8" />
                   </div>
-                  
 
-                   <div class="form-group col-md-6">
+
+
+                   <div class="form-group col-md-4">
                     <label>状态</label>
-                    <div class="clearfix">
+                    <div class="clearfix" id="status">
                       <label class="lyear-radio radio-inline radio-primary">
-                        <input type="radio" name="status" value="1" th:checked="${product.status==1}"/><span>上架</span>
-                        <input type="radio" name="status" value="2" th:checked="${product.status==2}"/><span>下架</span>
+                        <input type="radio" name="status" value="1" th:attr="checked=${product.status==1}"/><span>上架</span>
+                      </label>
+                      <label class="lyear-radio radio-inline radio-primary">
+                        <input type="radio" name="status" value="2" th:attr="checked=${product.status==2}"/><span>下架</span>
                       </label>
                     </div>
                   </div>
 
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-4">
                     <label>是否热门</label>
-                    <div class="clearfix">
+                    <div class="clearfix" id="hot">
                       <label class="lyear-radio radio-inline radio-primary">
-                        <input type="radio" name="hot" value="1" th:checked="${product.hot==1}"/><span>热门</span>
-                        <input type="radio" name="hot" value="2" th:checked="${product.hot==2}"/><span>不热门</span>
+                        <input type="radio" name="hot" value="1" th:attr="checked=${product.hot==1}"/><span>热门</span>
+                      </label>
+                      <label class="lyear-radio radio-inline radio-primary">
+                        <input type="radio" name="hot" value="2" th:attr="checked=${product.hot==2}"/><span>不热门</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-3" th:switch="${product.recommend}">
+                    <label>推荐</label>
+                    <div class="clearfix" id="recommend">
+                      <label class="lyear-radio radio-inline radio-primary">
+                        <input type="radio" name="recommend" value="1" th:attr="checked=${product.hot==1}"/><span>是</span>
+                      </label>
+                      <label class="lyear-radio radio-inline radio-primary">
+                        <input type="radio" name="recommend" value="2" th:attr="checked=${product.hot==2}"/><span>否</span>
                       </label>
                     </div>
                   </div>
@@ -222,6 +228,13 @@
     var status =$('#status input[name="status"]:checked ').val();
     var hot =$('#hot input[name="hot"]:checked ').val();
     var description = $("#seo_description").val();
+    var  id =$("#id").val();
+    var recommend =$('#recommend input[name="recommend"]:checked ').val();
+    var turnover = $("#turnover").val();
+    var createAdminName = $("#createAdminName").val();
+    var createTime = $("#createTime").val();
+    var updateAdminName = $("#updateAdminName").val();
+    var updateTime = $("#updateTime").val();
     var shop= new Object();
     shop.code=code;
     shop.title=title;
@@ -233,7 +246,15 @@
     shop.hot=hot;
     shop.stock=stock;
     shop.description=description;
-    console.log(shop);
+    shop.id=id;
+    shop.recommend=recommend;
+    shop.turnover=turnover;
+    shop.createAdminName=createAdminName;
+    shop.createTime=createTime;
+    shop.updateAdminName=updateAdminName;
+    shop.updateTime=updateTime;
+
+    console.log(JSON.stringify(shop));
 
     $.ajax({
       type: 'POST',
@@ -243,6 +264,7 @@
       dataType: "json",
       success: function (res) {
         alert(res.msg+""+res.data);
+        window.location.href="[[@{/admin/shop/shopList.html}]]"
       },
       error:function (res) {
         alert(res.msg);

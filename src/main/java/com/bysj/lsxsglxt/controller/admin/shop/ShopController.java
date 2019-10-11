@@ -1,6 +1,8 @@
 package com.bysj.lsxsglxt.controller.admin.shop;
 
 
+import com.bysj.lsxsglxt.annotation.LoginRequired;
+import com.bysj.lsxsglxt.model.Admin;
 import com.bysj.lsxsglxt.model.Product;
 import com.bysj.lsxsglxt.model.Producttype;
 import com.bysj.lsxsglxt.model.ShopPojo;
@@ -8,7 +10,6 @@ import com.bysj.lsxsglxt.service.shop.ShopService;
 import com.bysj.lsxsglxt.service.shop.ShopTypeService;
 import com.bysj.lsxsglxt.utils.ServerResponse;
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -36,7 +38,7 @@ public class ShopController {
     @Autowired
     private ShopService shopService;
 
-
+    @LoginRequired(name = "admin")
     @RequestMapping("/shopList.html")
     public ModelAndView shopList(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize , ModelAndView modelAndView){
         PageInfo<Product> productPageInfo = shopService.productListPage(pageNum, pageSize);
@@ -56,19 +58,22 @@ public class ShopController {
         modelAndView.setViewName("admin/shopUpdate");
         return modelAndView;
     }
-
+    @LoginRequired(name = "admin")
     @RequestMapping("/shopUpdate")
-    public ServerResponse shopUpdate(@RequestBody @Param("shop") ShopPojo shopPojo){
-        System.out.println(shopPojo);
-        ServerResponse<Integer> integerServerResponse = shopService.saveProduct(shopPojo,"admin");
+    @ResponseBody
+        public ServerResponse shopUpdate(@RequestBody  ShopPojo shop, HttpSession session){
+        System.out.println(shop);
+        Admin admin = (Admin)session.getAttribute("admin");
+        ServerResponse<Integer> integerServerResponse = shopService.updateByIdProduct(shop,admin.getUsername());
         return integerServerResponse;
     }
-
+    @LoginRequired(name = "admin")
     @RequestMapping("/shopAdd")
     @ResponseBody
-    public ServerResponse shopAdd(@RequestBody @Param("shop") ShopPojo shopPojo){
-        System.out.println(shopPojo);
-        ServerResponse<Integer> integerServerResponse = shopService.saveProduct(shopPojo,"admin");
+    public ServerResponse shopAdd(@RequestBody  ShopPojo shop,HttpSession session){
+        System.out.println(shop);
+        Admin admin = (Admin)session.getAttribute("admin");
+        ServerResponse<Integer> integerServerResponse = shopService.saveProduct(shop,admin.getUsername());
         return integerServerResponse;
     }
 
@@ -87,4 +92,29 @@ public class ShopController {
         Integer i = shopService.deleteIdProduct(id);
         return "redirect:shopList.html";
     }
+
+
+
+    @RequestMapping("/startStatus")
+    @ResponseBody
+    public ServerResponse startStatus(int[] ids){
+        System.out.println(ids);
+        ServerResponse serverResponse = shopService.updateStatus(ids,1);
+        return serverResponse;
+    }
+    @RequestMapping("/stopStatus")
+    @ResponseBody
+    public ServerResponse stopStatus(int[] ids){
+        System.out.println(ids);
+        ServerResponse serverResponse = shopService.updateStatus(ids,2);
+        return serverResponse;
+    }
+    @RequestMapping("/deleteStatus")
+    @ResponseBody
+    public ServerResponse deleteStatus(int[] ids){
+        System.out.println(ids);
+        ServerResponse serverResponse = shopService.deleteStatus(ids);
+        return serverResponse;
+    }
+
 }

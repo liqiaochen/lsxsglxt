@@ -3,12 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>首页 - 光年(Light Year Admin)后台管理系统模板</title>
-<link rel="icon" href="favicon.ico" type="image/ico">
-<meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
-<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
-<meta name="author" content="yinqi">
-  <div th:replace="common/adminstatic :: adminstatic"></div>
+<title>订单列表</title>
+<div th:replace="common/adminstatic :: adminstatic"></div>
 <style type="text/css">
 .table tbody tr td{
             vertical-align: middle;
@@ -31,7 +27,7 @@ table{
   <div class="lyear-layout-container">
 
 
-    <aside th:include="common/adminAside :: adminAside" class="lyear-layout-sidebar"></aside>
+    <aside th:include="common/adminAside :: adminAside('orderList.html')" class="lyear-layout-sidebar"></aside>
     <header th:include="common/adminHead :: adminHead" class="lyear-layout-header"></header>
     <!--页面主要内容-->
     <main class="lyear-layout-content">

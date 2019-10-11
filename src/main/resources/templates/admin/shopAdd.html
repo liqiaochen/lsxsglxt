@@ -3,11 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>新增文档 - 光年(Light Year Admin)后台管理系统模板</title>
-    <link rel="icon" href="favicon.ico" type="image/ico">
-    <meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
-    <meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
-    <meta name="author" content="yinqi">
+    <title>商品添加</title>
     <div th:replace="common/adminstatic :: adminstatic"></div>
     <!--标签插件-->
     <link rel="stylesheet" th:href="@{/js/jquery-tags-input/jquery.tagsinput.min.css}">
@@ -17,7 +13,7 @@
 <body>
 <div class="lyear-layout-web">
     <div class="lyear-layout-container">
-        <aside th:include="common/adminAside :: adminAside" class="lyear-layout-sidebar"></aside>
+        <aside th:include="common/adminAside :: adminAside('shopAdd.html')" class="lyear-layout-sidebar"></aside>
         <header th:include="common/adminHead :: adminHead" class="lyear-layout-header"></header>
         <!--页面主要内容-->
         <main class="lyear-layout-content">
@@ -75,7 +71,7 @@
                                         <label>状态</label>
                                         <div class="clearfix" id="status">
                                             <label class="lyear-radio radio-inline radio-primary">
-                                                <input type="radio" name="status" value="0"><span>下架</span>
+                                                <input type="radio" name="status" value="2"><span>下架</span>
                                             </label>
                                             <label class="lyear-radio radio-inline radio-primary">
                                                 <input type="radio" name="status" value="1" checked><span>上架</span>
@@ -87,7 +83,7 @@
                                         <label>是否热门</label>
                                         <div class="clearfix" id="hot">
                                             <label class="lyear-radio radio-inline radio-primary">
-                                                <input type="radio" name="hot" value="0"><span>不热门</span>
+                                                <input type="radio" name="hot" value="2"><span>不热门</span>
                                             </label>
                                             <label class="lyear-radio radio-inline radio-primary">
                                                 <input type="radio" name="hot" value="1" checked><span>热门</span>
@@ -196,7 +192,7 @@ $("#submit").click(function () {
     shop.hot=hot;
     shop.stock=stock;
     shop.description=description;
-    console.log(shop);
+    console.log(JSON.stringify(shop));
 
     $.ajax({
         type: 'POST',
@@ -206,6 +202,7 @@ $("#submit").click(function () {
         dataType: "json",
         success: function (res) {
             alert(res.msg+""+res.data);
+            window.location.href="[[@{/admin/shop/shopList.html}]]";
         },
         error:function (res) {
             alert(res.msg);
