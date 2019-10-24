@@ -2,6 +2,8 @@ package com.bysj.lsxsglxt.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class User {
     private Integer id;
@@ -11,10 +13,6 @@ public class User {
      * 密码信息(加密)
      */
     private String passWord;
-    /**
-     * 邮箱
-     */
-    private String email;
     /**
      * 账户余额
      */
@@ -35,5 +33,12 @@ public class User {
      * 备注
      */
     private String remark;
-
+    /**
+     * 邮箱
+     */
+    private String email;
+    /**
+     * 地址集合
+     */
+    private List<Useraddress> useraddress;
 }

@@ -45,7 +45,6 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         LoginRequired methodAnnotation = method.getAnnotation(LoginRequired.class);
         // 有 @LoginRequired 注解，需要认证
         if (methodAnnotation != null) {
-
             String scheme = request.getScheme();
             String serverName = request.getServerName();
             int port = request.getServerPort();
@@ -54,6 +53,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             HttpSession httpSession = request.getSession();
             String msg = "未登录";
             msg = URLEncoder.encode(msg,"UTF-8");
+
             String name = methodAnnotation.name();
             if (name.equals(adminString)){
                 Admin admin = (Admin) httpSession.getAttribute("admin");

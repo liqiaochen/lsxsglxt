@@ -57,7 +57,7 @@ public class AdminIndexController {
         return "admin/shopRecommend";
     }
 
-
+    @LoginRequired(name = "admin")
     @RequestMapping("/adminEditPwd.html")
     public String reAdminEditPwd(){
         return "admin/adminEditPwd";
@@ -66,6 +66,7 @@ public class AdminIndexController {
     public String reAdminLogin(){
         return "admin/adminLogin";
     }
+    @LoginRequired(name = "admin")
     @RequestMapping("/adminPersonal.html")
     public String reAdminPersonal(){
         return "admin/adminPersonal";

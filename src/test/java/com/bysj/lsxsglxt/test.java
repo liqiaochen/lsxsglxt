@@ -75,4 +75,16 @@ public class test {
         System.out.println(integer);
         System.out.println(picture);
     }
+
+    /**
+     * 测试hotList和recommendList方法
+     */
+    @Test
+    public void  Test5() {
+        List<Product> products = productMapper.hotList(1);
+        products.forEach((a)-> System.out.println("1:"+a.getHot()));
+
+        List<Product> products1 = productMapper.recommendList(1);
+        products1.forEach((a)-> System.out.println("2:"+a.getRecommend()));
+    }
 }

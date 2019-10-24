@@ -14,8 +14,8 @@
           text-align: center;
         }
 .table tbody tr td img{
-  width:100px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
 }
 table{
   table-layout:fixed;
@@ -74,7 +74,7 @@ table{
                           </label>
                         </th>
                         <th style='width:10%;'>商品编码</th>
-                        <th style='width:15%;'>商品图片</th>
+                        <th style='width:12%;'>商品图片</th>
                         <th>商品名称</th>
                         <th>商品类型</th>
                         <th>商品价格</th>
@@ -92,7 +92,7 @@ table{
                         </td>
                         <td th:text="${product.code}">123456789</td>
                         <td>
-                            <img  th:src="${product.picId[1].url}" th:alt="${product.picId[1].title}">
+                            <img th:each="pic : ${product.picId}" th:if="${pic.level}==1"  th:src="${pic.url}" th:alt="${pic.title}">
                         </td>
                         <td th:text="${product.title}">火龙果</td>
                         <td th:text="${product.typeId.name}">水果</td>
@@ -118,7 +118,7 @@ table{
                 <ul class="pagination">
 
                   <li>
-                    <a th:if="${not pageInfo.isFirstPage}" th:href="@{${'shopType.html'}(pageNum=${pageInfo.pageNum-1},pageSize=${pageInfo.pageSize})}" aria-label="Previous">
+                    <a th:if="${not pageInfo.isFirstPage}" th:href="@{${'shopList.html'}(pageNum=${pageInfo.pageNum-1},pageSize=${pageInfo.pageSize})}" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                     </a>
                     <a th:if="${pageInfo.isFirstPage}" href="javascript:void(0);" aria-label="Previous">
@@ -131,13 +131,13 @@ table{
                       <span th:text="${pageNo}"></span>
                     </a>
 
-                    <a  th:if="${not (pageInfo.pageNum eq pageNo)}" th:href="@{${'shopType.html'}(pageNum=${pageNo},pageSize=${pageInfo.pageSize})}">
+                    <a  th:if="${not (pageInfo.pageNum eq pageNo)}" th:href="@{${'shopList.html'}(pageNum=${pageNo},pageSize=${pageInfo.pageSize})}">
                       <span th:text="${pageNo}"></span>
                     </a>
                   </li>
 
                   <li>
-                    <a th:if="${not pageInfo.isLastPage}" th:href="@{${'shopType.html'}(pageNum=${pageInfo.pageNum+1},pageSize=${pageInfo.pageSize})}" aria-label="Next">
+                    <a th:if="${not pageInfo.isLastPage}" th:href="@{${'shopList.html'}(pageNum=${pageInfo.pageNum+1},pageSize=${pageInfo.pageSize})}" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                     </a>
                     <a th:if="${pageInfo.isLastPage}" href="javascript:void(0);" aria-label="Next">

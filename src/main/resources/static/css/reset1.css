@@ -19,7 +19,7 @@ input, button, textarea, select, optgroup, option {
 }
 
 input {
-    text-align: inherit;
+    /*text-align: inherit;*/
 }
 
 textarea {

@@ -14,7 +14,9 @@
     <result column="unit" jdbcType="VARCHAR" property="unit" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
-    <result property="updateAdminName" jdbcType="VARCHAR" column="updateAdmin_name"/>
+    <result column="updateAdmin_name" jdbcType="VARCHAR" property="updateAdminName"/>
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="createAdmin_Name" jdbcType="TIMESTAMP" property="createAdminName" />
     <association property="typeId" column="type_id" javaType="com.bysj.lsxsglxt.model.Producttype"
      fetchType="lazy"      select="com.bysj.lsxsglxt.mapper.ProducttypeMapper.showByIdType">
     </association>
@@ -76,11 +78,13 @@
     pic.id picid,pic.`level`,pic.title pictitle,pic.time,pic.url,pic.admin_name,pic.product_id
     FROM product INNER JOIN  producttype pt ON product.type_id = pt.id INNER JOIN picture pic ON pic.product_id = product.id
     WHERE product.id = #{id}
+    ORDER BY code ASC
   </select>
 
   <select id="selectListProduct" resultMap="BaseResultMap">
     select product.*
     from product
+    ORDER BY code ASC
   </select>
 
 </mapper>

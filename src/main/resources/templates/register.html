@@ -5,37 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/registera.css">
-    <title>注册小米账号</title>
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <title>注册账号</title>
 </head>
 <body>
     <div id="myRegister">
         <div><a href="#" class='ercode'></a></div>
         <ul>
-            <li><a href="#"><img src="img/mistore_logo.png"></a></li>
-            <li style="font-size: 30px"><h4>注册小米账号</h4></li>
+            <li><a href="#"><img th:src="@{/img/logo6.jpg}" src="img/mistore_logo.png"></a></li>
+            <li style="font-size: 30px"><h4>注册账号</h4></li>
         </ul>
         <br>
         <div>
             <div class='register_area' >
-                <form id="register_form" action="login.html" method="post" autocomplete="on">
-                    <label for="user_name" class='labelbox'>
-                        <input type="text" placeholder="请输入用户名"  name="uname" id="uname">
+                <form id="register_form" action="saveUser" method="post" autocomplete="on" onsubmit="return  checkForm()">
+                    <label for="userName" class='labelbox'>
+                        <input type="text" id="userName" required placeholder="请输入用户名"  name="userName">
                     </label>
                     <br><br>
-                    <label for="user_pwd" class='valibox'>
-                        <input type="password" placeholder="请输入密码" name="upwd" id="upwd">
+                    <label for="passWord" class='valibox'>
+                        <input type="password" required id="passWord" placeholder="请输入密码" name="passWord">
                     </label>
                     <br><br>   
-                    <label for="user_rePwd" class='valibox'>
-                        <input type="password" placeholder="请再次输入密码" name="upwda" id="upwda">
+                    <label for="rePassWord" class='valibox'>
+                        <input type="password" required id="rePassWord" placeholder="请再次输入密码" name="rePassWord">
                     </label>
                     <br><br>
-                    <input type="button" class="btn" value="立即注册" onclick="regiset()">
+                    <input type="submit" class="btn" value="立即注册">
                 </form>
             </div>
             <div class='msg'>
                 <div>
-                    <span>点击“立即注册”，即表示您同意遵守小米 <a href="#" class='outer_link'><b>用户协议</b> 和 <b>隐私政策</b></a></span>
+                    <span>点击“立即注册”，即表示您同意遵守 <a href="#" class='outer_link'><b>用户协议</b> 和 <b>隐私政策</b></a></span>
                 </div>
             </div>   
         </div>
@@ -47,16 +48,35 @@
             <li><a href="#">English</a>|</li>
             <li><a href="#">常见问题</a></li>
         </ul>
-        <p><span>小米公司版权所有-京ICP备10046444-</span>京公网安备11010802020134号</p>
     </div>
-    <script type="text/javascript">
-    function regiset()
-    {
-
-        window.location.href='login.html';
-    }
-
-    </script>
 <script type="text/javascript" src="./js/jquery.min.js"></script>
 </body>
 </html>
+<script>
+    $(function () {
+        var url = location.search; //获取url中"?"符后的字串
+        if (url.indexOf("?") != -1) {
+            // 判断是否有参数
+            //对整个url进行解码
+            var s = decodeURIComponent(url);
+            var str = s.substr(1);
+            //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
+            strs = str.split("=");
+            //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
+            alert(strs[1]);
+            //直接弹出第一个参数 （如果有多个参数 还要进行循环的）
+        }
+
+    })
+    function checkForm(){
+        var passWord= document.getElementById("passWord").value;
+        var rePassWord = document.getElementById("rePassWord").value;
+
+        if(passWord != rePassWord){
+            window.alert("两次输入的新密码不一致！");
+            document.getElementById("rePassWord").focus();
+            return false;
+        }
+        return true;
+     }
+</script>

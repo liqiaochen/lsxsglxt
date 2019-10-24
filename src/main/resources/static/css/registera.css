@@ -115,19 +115,19 @@ input{
     height:68px;
     opacity: 0.3;
 }
-#uname{
+#userName{
     width:100%;
     height:40px;
     line-height:40px;
     margin-right:166px;
 }
-#upwd{
+#passWord{
     width:100%;
     height:40px;
     line-height:40px;
     margin-right:166px;
 }
-#upwda{
+#rePassWord{
     width:100%;
     height:40px;
     line-height:40px;

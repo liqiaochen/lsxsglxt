@@ -3,10 +3,15 @@
 <mapper namespace="com.bysj.lsxsglxt.mapper.CartMapper">
   <resultMap id="BaseResultMap" type="com.bysj.lsxsglxt.model.Cart">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="product_id" jdbcType="INTEGER" property="productId" />
     <result column="num" jdbcType="TINYINT" property="num" />
     <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="total" jdbcType="DOUBLE" property="total"/>
+    <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+    <result column="orderId" jdbcType="INTEGER" property="orderId"/>
+    <association column="user_id" javaType="com.bysj.lsxsglxt.model.User" property="userId"
+                 fetchType="lazy"      select="com.bysj.lsxsglxt.mapper.UserMapper.selectUserOneById"/>
+    <association column="product_id" javaType="com.bysj.lsxsglxt.model.Product" property="productId"
+                 fetchType="lazy"      select="com.bysj.lsxsglxt.mapper.ProductMapper.selectById2"/>
   </resultMap>
   <sql id="Base_Column_List">
     id, user_id, product_id, num, price

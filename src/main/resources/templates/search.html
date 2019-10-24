@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索页</title>
+    <meta name="viewport" content="width=1226">
+    <meta name="author" content="iwuly">
+    <link rel="stylesheet" href="./css/reset1.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/base.min.css">
+    <link rel="stylesheet" href="./css/category.min.css">
+    <link rel="stylesheet" href="./css/search.min.css">
+</head>
+<style>
+    li{
+        display: inline;
+    }
+    .xm-pagenavi a.numbers:hover {
+        background: #b0b0b0;
+        color: #fff;
+    }
+    .xm-pagenavi .numbers {
+        height: 30px;
+    }
+</style>
+<body>
+    <div id="head" th:include="common/head :: common_head"></div>
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="index.html">首页</a>
+            <span class="sep">&gt;</span>
+            <a href="./search">全部结果</a>
+        </div>
+    </div>
+    <div class="search-reuslt">
+        <div class="reuslt-order"  th:if="${pageInfo.list}!=null">
+                 <div class="goods-list-box">
+                    <div class="goods-list clearfix">
+                        <div class="goods-item" th:each ="product :${pageInfo.list}">
+                            <div class="figure figure-img">
+                                <a th:href="@{${'shop/product'}(id=${product.id})}">
+                                <img th:each="pic : ${product.picId}" th:if="${pic.level}==0"  th:src="${pic.url}" th:alt="${pic.title}"
+                                     width="200" height="200" alt="">
+                                </a>
+                                <br>
+                                <h2 class="title" th:text="${product.title}"><a>小米9 Pro 5G</a></h2>
+                                <br>
+                                <p class="price" th:text="${product.price}">3699元 起 </p>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div>
+                         <div class="xm-pagenavi">
+                             <li>
+                                 <a th:if="${not pageInfo.isFirstPage}" class="numbers first" th:href="@{${'search'}(search=${search},pageNum=${pageInfo.pageNum-1},pageSize=${pageInfo.pageSize})}">
+                                     <span class="iconfont"></span>
+                                 </a>
+                                 <a th:if="${pageInfo.isFirstPage}" href="javascript:void(0);"class="numbers first">
+                                     <span class="iconfont"></span>
+                                 </a>
+                             </li>
+                             <li th:each="pageNo : ${#numbers.sequence(1, pageInfo.pages)}">
+                                 <a th:if="${pageInfo.pageNum eq pageNo}" class="current numbers" href="javascript:void(0);">
+                                     <span th:text="${pageNo}"></span>
+                                 </a>
+                                 <a  th:if="${not (pageInfo.pageNum eq pageNo)}" class="numbers" th:href="@{${'search'}(search=${search},pageNum=${pageNo},pageSize=${pageInfo.pageSize})}">
+                                     <span th:text="${pageNo}"></span>
+                                 </a>
+                             </li>
+
+                             <li>
+                                 <a th:if="${not pageInfo.isLastPage}" class="numbers last" th:href="@{${'search'}(search=${search},pageNum=${pageInfo.pageNum+1},pageSize=${pageInfo.pageSize})}" aria-label="Next">
+                                     <span class="iconfont"></span>
+                                 </a>
+                                 <a th:if="${pageInfo.isLastPage}" href="javascript:void(0);" class="numbers last">
+                                     <span class="iconfont"></span>
+                                 </a>
+                             </li>
+                         </div>
+                     </div>
+                </div>
+    </div>
+        <div th:if="${pageInfo.list}==null">
+            <ul>
+                <span>没有商品了</span>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+</html>

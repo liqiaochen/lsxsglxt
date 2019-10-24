@@ -2,7 +2,6 @@
 
 @font-face {
     font-family: 'iconfont';
-
     src: url('../font/iconfont.ttf');
 }
 
@@ -155,7 +154,7 @@ body {
     height: 55px;
     margin-top: 22px;
     padding: 3px;
-    background: #ff6700;
+   /* background: #ff6700;*/
 }
 
 .site-header .header-nav {

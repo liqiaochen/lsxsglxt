@@ -1,0 +1,7 @@
+.site-topbar a {
+    color: #b0b0b0;
+    line-height: 40px;
+    display: inline-block;
+    *zoom: 1;
+    *display: inline
+}

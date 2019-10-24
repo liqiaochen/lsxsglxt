@@ -18,8 +18,8 @@
     <div class="site-header site-mini-header">
         <div class="container">
             <div class="header-logo">
-                <a href="./index.html" class="logo ir">
-                    <img src="./images/logo-footer.png" alt="">
+                <a href="./index.html" th:href="@{/index.html}" class="logo ir" style="width:70px; height:70px">
+                    <img src="./images/logo-footer.png"  alt="" th:src="@{/img/logo62.png}" style="width:70px; height:70px" >
                 </a>
             </div>
             <div class="header-title has-more">
@@ -27,9 +27,9 @@
                 <p>温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算</p>
             </div>
             <div class="topbar-info">
-                <a href="./login.html" class="link">登录</a>
-                <p class="sep">|</p>
-                <a href="./register.html" class="link">注册</a>
+                <a href="PersonalInfo.html" th:href="@{/PersonalInfo.html}"><span th:text="${session.user.userName}"></span></a>
+                <a href="PersonalOrder.html" th:href="@{/PersonalOrder.html}">我的订单</a>
+                <a href="logout"  th:href="@{/logout}">退出</a>
             </div>
         </div>
     </div>
@@ -39,9 +39,9 @@
                 <div class="cart-goods-list">
                     <div class="list-head">
                         <div class="col col-check ipt">
-                            <input type="checkbox"   class="allsel"> 全选
+                            <input type="checkbox"   class="allsel" id="check-all">全选
                         </div>
-                        <div class="col col-img">&nbsp;</div>
+                        <div class="col col-img">商品图片</div>
                         <div class="col col-name">商品名称</div>
                         <div class="col col-price">单价</div>
                         <div class="col col-num">数量</div>
@@ -52,29 +52,29 @@
                     <div class="list-body">
 
                          <div class="item-box">
-                           <div class="item-table">
+                           <div class="item-table" th:each="cart :${carts}">
                                <div class="col col-check">
                                    <div class="ipt">
-                                       <input type="checkbox">
+                                       <input type="checkbox" name="ids[]" th:value="${cart.id}" value="1">
                                    </div>
                                </div>
                                <div class="col col-img">
-                                   <!-- <a href="#">
-                                       <img src="./images/mi9-80.png" alt="">
-                                   </a> -->
+                                    <a href="#">
+                                       <img src="./images/mi9-80.png" alt="" th:each="pic : ${cart.productId.picId}" th:if="${pic.level}==0"  th:src="${pic.url}" th:alt="${pic.title}">
+                                   </a>
                                </div>
-                               <div class="col col-name">商品名qweqeqeqeqeqeq称</div>
-                               <div class="col col-price">单价</div>
+                               <div class="col col-name" th:text="${cart.productName}">商品名qweqeqeqeqeqeq称</div>
+                               <div class="col col-price" th:text="${cart.price}">单价</div>
                                <div class="col col-num">
                                    <div class="change-goods-num">
-                                       <a href="javascript:void(0)" class="quantity-down">-</a>
-                                       <input type="text" value="1">
-                                       <a href="javascript:void(0)" class="quantity-add">+</a>
+                                       <a href="javascript:void(0)" class="quantity-down" onclick="jian(this)">-</a>
+                                       <input type="text" value="1" th:value="${cart.num}">
+                                       <a href="javascript:void(0)" class="quantity-add" onclick="jia(this)">+</a>
                                    </div>
                                </div>
-                               <div class="col col-total">小计</div>
+                               <div class="col col-total" th:text="${cart.total}">小计</div>
                                <div class="col col-action">
-                                   <a href="javascript:void(0)">X</a>
+                                   <a href="javascript:void(0)" th:onclick="deleteCat([[${cart.id}]])">X</a>
                                </div>
                            </div>
                        </div>
@@ -85,10 +85,10 @@
                 <!-- 加购价 -->
                 <div class="cart-bar clearfix">
                     <div class="section-left">
-                        <a href="./index.html" class="back-shopping J_goShoping">继续购物</a>
+                        <a href="./index.html" th:href="@{/index.html}" class="back-shopping J_goShoping">继续购物</a>
                         <span class="cart-totalC">
                             共
-                            <i id="J_cartTotalNum">0</i> 件商品，已选择
+                            <i id="J_cartTotalNum" th:text="${#lists.size(carts)}">0</i> 件商品，已选择
                             <i id="J_selTotalNum">0</i> 件
                         </span>
                     </div>
@@ -97,8 +97,8 @@
                         <em id="J_cartTotalPrice">0</em>
                         元
                     </span>
-                    <a href="purchase.html" class="btn btn-a btn btn-disabled ">去结算</a>
-                    <div class="no-select-tip hide">
+                    <a  href="javascript:void(0)" id="jiesuan" class="btn btn-a btn btn-disabled ">去结算</a>
+                    <div id="hide" class="no-select-tip hide">
                         请勾选需要结算的商品
                         <i class="arrow arrow-a"></i>
                         <i class="arrow arrow-b"></i>
@@ -107,12 +107,161 @@
             </div>
         </div>
     </div>
-
-
-
-   
-
     <script src="./js/jquery.js"></script>
 </body>
 
 </html>
+<script>
+
+    // 复选框全选
+    $("#check-all").change(function () {
+        $("input[type='checkbox']").prop('checked', $(this).prop("checked"));
+    });
+    /**
+     * 修改总数
+     * **/
+    function selTotalNum(){
+        var options=$("input[name='ids[]']:checked");  //获取选中的项
+        var  length = options.length;
+        //获取总共的选中数
+        $("#J_selTotalNum").text(length);
+        var TotalNum = 0;
+        for (var i =0 ; i <length; i++ ){
+            var nextAll = $(options[i]).parent().parent().nextAll();
+            var total = $(nextAll[4]).text();
+            TotalNum = Number(TotalNum)+Number(total);
+        }
+        $("#J_cartTotalPrice").text(TotalNum);
+
+    }
+
+    /**
+     * 复选发生改变时
+     * **/
+    $("input[type='checkbox']").change(function() {
+        selTotalNum();
+    });
+
+
+    /**
+     *删除购物车的商品
+     **/
+    function deleteCat(id){
+        $.ajax({
+            type: 'POST',
+            url: "[[@{/cart/quxiao}]]",
+            dataType: "json",
+            success: function (res) {
+                alert(res.msg);
+                location.reload();
+            },
+            error:function (res) {
+                alert(res.msg);
+            }
+        });
+
+      }
+
+    /**
+     * 加
+     * @param that
+     */
+      function jia(that){
+          var input = $(that).prevAll();
+          var value = input[0].value;
+          var  sum = Number(value)+1
+          input[0].value=sum;
+          var total = $(that).parent().parent().next();
+          var price = $(that).parent().parent().prev().text();
+          $(total.text(sum*Number(price)))
+
+      }
+
+    /**
+     * 减
+     * @param that
+     */
+      function  jian(that) {
+          var input = $(that).nextAll();
+          var value = input[0].value;
+          if (value>1){
+              var  sum = Number(value)-1
+              input[0].value=sum;
+              var total = $(that).parent().parent().next();
+              var price = $(that).parent().parent().prev().text();
+              $(total.text(sum*Number(price)))
+          }
+      }
+
+    /**
+     * 当直接修改数量时，改变总价
+     */
+    $("input[type=text]").bind('input oninput', function() {
+          var total = $(this).parent().parent().next();
+          var price = $(this).parent().parent().prev().text();
+          var num = $(this).val();
+          $(total).text(Number(price)*Number(num));
+      });
+
+    $(".col-total").bind('DOMNodeInserted',function () {
+        var div = $(this).prevAll()[4];
+        var checkbox = $(div).children().children();
+        //判断当前的是否被选中
+        var newVar = $(checkbox).is(':checked');
+        if (newVar) {
+            selTotalNum();
+        }
+    });
+    $("#jiesuan").click(function () {
+
+        var options=$("input[name='ids[]']:checked");  //获取选中的项
+        var  length = options.length;
+        if (length==0){
+            $("#hide").removeClass("hide");
+        }else{
+            //获取数据
+            var  cartsPojo =new Object()
+            var carts = new Array();
+            for (var i =0 ; i <length; i++ ){
+                var id = $(options[i]).val();
+                var nextAll = $(options[i]).parent().parent().nextAll();
+                console.log(nextAll)
+                console.log($(nextAll[0]).children().children())
+                var imgUrl = $(nextAll[0]).children().children().attr("src");
+                var title = $(nextAll[1]).text();
+                var price = $(nextAll[2]).text();
+                var num = $(nextAll[3]).children().children("input").val();
+                var total = $(nextAll[4]).text();
+                var cartPojo = new  Object();
+                cartPojo.id=id;
+                cartPojo.imgUrl = imgUrl;
+                cartPojo.title = title;
+                cartPojo.price = price;
+                cartPojo.num = num;
+                cartPojo.total = total;
+                carts.push(cartPojo);
+            }
+            var cartTotalPrice = $("#J_cartTotalPrice").text();
+            cartsPojo.cartPojo=carts;
+            cartsPojo.cartTotalPrice=cartTotalPrice;
+            console.log(JSON.stringify(cartsPojo))
+            $.ajax({
+                type: 'POST',
+                url: "[[@{/cart/sumbit}]]",
+                contentType : "application/json",
+                data: JSON.stringify(cartsPojo),
+                dataType: "json",
+                success: function (res) {
+                    alert(res.msg);
+                    location.href="[[@{/purchase.html}]]"
+                },
+                error:function (res) {
+                    alert(res.msg);
+                }
+            })
+
+        }
+
+    })
+
+</script>

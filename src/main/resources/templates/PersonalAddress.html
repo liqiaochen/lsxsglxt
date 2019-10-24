@@ -91,7 +91,7 @@
                 <ul>
                     <li><a href="./PersonalInfo.html">我的个人中心</a></li>
                     <li><a href="./PersonalOrder.html">我的订单</a></li>
-                    <li><a href="">消息通知</a></li>
+                    <li><a href="javascript:void(0);">消息通知</a></li>
                     <li><a href="./PersonalAddress.html" style="color:#ff6700;font-weight:bold;">收货地址</a></li>
                 </ul>
             </div>
@@ -102,46 +102,23 @@
             <div class="xm-box">
                 <div class="box-bd">
                     <div class="clearfix xm-address-list" id="checkoutAddrList">
-                        <dl class="item">
-                            <input hidden="hidden" id="1"/>
+                        <dl class="item" th:each="address,item : ${session.user.useraddress}">
+                            <input hidden="hidden" th:id="${address.id}" id="1"/>
                             <dt>
-                                <strong class="itemConsignee">潘骏杰</strong>
-                                <span class="itemTag tag">家</span>
+                                <strong class="itemConsignee" th:text="${address.consignee}">潘骏杰</strong>
+                                <span class="itemTag tag" th:text="${address.tag}">家</span>
                             </dt>
                             <dd>
-                                <p class="tel itemTel">15961726437</p>
-                                <p class="itemRegion">江苏 无锡市 北塘区</p>
-                                <p class="itemStreet">民丰西苑82号202室(214045)</p>
-                                <span class="edit-btn J_editAddr" onclick="updateAddress(1)">编辑</span>
+                                <p class="tel itemTel" th:text="${address.phone}">15961726437</p>
+                                <p class="itemRegion" th:text="${address.region}">江苏 无锡市 北塘区</p>
+                                <p class="itemStreet" >
+                                    <span th:text="${address.street}">民丰西苑82号202室</span>
+                                    (<span th:text="${address.zipCode}">214045</span>)
+                                </p>
+                                <span class="edit-btn J_editAddr" th:onclick="'updateAddress(&quot;'+${address.id}+'&quot;)'" onclick="updateAddress(1)">编辑</span>
                             </dd>
                         </dl>
-                        <dl class="item">
-                            <input hidden="hidden" id="2"/>
-                            <dt>
-                                <strong class="itemConsignee">潘骏杰</strong>
-                                <span class="itemTag tag">家</span>
-                            </dt>
-                            <dd>
-                                <p class="tel itemTel">15961726437</p>
-                                <p class="itemRegion">江苏 无锡市 北塘区</p>
-                                <p class="itemStreet">民丰西苑82号202室(214045)</p>
-                                <span class="edit-btn J_editAddr" onclick="updateAddress(2)">编辑</span>
-                            </dd>
-                        </dl>
-                        <dl class="item">
-                            <dt>
-                                <strong class="itemConsignee">潘骏杰</strong>
-                                <span class="itemTag tag">家</span>
-                            </dt>
-                            <dd>
-                                <p class="tel itemTel">15961726437</p>
-                                <p class="itemRegion">江苏 无锡市 北塘区</p>
-                                <p class="itemStreet">民丰西苑82号202室(214045)</p>
-                                <span class="edit-btn J_editAddr" onclick="updateAddress(3)">编辑</span>
-                            </dd>
-                        </dl>
-
-                        <div class="item use-new-addr" id="J_useNewAddr" data-state="off" onclick="addAddress()">
+                        <div class="item use-new-addr" id="J_useNewAddr" data-state="off" onclick="addAddressShow()">
                             <span class="iconfont icon-add"><img src="images/add_cart.png"></span>
                             使用新地址
                         </div>
@@ -156,50 +133,80 @@
         <div class="modal-header">
             <span class="title">添加收货地址</span>
         </div>
-        <div class="modal-body">
-            <div class="form-box clearfix">
-                <div class="form-section form-name">
-                    <input class="input-text J_addressInput" type="text" id="J_addressNameInput" name="user_name" value="请输入姓名"  onfocus="if(value=='请输入姓名') {value=''}" onblur="if(value=='') {value='请输入姓名'}"/>
+        <form method="post"  th:action="@{/userAddress/update}">
+            <div class="modal-body">
+                <div class="form-box clearfix">
+                    <div class="form-section form-name">
+                        <input class="input-text J_addressInput" type="text" id="J_addressNameInput" name="consignee" value="请输入姓名"  onfocus="if(value=='请输入姓名') {value=''}" onblur="if(value=='') {value='请输入姓名'}"/>
+                    </div>
+                    <div class="form-section form-phone">
+                        <input class="input-text J_addressInput" type="text" id="J_addressPhoneInput" name="phone" value="11位手机号" onfocus="if(value=='11位手机号') {value=''}" onblur="if(value=='') {value='11位手机号'}"/>
+                    </div>
+                    <div class="form-section form-four-address form-section-active">
+                        <input id="J_selectAddressTrigger" class="input-text J_addressInput" type="text" name="region" value="请输入省 / 市 / 区 / 街道" onfocus="if(value=='请输入省 / 市 / 区 / 街道') {value=''}" onblur="if(value=='') {value='请输入省 / 市 / 区 / 街道'}"/>
+                    </div>
+                    <div class="form-section form-address-detail">
+                        <textarea class="input-text J_addressInput" type="text" id="J_addressDetailInput" name="street"  onfocus="if(value=='详细地址，路名或街道名称，门牌号') {value=''}" onblur="if(value=='') {value='详细地址，路名或街道名称，门牌号'}">详细地址，路名或街道名称，门牌号</textarea>
+                    </div>
+                    <div class="form-section form-zipcode">
+                        <input class="input-text J_addressInput" type="text" id="J_addressZipcodeInput" name="zipCode" value="请输入邮政编码" onfocus="if(value=='请输入邮政编码') {value=''}" onblur="if(value=='') {value='请输入邮政编码'}"/>
+                    </div>
+                    <div class="form-section form-tag">
+                        <input class="input-text J_addressInput" type="text" id="J_addressTagInput" name="tag" value="如&quot;家&quot;、&quot;公司&quot;。限5个字内" onfocus="if(value=='如&quot;家&quot;、&quot;公司&quot;。限5个字内') {value=''}" onblur="if(value=='') {value='如&quot;家&quot;、&quot;公司&quot;。限5个字内'}"/>
+                    </div>
+                    <input type="hidden" id="addressId" name="id" value=""/>
+                    <div class="form-section form-tip-msg clearfix" id="J_formTipMsg"></div>
                 </div>
-                <div class="form-section form-phone">
-                    <input class="input-text J_addressInput" type="text" id="J_addressPhoneInput" name="user_phone" value="11位手机号" onfocus="if(value=='11位手机号') {value=''}" onblur="if(value=='') {value='11位手机号'}"/>
-                </div>
-                <div class="form-section form-four-address form-section-active">
-                    <input id="J_selectAddressTrigger" class="input-text J_addressInput" type="text" name="four_address" value="请输入省 / 市 / 区 / 街道" onfocus="if(value=='请输入省 / 市 / 区 / 街道') {value=''}" onblur="if(value=='') {value='请输入省 / 市 / 区 / 街道'}"/>
-                </div>
-                <div class="form-section form-address-detail">
-                    <textarea class="input-text J_addressInput" type="text" id="J_addressDetailInput" name="user_adress"  onfocus="if(value=='详细地址，路名或街道名称，门牌号') {value=''}" onblur="if(value=='') {value='详细地址，路名或街道名称，门牌号'}">详细地址，路名或街道名称，门牌号</textarea>
-                </div>
-                <div class="form-section form-zipcode">
-                    <input class="input-text J_addressInput" type="text" id="J_addressZipcodeInput" name="user_zipcode" value="请输入邮政编码" onfocus="if(value=='请输入邮政编码') {value=''}" onblur="if(value=='') {value='请输入邮政编码'}"/>
-                </div>
-                <div class="form-section form-tag">
-                    <input class="input-text J_addressInput" type="text" id="J_addressTagInput" name="user_tag" value="如&quot;家&quot;、&quot;公司&quot;。限5个字内" onfocus="if(value=='如&quot;家&quot;、&quot;公司&quot;。限5个字内') {value=''}" onblur="if(value=='') {value='如&quot;家&quot;、&quot;公司&quot;。限5个字内'}"/>
-                </div>
-                <input type="hidden" id="addressId" value=""/>
-                <div class="form-section form-tip-msg clearfix" id="J_formTipMsg"></div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <a href="javascript:void(0);" class="btn2 btn-primary" onclick="">保存</a>
-            <a href="" class="btn2 btn-gray" onclick="">取消</a>
-        </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn2 btn-primary">保存</button>
+                <a href="" class="btn2 btn-gray" onclick="">取消</a>
+            </div>
+        </form>
     </div>
 
 
 </div>
 
 </body>
+<script type="text/javascript" th:inline="javascript">
+    var msg = [[${msg}]];
+    if (msg == null || msg == undefined || msg == '') {
+        console.log("msg为null")
+    }else {
+        alert(msg);
+    }
+</script>
 <script>
-    function  addAddress() {
+
+    function  addAddressShow() {
         var J_modalEditAddress = document.getElementById("J_modalEditAddress");
         J_modalEditAddress.style.display = "block";
     }
     function updateAddress(id) {
-        console.log(id);
-        var addressId = document.getElementById("addressId");
-        addressId.value =id;
-        addAddress();
+        $("#addressId").val(id);
+        $.ajax({
+            type: 'POST',
+            url: "userAddress/"+id,
+            data: "",
+            dataType: "json",
+            success: function (res) {
+                var addresss = res.data;
+                console.log(addresss)
+                $("#J_addressNameInput").val(addresss.consignee);
+                $("#J_addressPhoneInput").val(addresss.phone);
+                $("#J_addressZipcodeInput").val(addresss.zipCode);
+                $("#J_selectAddressTrigger").val(addresss.region);
+                $("#J_addressDetailInput").val(addresss.street);
+                $("#J_addressTagInput").val(addresss.tag);
+            },
+            error:function (res) {
+                alert(res.msg);
+            }
+        });
+        addAddressShow();
     }
+
+
 </script>
 </html>

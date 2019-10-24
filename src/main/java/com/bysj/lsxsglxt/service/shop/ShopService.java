@@ -1,8 +1,7 @@
 package com.bysj.lsxsglxt.service.shop;
-
-
 import com.bysj.lsxsglxt.mapper.PictureMapper;
 import com.bysj.lsxsglxt.mapper.ProductMapper;
+import com.bysj.lsxsglxt.mapper.ProducttypeMapper;
 import com.bysj.lsxsglxt.model.Picture;
 import com.bysj.lsxsglxt.model.Product;
 import com.bysj.lsxsglxt.model.Producttype;
@@ -13,8 +12,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @ClassName: ShopService
@@ -32,7 +30,8 @@ public class ShopService {
     @Autowired
     private PictureMapper pictureMapper;
 
-
+    @Autowired
+    private ProducttypeMapper producttypeMapper;
     /**
      * 添加商品
      * @param shop
@@ -85,7 +84,7 @@ public class ShopService {
     }
 
     /**
-     * 查询商品
+     * 查询商品,
      * @param pageNum
      * @param pageSize
      * @return
@@ -171,15 +170,7 @@ public class ShopService {
      */
     public ServerResponse updateStatus(int[] Ids,int status){
         int i = productMapper.updateStatus(Ids,status);
-        if (i!=0) {
-            if (Ids.length==i){
-                return ServerResponse.createBySuccess("已全部修改。共",i);
-            }
-            return ServerResponse.createBySuccess("修改一部分，有一些不用改。共",i);
-        }
-        else {
-            return  ServerResponse.createByError("批量修改失败");
-        }
+        return getServerResponse(Ids, i, "已全部修改。共", "修改一部分，有一些不用改。共", "批量修改失败");
 
     }
 
@@ -190,18 +181,104 @@ public class ShopService {
      */
     public ServerResponse deleteStatus(int[] Ids){
         int i = productMapper.deleteStatus(Ids);
-        if (i!=0) {
-            if (Ids.length==i){
-                return ServerResponse.createBySuccess("已全部删除。共",i);
-            }
-            return ServerResponse.createBySuccess("删除一部分，有一些不用改。共",i);
-        }
-        else {
-            return  ServerResponse.createByError("批量删除失败");
-        }
+        return getServerResponse(Ids, i, "已全部删除。共", "删除一部分，有一些不用改。共", "批量删除失败");
 
     }
 
+    private ServerResponse getServerResponse(int[] Ids, int i, String s, String s2, String msg) {
+        if (i != 0) {
+            if (Ids.length == i) {
+                return ServerResponse.createBySuccess(s, i);
+            }
+            return ServerResponse.createBySuccess(s2, i);
+        } else {
+            return ServerResponse.createByError(msg);
+        }
+    }
 
+    /**
+     * 查询首页商品，热门以及推荐
+     * @return
+     */
+    public Map<String,List> productIndex (){
+        Map<String,List> map = new HashMap<>();
+        List<Product> hotList = productMapper.hotList(1);
+        List<Product> hotLists =new ArrayList<>();
+        hotLists.addAll(hotList);
+        List<Product> lightHotList;
+        int  size = hotLists.size();
+        int length= 3;
+        if (size>length) {
+            lightHotList = hotLists.subList(0, 2);
+            Product p1 = lightHotList.get(0);
+            Product p2 = lightHotList.get(1);
+            Iterator<Product> it = hotList.iterator();
+           while (it.hasNext()) {
+               Product product = it.next();
+               if (product.getId().equals(p1.getId()) || product.getId().equals(p2.getId())) {
+                   it.remove();
+               }
+           }
 
+        }else {
+            lightHotList = hotList;
+        }
+        List<Product> recommendList = productMapper.recommendList(1);
+        List<Producttype> types = producttypeMapper.showTypeStatus(1);
+        map.put("lightHotList",lightHotList);
+        map.put("hotList",hotList);
+        map.put("recommendList",recommendList);
+        map.put("types",types);
+        return  map;
+    }
+
+    /**
+     * 更据类别id查询商品
+     * @param typeId
+     * @return
+     */
+    public PageInfo<Product> produceType(int pageNum,int pageSize,Integer typeId) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Product> products = productMapper.listType(typeId);
+        PageInfo<Product> pageTypeInfo = new PageInfo<>(products);
+        return pageTypeInfo;
+    }
+
+    /**
+     * 通过商品id查询商品
+     * @param id
+     * @return
+     */
+    public Product productsOne(Integer id){
+        Product product = productMapper.selectById2(id);
+        return product;
+    }
+
+    /**
+     * 上下架并分页
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    public PageInfo<Product> productsListPageStatus(int pageNum,int pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+        List<Product> products = productMapper.selectListProductStatus(1);
+        PageInfo<Product> pageTypeInfo = new PageInfo<>(products);
+        return pageTypeInfo;
+    }
+
+    /**
+     * 模糊查询，分页
+     * @param pageNum
+     * @param pageSize
+     * @param keyword
+     * @return
+     */
+    public PageInfo<Product> productListLike(int pageNum,int pageSize,String keyword){
+        PageHelper.startPage(pageNum,pageSize);
+        List<Product> products = productMapper.listLike(keyword);
+        PageInfo<Product> pageTypeInfo = new PageInfo<>(products);
+        return pageTypeInfo;
+
+    }
 }

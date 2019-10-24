@@ -24,20 +24,21 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <form method="post" action="#!" class="site-form">
+                                <form method="post" id="from" action="#" onsubmit="return false" class="site-form">
+                                    <input type="hidden" name="id" th:value="${session.admin.id}">
                                     <div class="form-group">
                                         <label for="old-password">旧密码</label>
                                         <input type="password" class="form-control" name="oldpwd" id="old-password" placeholder="输入账号的原登录密码">
                                     </div>
                                     <div class="form-group">
                                         <label for="new-password">新密码</label>
-                                        <input type="password" class="form-control" name="newpwd" id="new-password" placeholder="输入新的密码">
+                                        <input type="password" class="form-control" name="password" id="new-password" placeholder="输入新的密码">
                                     </div>
                                     <div class="form-group">
                                         <label for="confirm-password">确认新密码</label>
-                                        <input type="password" class="form-control" name="confirmpwd" id="confirm-password" placeholder="请输入正确的邮箱地址">
+                                        <input type="password" class="form-control" name="confirmpwd" id="confirm-password" placeholder="确认新密码">
                                     </div>
-                                    <button type="submit" class="btn btn-primary">修改密码</button>
+                                    <button type="button" id="sumbit" class="btn btn-primary">修改密码</button>
                                 </form>
 
                             </div>
@@ -55,3 +56,23 @@
 </body>
 
 </html>
+<script>
+
+    $("#sumbit").click(function () {
+        console.log($('#from').serialize());
+        $.ajax({
+            type: 'POST',
+            url: "[[@{/admin/rePassword}]]",
+            data:  $('#from').serialize(),
+            dataType: "json",
+            success: function (res) {
+                alert(res.msg+""+res.data);
+            },
+            error:function (res) {
+                alert(res.msg);
+            }
+
+        })
+    })
+
+</script>

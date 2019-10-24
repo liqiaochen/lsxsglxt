@@ -273,13 +273,6 @@ body {
     cursor: pointer
 }
 
-.cart-goods-list .item-box .col-img {
-    width: 80px;
-    height: 80px;
-    padding-right: 40px;
-    overflow: hidden
-}
-
 .cart-goods-list .item-table .col {
     display: table-cell;
     vertical-align: middle
@@ -293,7 +286,7 @@ body {
 .cart-goods-list .item-box .col-img {
     width: 80px;
     height: 80px;
-    padding-right: 40px;
+    padding-right: 10px;
     overflow: hidden
 }
 
@@ -338,7 +331,7 @@ body {
 .item-table .col-name {
     color: #424242;
     font-size: 18px;
-    line-height: 1;
+    line-height: 2;
     overflow: hidden
 }
 

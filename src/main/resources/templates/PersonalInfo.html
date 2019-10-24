@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="./css/reset1.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" hreaf="./css/style.css">
     <script type="text/javascript" src="./js/jquery.min.js"></script>
     <script type="text/javascript" src="./js/index.js"></script>
 
     <script type="text/javascript">
-        function showelement(element) {
+        function showelement(element,type) {
+            console.log();
             var oldhtml = element.innerText;
             console.log(oldhtml);
             //创建新的input元素
@@ -23,7 +24,7 @@
             //为新增元素添加光标离开事件
             newobj.onblur = function() {
                 if (this.value!=""){
-                    this.parentNode.innerHTML="<span>"+this.value+"</span>"
+                    this.parentNode.innerHTML="<span id="+$(type)[0].id+">"+this.value+"</span>"
                 }else {
                     this.parentNode.innerHTML="<span style='color: red'>不能为空</span>"
                 }
@@ -39,20 +40,25 @@
         }
 
         function   update(){
+            var id = document.getElementById("id").value;
             var username = document.getElementById("username").innerText;
             var signature = document.getElementById("Signature").innerText;
             var hobby = document.getElementById("hobby").innerText;
             var telPhone = document.getElementById("telPhone").innerText;
+            var remark = document.getElementById("remark").innerText;
+            remark
             var  user = new Object();
-            user.username=username;
+            user.id =id;
+            user.userName=username;
             user.signature=signature;
             user.hobby=hobby;
             user.telPhone=telPhone;
+            user.remark=remark;
             console.log(user);
             var userJson = JSON.stringify(user);
-            console.log("userJson:"+userJson);
+            console.log("user:"+userJson);
             var xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("POST","saveInfo",true);
+            xmlHttp.open("POST","updateUser",true);
             xmlHttp.setRequestHeader("Content-type","application/json; charset=UTF-8");
             xmlHttp.send(userJson);
             xmlHttp.onreadystatechange=function()
@@ -121,7 +127,7 @@
                 <ul>
                     <li><a href="./PersonalInfo.html" style="color:#ff6700;font-weight:bold;">我的个人中心</a></li>
                     <li><a href="./PersonalOrder.html">我的订单</a></li>
-                    <li><a href="">消息通知</a></li>
+                    <li><a href="javascript:void(0);">消息通知</a></li>
                     <li><a href="./PersonalAddress.html">收货地址</a></li>
                 </ul>
             </div>
@@ -134,37 +140,46 @@
                 <tr>
                     <td class="td1">昵称：</td>
                     <td class="td2">
-                        <div ondblclick="showelement(this)">
-                            <span id="username">啦啦维吉尔</span>
+                        <div ondblclick="showelement(this,username)">
+                            <span id="username" th:text="${session.user.userName}">啦啦维吉尔</span>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td class="td1">手机号：</td>
                     <td class="td2">
-                        <div  ondblclick="showelement(this)">
-                            <span id="telPhone">15669097417</span>
+                        <div  ondblclick="showelement(this,telPhone)">
+                            <span id="telPhone" th:text="${session.user.telPhone}">15669097417</span>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td class="td1">个性签名：</td>
                     <td class="td2">
-                        <div  ondblclick="showelement(this)">
-                            <span id="Signature">一支穿云箭，千军万马来相见！</span>
+                        <div  ondblclick="showelement(this,Signature)">
+                            <span id="Signature" th:text="${session.user.signature}">一支穿云箭，千军万马来相见！</span>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td class="td1">我的爱好：</td>
+                <td class="td1">我的爱好：</td>
+                <td class="td2">
+                    <div  ondblclick="showelement(this,hobby)">
+                        <span id="hobby" th:text="${session.user.hobby}">游戏，音乐，旅游，健身</span>
+                    </div>
+                </td>
+            </tr>
+                <tr>
+                    <td class="td1">备注：</td>
                     <td class="td2">
-                        <div  ondblclick="showelement(this)">
-                            <span id="hobby">游戏，音乐，旅游，健身</span>
+                        <div  ondblclick="showelement(this,remark)">
+                            <span id="remark" th:text="${session.user.remark}">喜欢购物</span>
                         </div>
                     </td>
                 </tr>
-                <tr onclick="update()" class="save_btn">
-                    <td colspan="2"><div class="btn2">保存</div></td>
+                <tr  class="save_btn">
+                    <input id="id" th:value="${session.user.id}" hidden="hidden"/>
+                    <td colspan="2"><div class="btn2" onclick="update()">保存</div></td>
                 </tr>
             </table>
             </form>

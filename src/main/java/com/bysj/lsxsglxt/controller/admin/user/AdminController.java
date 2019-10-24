@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * @ClassName: UserController
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpSession;
  */
 @RequestMapping("/admin")
 @Controller
-public class UserController {
+public class AdminController {
 
     @Autowired
     private UserService userService;
@@ -40,6 +42,11 @@ public class UserController {
             return "redirect:index.html";
         }else {
             String msg="用户名密码错误";
+            try {
+                msg = URLEncoder.encode(msg,"UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             return "redirect:adminLogin.html?msg="+msg;
         }
 
@@ -57,22 +64,33 @@ public class UserController {
 
     @RequestMapping("/updateAdmin")
     @ResponseBody
-    public ServerResponse<Integer> updateAdmin(Admin admin){
-        ServerResponse<Integer> integerServerResponse = userService.updateAdmin(admin);
-        return integerServerResponse;
+    public ServerResponse updateAdmin(Admin admin,HttpSession session){
+        ServerResponse<Admin> admin1 = userService.updateAdmin(admin);
+        if (admin!=null) {
+            return userService.reSession(admin1.getData(),session);
+        }
+        return admin1;
     }
 
     @RequestMapping("/updateUrl")
     @ResponseBody
-    public ServerResponse<Integer> updateUrl(String url,Integer id){
-        ServerResponse<Integer> integerServerResponse = userService.updateAdminUrl(url,id);
-        return integerServerResponse;
+    public ServerResponse updateUrl(String url, Integer id,HttpSession session){
+            ServerResponse<Admin> admin = userService.updateAdminUrl(url, id);
+
+            if (admin!=null) {
+                System.out.println(admin);
+                return userService.reSession(admin.getData(),session);
+            }
+        return  ServerResponse.createByError("执行出现了问题");
     }
 
     @RequestMapping("/rePassword")
     @ResponseBody
-    public ServerResponse<Integer> rePassword(String password,Integer id){
-        ServerResponse<Integer> integerServerResponse = userService.rePassword(password,id);
-        return integerServerResponse;
+    public ServerResponse rePassword(String password,Integer id,HttpSession session){
+        ServerResponse<Admin> admin = userService.rePassword(password,id);
+        if (admin!=null) {
+            return userService.reSession(admin.getData(),session);
+        }
+        return  ServerResponse.createByError("执行出现了问题");
     }
 }

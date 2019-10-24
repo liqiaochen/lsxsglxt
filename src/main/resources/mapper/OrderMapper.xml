@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bysj.lsxsglxt.mapper.OrderMapper">
   <resultMap id="BaseResultMap" type="com.bysj.lsxsglxt.model.Order">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="ordercode" jdbcType="VARCHAR" property="orderCode"/>
+    <result column="total" jdbcType="DOUBLE" property="total"/>
+    <result column="userName" jdbcType="VARCHAR" property="userName"/>
+    <result column="status" jdbcType="INTEGER" property="status"/>
+    <result column="orderTime" jdbcType="TIMESTAMP" property="orderTime"/>
+    <result column="payment" jdbcType="VARCHAR" property="payment"/>
+    <association property="userId" javaType="com.bysj.lsxsglxt.model.User" column="user_id"
+                 fetchType="lazy" select="com.bysj.lsxsglxt.mapper.UserMapper.selectUserOneById"/>
+    <association property="orderItemId" javaType="com.bysj.lsxsglxt.model.Orderitem" column="orderItem_Id"
+                 fetchType="lazy" select="com.bysj.lsxsglxt.mapper.OrderitemMapper.selectById"/>
+    <collection property="carts" javaType="com.bysj.lsxsglxt.model.Cart" column="id"
+                fetchType="lazy" select="com.bysj.lsxsglxt.mapper.CartMapper.selectByOrderId"/>
 
   </resultMap>
   <sql id="Base_Column_List">

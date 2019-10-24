@@ -23,25 +23,25 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <div class="edit-avatar" onclick="upfile.click()">
-                                    <img id="img" th:src="${session.admin.url}" alt="图片" class="img-avatar">
+                                <div class="edit-avatar">
+                                    <img id="img"  th:src="${session.admin.url}" alt="图片" class="img-avatar">
                                     <div class="avatar-divider"></div>
                                     <div class="edit-avatar-content">
-                                        <button class="btn btn-default">修改头像</button>
+                                        <button class="btn btn-default" onclick="upfile.click()">修改头像</button>
                                         <p class="m-0">选择一张你喜欢的图片，裁剪后会自动生成264x264大小，上传图片大小不能超过2M。</p>
                                     </div>
                                 </div>
-                                <input type="hidden" id="id" th:value="${session.admin.id}">
                                 <input type="file" id="upfile" onchange="uploadFile()" style="visibility: hidden; position: relative;"/>
                                 <hr>
-                                <form method="post" th:action="@{/admin/updateAdmin}" class="site-form">
+                                <form id="from" method="post" action="#" onsubmit="return false" class="site-form">
+                                    <input type="hidden" id="id" name="id" th:value="${session.admin.id}">
                                     <div class="form-group">
                                         <label for="username">用户名</label>
-                                        <input type="text" class="form-control" name="username" id="username" th:value="${session.admin.userName}" value="lightyear" disabled="disabled" />
+                                        <input type="text" class="form-control" name="username" id="username" th:value="${session.admin.username}" value="lightyear" readonly ="readonly " />
                                     </div>
                                     <div class="form-group">
                                         <label for="nickname">昵称</label>
-                                        <input type="text" class="form-control" name="nickname" id="nickname" th:value="${session.admin.nickName}" placeholder="输入您的昵称" value="笔下光年">
+                                        <input type="text" class="form-control" name="nickName" id="nickName" th:value="${session.admin.nickName}" placeholder="输入您的昵称" value="笔下光年">
                                     </div>
                                     <div class="form-group">
                                         <label for="email">邮箱</label>
@@ -52,7 +52,7 @@
                                         <label for="remark">简介</label>
                                         <textarea class="form-control" name="remark" id="remark" rows="3" th:text="${session.admin.remark}"></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">保存</button>
+                                    <button type="button" id="sumbit" class="btn btn-primary">保存</button>
                                 </form>
 
                             </div>
@@ -98,8 +98,7 @@
                 $.ajax({
                     type: 'POST',
                     url: "[[@{/admin/updateUrl}]]",
-                    contentType: "application/json;charset=utf-8",
-                    data: {"url":url,"id":id},
+                    data: {"url":src,"id":id},
                     dataType: "json",
                     success: function (res) {
                         alert(res.msg+""+res.data);
@@ -119,5 +118,22 @@
         });
 
     }
+
+    $("#sumbit").click(function () {
+        console.log($('#from').serialize());
+        $.ajax({
+            type: 'POST',
+            url: "[[@{/admin/updateAdmin}]]",
+            data:  $('#from').serialize(),
+            dataType: "json",
+            success: function (res) {
+                alert(res.msg+""+res.data);
+            },
+            error:function (res) {
+                alert(res.msg);
+            }
+
+        })
+    })
     
 </script>

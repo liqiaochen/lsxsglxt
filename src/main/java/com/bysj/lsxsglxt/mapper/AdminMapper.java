@@ -4,7 +4,9 @@ import com.bysj.lsxsglxt.model.Admin;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AdminMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -38,11 +40,17 @@ public interface AdminMapper {
      * @param id
      * @return
      */
-    @Update("UPDATE `admin` SET `password` = #{password},"
+    @Update("UPDATE `admin` SET `password` = #{password}"
             +"where id=#{id}")
     Integer updatePasswordById(@Param("password") String password,@Param("id") Integer id);
 
-    @Update("UPDATE `admin` SET `url` = #{url},"
+    /**
+     * 通过id更新图片路径
+     * @param url
+     * @param id
+     * @return
+     */
+    @Update("UPDATE `admin` SET `url` = #{url} "
             +"where id=#{id}")
     Integer  updateUrlById(@Param("url") String url,@Param("id") Integer id);
 }

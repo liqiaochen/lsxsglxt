@@ -1,5 +1,5 @@
 package com.bysj.lsxsglxt.model;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -8,38 +8,31 @@ import java.util.Date;
 public class Orderitem {
     private Integer id;
 
-    private User userId;
     /**
-     * 用户地址
+     * 收货时间
      */
-    private Useraddress userAddressId;
-
-    private String address;
-
-    /**
-     * 确认收货时间
-     */
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date confirmTime;
 
-    /**
-     * 收货人
-     */
-    private String consignee;
-
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
-
-    private String orderNumber;
-
+    /**
+     * 订单编号
+     */
+    private String orderCode;
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date payTime;
 
     private String phone;
     /**
      * 发货时间
      */
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date shipTime;
 
     private String updateName;
 
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     private Integer status;
@@ -48,8 +41,12 @@ public class Orderitem {
      */
     private Double totalPrice;
     /**
-     * 邮编
+     * 备注
      */
-    private String zipCode;
+    private String remake;
+    /**
+     * 用户地址
+     */
+    private Useraddress addressId;
 
 }

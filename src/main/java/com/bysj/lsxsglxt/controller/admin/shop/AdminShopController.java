@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/admin/shop")
-public class ShopController {
+public class AdminShopController {
 
     @Autowired
     private ShopTypeService shopTypeService;
@@ -48,7 +48,7 @@ public class ShopController {
     }
 
 
-
+    @LoginRequired(name = "admin")
     @RequestMapping("/shopUpdate.html")
     public ModelAndView shopUpdateShow(Integer id,ModelAndView modelAndView){
         Product product = shopService.selectByIdProduct(id);
@@ -116,5 +116,4 @@ public class ShopController {
         ServerResponse serverResponse = shopService.deleteStatus(ids);
         return serverResponse;
     }
-
 }

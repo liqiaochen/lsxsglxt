@@ -81,11 +81,4 @@ public interface ProducttypeMapper {
     @Update("update productType set status = #{status},name = #{name}  WHERE id = #{id}")
     public int updateByProductType(Producttype productType);
 
-    /**
-     * 修改类型
-     * @param productType
-     * @return
-     */
-    @Update("update productType set status = #{status},name = #{name}  WHERE id = #{id}")
-    public int updateByProductType22222(Producttype productType);
 }
