@@ -89,13 +89,15 @@ public class IndexController {
     @LoginRequired(name = "user")
     @RequestMapping("/PersonalOrder.html")
     public String rePersonalOrder(){
-        return "order/PersonalOrder";
+        return "redirect:/order/showOrderPage";
     }
+
     @LoginRequired(name = "user")
-    @RequestMapping("/order-view.html")
-    public String rePersonalOrderView(){
-        return "order/order-view";
+    @RequestMapping("/PersonalOrder2.html")
+    public String rePersonalOrder2(){
+        return "PersonalOrder";
     }
+    
 
     @RequestMapping("/search")
     public ModelAndView research(@RequestParam(value = "search", required =false) String msg,

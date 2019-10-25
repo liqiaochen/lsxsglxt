@@ -27,7 +27,7 @@ public class Order {
      */
     private Double total;
     /**
-     * 订单状态（12345）
+     * 订单状态（1234）
      */
     private Integer status;
     /**

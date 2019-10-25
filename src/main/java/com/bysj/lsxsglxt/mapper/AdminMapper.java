@@ -4,9 +4,7 @@ import com.bysj.lsxsglxt.model.Admin;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface AdminMapper {
     int deleteByPrimaryKey(Integer id);
 

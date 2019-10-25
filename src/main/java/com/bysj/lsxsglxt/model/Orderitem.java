@@ -20,6 +20,9 @@ public class Orderitem {
      * 订单编号
      */
     private String orderCode;
+    /**
+     * 付款时间
+     */
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date payTime;
 

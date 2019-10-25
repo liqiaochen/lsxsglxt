@@ -260,11 +260,13 @@
                                         <div class="item-row">
                                             <div class="col col-1">
                                                 <div class="g-pic">
-                                                    <img src="../../../../a1/T11lLgB5YT1RXrhCrK!40x40.jpg"  width="40" height="40" th:src="${cart.imgUrl}" th:alt="${cart.title}">
+                                                    <a target="_blank" th:href="@{'/shop/product'(id=${cart.productId.id})}">
+                                                        <img src="../../../../a1/T11lLgB5YT1RXrhCrK!40x40.jpg"  width="40" height="40" th:src="${cart.imgUrl}" th:alt="${cart.title}">
+                                                    </a>
                                                 </div>
                                                 <div class="g-info" >
-                                                    <a href="" >
-                                                        <span th:text="${cart.title}">小米T恤 忍者米兔双截棍 军绿 XXL</span>                                            </a>
+                                                    <a href="" target="_blank" th:href="@{'/shop/product'(id=${cart.productId.id})}">
+                                                        <span th:text="${cart.title}">小米T恤 忍者米兔双截棍 军绿 XXL</span>
                                                     </a>
                                                 </div>
                                             </div>

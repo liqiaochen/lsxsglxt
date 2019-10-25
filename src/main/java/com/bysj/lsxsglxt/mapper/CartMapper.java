@@ -61,7 +61,7 @@ public interface CartMapper {
      * @return
      */
     @Update("update  cart set product_name = #{productName},num = #{num} ,price = #{price}," +
-            "total = #{total} ，status=#{status}" +
+            "total = #{total},status=#{status},order_Id=#{orderId} \n" +
             "where id=#{id}")
     Integer updateCartStatus(Cart cart);
 
@@ -70,7 +70,7 @@ public interface CartMapper {
      * @param orderId
      * @return
      */
-    @Select("select * from cart where orderId=#{orderId}")
+    @Select("select * from cart where order_id=#{orderId}")
     @ResultMap("BaseResultMap")
     List<Cart> selectByOrderId(Integer orderId);
 }

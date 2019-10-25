@@ -5,13 +5,32 @@
     <title>个人中心</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="./css/base.min.css">
-    <link rel="stylesheet" href="./css/main.min.css">
-    <link rel="stylesheet" href="./css/reset1.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/reset1.css" th:href="@{/css/reset1.css}">
+    <link rel="stylesheet" href="./css/style.css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="./css/base.min.css" th:href="@{/css/base.min.css}">
+    <link rel="stylesheet" href="./css/main.min.css" th:href="@{/css/main.min.css}">
+
 <style>
     .grzxbj {
         height: 710px;
+    }
+    .xm-pagenavi li{
+         display: inline;
+     }
+    .xm-pagenavi a.numbers:hover {
+        background: #b0b0b0;
+        color: #fff;
+    }
+    .xm-pagenavi .numbers {
+        height: 30px;
+    }
+    .btn {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        border: 1px solid #b0b0b0;
+        cursor: pointer;
+        transition: all .4s
     }
 </style>
 </head>
@@ -25,178 +44,189 @@
             <div class="ddzx">个人中心</div>
             <div class="subddzx">
                 <ul>
-                    <li><a href="./PersonalInfo.html">我的个人中心</a></li>
-                    <li><a href="./PersonalOrder.html" style="color:#ff6700;font-weight:bold;">我的订单</a></li>
+                    <li><a href="./PersonalInfo.html" th:href="@{/PersonalInfo.html}">我的个人中心</a></li>
+                    <li><a href="./PersonalOrder.html" th:href="@{/PersonalOrder.html}" style="color:#ff6700;font-weight:bold;">我的订单</a></li>
                     <li><a href="">消息通知</a></li>
-                    <li><a href="./PersonalAddress.html">收货地址</a></li>
+                    <li><a href="./PersonalAddress.html" th:href="@{/PersonalAddress.html}">收货地址</a></li>
                 </ul>
             </div>
         </div>
         <div class="rtcont fr">
-        <!--<div class="span16">
+        <div class="span16"th:if="${orderPageInfo.size==0}" >
             <div class="uc-box uc-main-box">
                 <div class="uc-content-box order-list-box">
                     <div class="box-hd">
                         <h1 class="title">我的订单<small>请谨防钓鱼链接或诈骗电话，<a href="https://www.mi.com/service/buy/antifraud/" target="_blank" data-stat-id="c46a318fa0357711" onclick="">了解更多&gt;</a></small></h1>
                         <div class="more clearfix">
                             <ul class="filter-list J_orderType">
-                                <li class="first"><a href="#" onclick="">全部有效订单</a></li>
-                                <li class=""><a href="#" onclick="">待支付（1）</a></li>
-                                <li class="active"><a href="#" onclick="">待收货</a></li>
-                                <li class=""><a href="#" data-type="20"onclick="">已完成订单</a></li>
+                                <li class="first active" th:class="${status}==0?'first active':'first'">
+                                    <a href="#">全部有效订单</a>
+                                </li>
+                                <li class="" th:class="${status}==1?'active':''">
+                                    <a href="#" th:href="@{'/order/showOrderPage'(status=1)}">待支付</a>
+                                </li>
+                                <li class="" th:class="${status}==3?'active':''">
+                                    <a href="#" th:href="@{'/order/showOrderPage'(status=3)}">待收货</a>
+                                </li>
+                                <li class="" th:class="${status}==4?'active':''">
+                                    <a href="#" data-type="20" th:href="@{'/order/showOrderPage'(status=4)}">已完成订单</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="box-bd">
-                        <div id="J_orderList"><p class="empty">当前没有待收货订单。</p></div>
+                        <div id="J_orderList"><p class="empty">当前没有订单。</p></div>
                         <div id="J_orderListPages"></div>
                     </div>
                 </div>
             </div>
-        </div>-->
-            <div class="span16">
+        </div>
+        <div class="span16" th:if="${orderPageInfo.size!=0}">
                 <div class="uc-box uc-main-box">
                     <div class="uc-content-box order-list-box">
                         <div class="box-hd">
                             <h1 class="title">我的订单<small>请谨防钓鱼链接或诈骗电话，<a href="https://www.mi.com/service/buy/antifraud/" target="_blank" data-stat-id="c46a318fa0357711" onclick="">了解更多&gt;</a></small></h1>
                             <div class="more clearfix">
                                 <ul class="filter-list J_orderType">
-                                    <li class="first"><a href="#" onclick="">全部有效订单</a></li>
-                                    <li class=""><a href="#" onclick="">待支付（1）</a></li>
-                                    <li class="active"><a href="#" onclick="">待收货</a></li>
-                                    <li class=""><a href="#" data-type="20"onclick="">已完成订单</a></li>
+                                    <li class="first active" th:class="${status}==0?'first active':'first'">
+                                        <a href="#">全部有效订单</a>
+                                    </li>
+                                    <li class="" th:class="${status}==1?'active':''">
+                                        <a href="#" th:href="@{'/order/showOrderPage'(status=1)}">待支付</a>
+                                    </li>
+                                    <li class="" th:class="${status}==3?'active':''">
+                                        <a href="#" th:href="@{'/order/showOrderPage'(status=3)}">待收货</a>
+                                    </li>
+                                    <li class="" th:class="${status}==4?'active':''">
+                                        <a href="#" data-type="20" th:href="@{'/order/showOrderPage'(status=4)}">已完成订单</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="box-bd">
-                            <div id="J_orderList">
-                                <ul class="order-list">
+                            <div id="J_orderList" >
+                                <ul class="order-list" th:each="order :${orderPageInfo.list}">
                                     <li class="uc-order-item uc-order-item-pay">
                                         <div class="order-detail">
                                             <div class="order-summary">
-                                                <div class="order-status">等待付款</div>
+                                                <div class="order-status" th:if="${order.status}==1">等待付款</div>
+                                                <div class="order-status" th:if="${order.status}==2">等待发货</div>
+                                                <div class="order-status" th:if="${order.status}==3">等待收货</div>
+                                                <div class="order-status" th:if="${order.status}==4">交易成功</div>
+                                                <div class="order-status" th:if="${order.status}==5">订单取消</div>
                                             </div>
                                             <table class="order-detail-table">
                                                 <thead>
                                                 <tr>
                                                     <th class="col-main">
-                                                        <p class="caption-info">2019年09月29日 16:21<span
-                                                                class="sep">|</span>李巧郴<span class="sep">|</span>订单号： <a
-                                                                href="#">5190929780318251</a><span
-                                                                class="sep">|</span>在线支付</p>
+                                                        <p class="caption-info"><span th:text="${#dates.format(order.orderTime,'yyyy年MM月dd日 HH时mm分')}">2019年09月29日 16:21</span>
+                                                            <span class="sep">|</span><span th:text="${order.userId.userName}">李巧郴</span><span class="sep">|</span>订单号： <a
+                                                                href="#" th:text="${order.orderCode}">5190929780318251</a><span
+                                                                class="sep">|</span><span th:text="${order.payment}">在线支付</span></p>
                                                     </th>
-                                                    <th class="col-sub"><p class="caption-price">应付金额：<span class="num">1599.00</span>元
+                                                    <th class="col-sub"><p class="caption-price">应付金额：<span class="num" th:text="${order.total}">1599.00</span>元
                                                     </p></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <tr>
                                                     <td class="order-items">
-                                                        <ul class="goods-list">
-                                                            <li>
-                                                                <div class="figure figure-thumb"><a
-                                                                        href="#"
-                                                                        target="_blank"> <img
-                                                                        src=""
-                                                                        width="80" height="80"
-                                                                        alt="Redmi Note 8 Pro 6GB+128GB 冰翡翠"> </a></div>
-                                                                <p class="name"><a target="_blank"
-                                                                                   href="">Redmi
-                                                                    Note 8 Pro 6GB+128GB 冰翡翠</a></p>
-                                                                <p class="price"> 1599元 × 1 </p>
+                                                        <ul class="goods-list" th:each="cart :${order.carts}">
+                                                            <li th:each="product :${cart.productId}">
+                                                                <div class="figure figure-thumb">
+                                                                    <a href="#" th:href="@{${'/shop/product'}(id= ${product.id})}" target="_blank">
+                                                                        <img src="" width="80" height="80" alt="Redmi Note 8 Pro 6GB+128GB 冰翡翠"
+                                                                             th:each="pic : ${product.picId}" th:if="${pic.level}==0"  th:src="${pic.url}" th:alt="${pic.title}">
+                                                                    </a>
+                                                                </div>
+                                                                <p class="name">
+                                                                    <a target="_blank" href="" th:href="@{${'/shop/product'}(id= ${product.id})}" th:text="${product.title}">Redmi Note 8 Pro 6GB+128GB 冰翡翠</a>
+                                                                </p>
+                                                                <p class="price"><span th:text="${cart.price}">1599</span>元 × <span th:text="${cart.num}">1</span> </p>
                                                             </li>
-
-                                                            <li>
-                                                                <div class="figure figure-thumb"><a
-                                                                        href="#"
-                                                                        target="_blank"> <img
-                                                                        src=""
-                                                                        width="80" height="80"
-                                                                        alt="Redmi Note 8 Pro 6GB+128GB 冰翡翠"> </a></div>
-                                                                <p class="name"><a target="_blank"
-                                                                                   href="">Redmi
-                                                                    Note 8 Pro 6GB+128GB 冰翡翠</a></p>
-                                                                <p class="price"> 1599元 × 1 </p>
-                                                            </li>
-
+                                                            <br>
                                                         </ul>
                                                     </td>
-                                                    <td class="order-actions"><a class="btn btn-small btn-primary"
-                                                                                 href="#"
-                                                                                 target="_blank">立即付款</a> <a
+                                                    <td class="order-actions" th:if="${order.status==1}">
+                                                        <a class="btn btn-small btn-primary"
+                                                           href="" id="pay" th:onclick="pay([[${order.id}]])"
+                                                                                 >立即付款</a>
+                                                        <a  target="_blank"
                                                             class="btn btn-small btn-line-gray"
-                                                            href="order-view.html">订单详情</a>
+                                                            href="order-view.html" th:href="@{'/order/orderItem'(id=${order.id})}">订单详情</a>
+                                                    </td>
+                                                    <td class="order-actions" th:if="${order.status!=1}">
+                                                        <a  target="_blank"
+                                                            class="btn btn-small btn-line-gray"
+                                                            href="order-view.html" th:href="@{'/order/orderItem'(id=${order.id})}">订单详情</a>
                                                     </td>
                                                 </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </li>
-                                    <li class="uc-order-item uc-order-item-pay">
-                                        <div class="order-detail">
-                                            <div class="order-summary">
-                                                <div class="order-status">等待付款</div>
-                                            </div>
-                                            <table class="order-detail-table">
-                                                <thead>
-                                                <tr>
-                                                    <th class="col-main">
-                                                        <p class="caption-info">2019年09月29日 16:21<span
-                                                                class="sep">|</span>李巧郴<span class="sep">|</span>订单号： <a
-                                                                href="#">5190929780318251</a><span
-                                                                class="sep">|</span>在线支付</p>
-                                                    </th>
-                                                    <th class="col-sub"><p class="caption-price">应付金额：<span class="num">1599.00</span>元
-                                                    </p></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td class="order-items">
-                                                        <ul class="goods-list">
-                                                            <li>
-                                                                <div class="figure figure-thumb"><a
-                                                                        href="#"
-                                                                        target="_blank"> <img
-                                                                        src=""
-                                                                        width="80" height="80"
-                                                                        alt="Redmi Note 8 Pro 6GB+128GB 冰翡翠"> </a></div>
-                                                                <p class="name"><a target="_blank"
-                                                                                   href="">Redmi
-                                                                    Note 8 Pro 6GB+128GB 冰翡翠</a></p>
-                                                                <p class="price"> 1599元 × 1 </p></li>
-                                                        </ul>
-                                                    </td>
-                                                    <td class="order-actions"><a class="btn btn-small btn-primary"
-                                                                                 href="#"
-                                                                                 target="_blank">立即付款</a> <a
-                                                            class="btn btn-small btn-line-gray"
-                                                            href="order-view.html">订单详情</a>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </li>
-
                                 </ul>
                             </div>
                             <div id="J_orderListPages">
-                                <div class="xm-pagenavi"><span class="numbers first"><span
-                                        class="iconfont"></span></span> <span class="numbers current">1</span> <span
-                                        class="numbers last"><span class="iconfont"></span></span></div>
+                                <div>
+                                    <div class="xm-pagenavi">
+                                        <li>
+                                            <a th:if="${not orderPageInfo.isFirstPage}" class="numbers first" th:href="@{${'/order/showOrderPage'}(pageNum=${pageInfo.pageNum-1},pageSize=${pageInfo.pageSize})}">
+                                                <span class="iconfont"></span>
+                                            </a>
+                                            <a th:if="${orderPageInfo.isFirstPage}" href="javascript:void(0);"class="numbers first">
+                                                <span class="iconfont"></span>
+                                            </a>
+                                        </li>
+                                        <li th:each="pageNo : ${#numbers.sequence(1, orderPageInfo.pages)}">
+                                            <a th:if="${orderPageInfo.pageNum eq pageNo}" class="current numbers" href="javascript:void(0);">
+                                                <span th:text="${pageNo}"></span>
+                                            </a>
+                                            <a  th:if="${not (orderPageInfo.pageNum eq pageNo)}" class="numbers" th:href="@{${'/order/showOrderPage'}(pageNum=${pageNo},pageSize=${pageInfo.pageSize})}">
+                                                <span th:text="${pageNo}"></span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a th:if="${not orderPageInfo.isLastPage}" class="numbers last" th:href="@{${'/order/showOrderPage'}(pageNum=${pageInfo.pageNum+1},pageSize=${pageInfo.pageSize})}" aria-label="Next">
+                                                <span class="iconfont"></span>
+                                            </a>
+                                            <a th:if="${orderPageInfo.isLastPage}" href="javascript:void(0);" class="numbers last">
+                                                <span class="iconfont"></span>
+                                            </a>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
         </div>
+            </div>
         <div class="clear"></div>
     </div>
 </div>
 
 </body>
-<script type="text/javascript" src="./js/jquery.min.js"></script>
-<script type="text/javascript" src="./js/index.js"></script>
+<script type="text/javascript" src="./js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="./js/index.js" th:src="@{/js/index.js}"></script>
+<script>
+
+    function  pay(id) {
+        $.ajax({
+            type: 'POST',
+            url: "[[@{/order/pay}]]",
+            data:{"id":id},
+            dataType: "json",
+            success: function (res) {
+                alert(res.msg);
+                alert("付款成功");
+            },
+            error:function (res) {
+                alert(res.msg);
+            }
+        });
+    }
+</script>
 </html>

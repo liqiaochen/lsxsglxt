@@ -12,7 +12,7 @@
                 </div>
                 <!--购物车-->
                 <div class="topbar-cart pull-right" th:if="${session.user}!=null">
-                    <a href="carts.html" class="btn cart">
+                    <a href="carts.html" th:href="@{/carts.html}" class="btn cart" style="border: 0px">
                         <!--<i class="icon iconfont"></i>-->
                         购物车<!--(<span>0</span>)-->
                     </a>

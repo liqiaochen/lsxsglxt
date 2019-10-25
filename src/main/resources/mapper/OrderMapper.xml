@@ -11,9 +11,9 @@
     <result column="payment" jdbcType="VARCHAR" property="payment"/>
     <association property="userId" javaType="com.bysj.lsxsglxt.model.User" column="user_id"
                  fetchType="lazy" select="com.bysj.lsxsglxt.mapper.UserMapper.selectUserOneById"/>
-    <association property="orderItemId" javaType="com.bysj.lsxsglxt.model.Orderitem" column="orderItem_Id"
+    <association property="orderItemId" javaType="com.bysj.lsxsglxt.model.Orderitem" column="orderitem_id"
                  fetchType="lazy" select="com.bysj.lsxsglxt.mapper.OrderitemMapper.selectById"/>
-    <collection property="carts" javaType="com.bysj.lsxsglxt.model.Cart" column="id"
+    <collection property="carts" javaType="java.util.List" column="id"
                 fetchType="lazy" select="com.bysj.lsxsglxt.mapper.CartMapper.selectByOrderId"/>
 
   </resultMap>

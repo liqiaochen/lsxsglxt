@@ -5,13 +5,13 @@
     <title>个人中心</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="./css/base.min.css">
-    <link rel="stylesheet" href="./css/main.min.css">
-    <link rel="stylesheet" type="text/css" href="css/checkOut.css">
-    <link rel="stylesheet" href="./css/reset1.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <script type="text/javascript" src="./js/jquery.min.js"></script>
-    <script type="text/javascript" src="./js/index.js"></script>
+    <link rel="stylesheet" href="./css/base.min.css" th:href="@{/css/base.min.css}">
+    <link rel="stylesheet" href="./css/main.min.css" th:href="@{/css/main.min.css}">
+    <link rel="stylesheet" type="text/css" href="css/checkOut.css" th:href="@{/css/checkOut.css}">
+    <link rel="stylesheet" href="./css/reset1.css" th:href="@{/css/reset1.css}">
+    <link rel="stylesheet" href="./css/style.css" th:href="@{/css/style.css}">
+    <script type="text/javascript" src="./js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" src="./js/index.js" th:src="@{/js/index.js}"></script>
 </head>
 <body>
 <div id="head" th:include="common/head :: common_head"></div>
@@ -89,10 +89,10 @@
             <div class="ddzx">个人中心</div>
             <div class="subddzx">
                 <ul>
-                    <li><a href="./PersonalInfo.html">我的个人中心</a></li>
-                    <li><a href="./PersonalOrder.html">我的订单</a></li>
-                    <li><a href="javascript:void(0);">消息通知</a></li>
-                    <li><a href="./PersonalAddress.html" style="color:#ff6700;font-weight:bold;">收货地址</a></li>
+                    <li><a href="./PersonalInfo.html" th:href="@{/PersonalInfo.html}">我的个人中心</a></li>
+                    <li><a href="./PersonalOrder.html" th:href="@{/PersonalOrder.html}" >我的订单</a></li>
+                    <li><a href="">消息通知</a></li>
+                    <li><a href="./PersonalAddress.html" th:href="@{/PersonalAddress.html}" style="color:#ff6700;font-weight:bold;">收货地址</a></li>
                 </ul>
             </div>
         </div>

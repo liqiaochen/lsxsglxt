@@ -13,7 +13,6 @@
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="totalPrice" jdbcType="DOUBLE" property="totalPrice" />
-    <result column="zipCode" jdbcType="VARCHAR" property="zipCode" />
     <result column="remake" jdbcType="VARCHAR" property="remake" />
     <association property="addressId" javaType="com.bysj.lsxsglxt.model.Useraddress" column="address_id"
                  fetchType="lazy" select="com.bysj.lsxsglxt.mapper.UseraddressMapper.selectById"/>

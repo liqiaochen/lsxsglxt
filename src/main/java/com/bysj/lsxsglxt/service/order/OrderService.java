@@ -42,11 +42,35 @@ public class OrderService {
      * @param userId
      * @return
      */
-    public PageInfo<Order> showOrder(Integer pageNum,Integer pageSize,Integer userId){
+    public PageInfo<Order> showOrderPage(Integer pageNum,Integer pageSize,Integer userId){
         PageHelper.startPage(pageNum,pageSize);
         List<Order> orders = orderMapper.selectByUserId(userId);
         PageInfo<Order> pageTypeInfo = new PageInfo<>(orders);
         return pageTypeInfo;
+    }
+
+    /**
+     * 查询用户的订单根据用户id和订单状态,并分页
+     * @param pageNum
+     * @param pageSize
+     * @param userId
+     * @param status
+     * @return
+     */
+    public PageInfo<Order> showOrderPageStatus(Integer pageNum,Integer pageSize,Integer userId,Integer status){
+        PageHelper.startPage(pageNum,pageSize);
+        List<Order> orders = orderMapper.selectByUserIdStatus(userId,status);
+        PageInfo<Order> pageTypeInfo = new PageInfo<>(orders);
+        return pageTypeInfo;
+    }
+    /**
+     * 查询订单通过订单id
+     * @param id
+     * @return
+     */
+    public Order showOrder(Integer id){
+        Order order = orderMapper.selectById(id);
+        return order;
     }
 
 
@@ -79,13 +103,15 @@ public class OrderService {
             * 填充订单信息
             */
            order.setOrderItemId(orderitem);
+           System.out.println("--------------"+orderitem);
            order.setUserId(user);
            order.setUserName(user.getUserName());
            order.setOrderCode(orderCode);
            order.setOrderTime(now);
            order.setStatus(1);
            order.setPayment(payment);
-           Integer orderId = orderMapper.InsertOrder(order);
+           order.setTotal(cartsPojo.getCartTotalPrice());
+           Integer orderId = orderMapper.insertOrder(order);
 
            /**
             * 修改购物车，并且将状态改为生成订单
@@ -96,15 +122,49 @@ public class OrderService {
            for (CartPojo pojo : cartPojos){
                cart = ConverCart(pojo);
                cart.setStatus(2);
-               cart.setOrderId(orderId);
+               cart.setOrderId(order.getId());
                Integer integer = cartMapper.updateCartStatus(cart);
                i=i+integer;
            }
-           return ServerResponse.createBySuccess("生成订单成功", "");
+           if (i==cartPojos.size()) {
+               return ServerResponse.createBySuccess("生成订单成功", "");
+           }else {
+               return ServerResponse.createByError("修改购物车失败");
+           }
        }catch (Exception e) {
-           System.out.println(e);
            return ServerResponse.createByError("生成订单失败");
        }
+    }
+
+    /**
+     * 修改订单状态
+     * @return
+     */
+    public ServerResponse updateOrderStatus(int status,Integer orderId){
+        try {
+            Date now = new Date();
+            orderMapper.updateOrderStatus(status,orderId);
+            Order order = orderMapper.selectById(orderId);
+            Orderitem orderItem = order.getOrderItemId();
+            Integer orderItemId = orderItem.getId();
+            //客户付款
+            if (status==2){
+                orderitemMapper.updateOrderItemStatusPay(orderItemId,status,now);
+                return ServerResponse.createBySuccess("付款成功","");
+            }//收货
+            else if(status==4){
+                orderitemMapper.updateOrderItemStatusReceipt(orderItemId,status,now);
+                return ServerResponse.createBySuccess("收货成功","");
+            }//取消订单
+            else  if (status==5){
+                orderitemMapper.updateOrderItemStatusCancel(orderItemId,status);
+                return ServerResponse.createBySuccess("取消订单成功","");
+            }
+            return ServerResponse.createByError("出现了意外");
+        }catch (Exception e){
+            return ServerResponse.createByError(e.toString());
+        }
+
     }
 
     private Cart ConverCart(CartPojo pojo) {

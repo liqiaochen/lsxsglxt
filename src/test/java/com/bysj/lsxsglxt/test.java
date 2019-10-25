@@ -1,12 +1,7 @@
 package com.bysj.lsxsglxt;
-
 import com.bysj.LsxsglxtApplication;
-import com.bysj.lsxsglxt.mapper.PictureMapper;
-import com.bysj.lsxsglxt.mapper.ProductMapper;
-import com.bysj.lsxsglxt.mapper.ProducttypeMapper;
-import com.bysj.lsxsglxt.model.Picture;
-import com.bysj.lsxsglxt.model.Product;
-import com.bysj.lsxsglxt.model.Producttype;
+import com.bysj.lsxsglxt.mapper.*;
+import com.bysj.lsxsglxt.model.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -36,6 +31,12 @@ public class test {
 
     @Autowired
     private PictureMapper pictureMapper;
+
+    @Autowired
+    private OrderitemMapper orderitemMapper;
+
+    @Autowired
+    private OrderMapper orderMapper;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Test
@@ -86,5 +87,14 @@ public class test {
 
         List<Product> products1 = productMapper.recommendList(1);
         products1.forEach((a)-> System.out.println("2:"+a.getRecommend()));
+    }
+    @Test
+    public void Test6(){
+        Orderitem orderitem = orderitemMapper.selectById(5);
+        System.out.println(orderitem);
+    }@Test
+    public void Test7(){
+        Order order = orderMapper.selectById(5);
+        System.out.println(order);
     }
 }
