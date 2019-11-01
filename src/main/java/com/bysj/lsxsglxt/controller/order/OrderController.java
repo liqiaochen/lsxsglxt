@@ -34,7 +34,7 @@ public class OrderController {
     @RequestMapping("/showOrderPage")
     public ModelAndView showOrderPage(@RequestParam(value = "serverResponse", required =false) ServerResponse serverResponse,
                                       @RequestParam(required =false) Integer status,@RequestParam(defaultValue = "1") int pageNum,
-                                      @RequestParam(defaultValue = "2") int pageSize, HttpSession session,
+                                      @RequestParam(defaultValue = "1") int pageSize, HttpSession session,
                                       RedirectAttributes redirectAttributes){
         ModelAndView mv;
         if (serverResponse!=null&&!serverResponse.checkIsSuccess()){
@@ -44,7 +44,7 @@ public class OrderController {
             mv = new ModelAndView("order/PersonalOrder");
             User user = (User) session.getAttribute("user");
             //如果没有则是查询所有订单
-            if (status==null) {
+            if (status==null||status ==0) {
                 PageInfo<Order> orderPageInfo = orderService.showOrderPage(pageNum, pageSize, user.getId());
                 mv.addObject("orderPageInfo", orderPageInfo);
                 mv.addObject("status", 0);

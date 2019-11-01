@@ -13,6 +13,7 @@ import lombok.Data;
 @Data
 public class CartPojo {
     private Integer id;
+    private Integer productId;
     private String imgUrl;
     private String title;
     private double price;

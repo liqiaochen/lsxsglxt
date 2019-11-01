@@ -22,21 +22,21 @@
                     <ul class="nav nav-subnav">
                         <li th:class="${activeUri=='shopType.html'?'active':''}"> <a th:href="@{/admin/shop/shopType.html}">类目管理</a> </li>
                         <li th:class="${activeUri eq 'shopList.html'?'active':''}"> <a th:href="@{/admin/shop/shopList.html}">商品列表</a></li>
-                        <li th:class="${activeUri=='lyear_forms_checkbox.html'?'active':''}"> <a href="lyear_forms_checkbox.html">规格管理</a> </li>
-                        <li th:class="${activeUri=='shopRecommend.html'?'active':''}"> <a href="shopRecommend.html">商品推荐</a> </li>
+<!--                        <li th:class="${activeUri=='lyear_forms_checkbox.html'?'active':''}"> <a href="lyear_forms_checkbox.html">规格管理</a> </li>
+                        <li th:class="${activeUri=='shopRecommend.html'?'active':''}"> <a href="shopRecommend.html">商品推荐</a> </li>-->
                     </ul>
                 </li>
                 <li class="nav-item nav-item-has-subnav">
                     <a href="javascript:void(0)"><i class="mdi mdi-palette"></i> 订单管理</a>
                     <ul class="nav nav-subnav">
-                        <li th:class="${activeUri=='orderList.html'?'active':''}"> <a th:href="@{/admin/orderList.html}">订单列表</a> </li>
-                        <li th:class="${activeUri=='index1.html'?'active':''}"> <a href="address.html">发货地址</a> </li>
+                        <li th:class="${activeUri=='orderList.html'?'active':''}"> <a th:href="@{/admin/order/orderList.html}">订单列表</a> </li>
+                        <!--<li th:class="${activeUri=='index1.html'?'active':''}"> <a href="address.html">发货地址</a> </li>
                         <li th:class="${activeUri=='index1.html'?'active':''}"> <a href="lyear_ui_grid.html">格栅</a> </li>
-                        <li th:class="${activeUri=='index1.html'?'active':''}"> <a href="lyear_ui_icons.html">图标</a> </li>
+                        <li th:class="${activeUri=='index1.html'?'active':''}"> <a href="lyear_ui_icons.html">图标</a> </li>-->
                     </ul>
                 </li>
 
-                <li class="nav-item nav-item-has-subnav">
+                <!--<li class="nav-item nav-item-has-subnav">
                     <a href="javascript:void(0)"><i class="mdi mdi-account"></i>用户管理</a>
                     <ul class="nav nav-subnav">
                         <li th:class="${activeUri=='userList.html'?'active':''}"> <a href="userList.html">用户列表</a> </li>
@@ -73,7 +73,7 @@
 
         <div class="sidebar-footer">
             <p class="copyright">Copyright &copy; 2019. <a target="_blank" href="http://lyear.itshubao.com">IT书包</a> All rights reserved.</p>
-        </div>
+        </div>-->
     </div>
 
 </aside>

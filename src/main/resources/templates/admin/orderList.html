@@ -52,10 +52,11 @@ table{
                       </ul>
                     </div>
                     <input type="text" class="form-control" value="" name="keyword" placeholder="请输入">
+                    <!--<input type="submit" value="查询" name="keyword">-->
                   </div>
                 </form>
                 <div class="toolbar-btn-action">
-                  <a class="btn btn-primary m-r-5" href="orderUpdate.html">修改</a>
+                  <a class="btn btn-success m-r-5">发货</a>
                   <a class="btn btn-danger" href="#!">删除</a>
                 </div>
               </div>
@@ -73,7 +74,7 @@ table{
                           </label>
                         </th>
                         <th style='width:10%;'>订单日期</th>
-                        <th style='width:15%;'>订单编号</th>
+                        <th style='width:17%;'>订单编号</th>
                         <th>订单金额</th>
                         <th>收件人</th>
                         <th>订单状态</th>
@@ -81,22 +82,29 @@ table{
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="text-center">
+                      <tr class="text-center" th:each="order :${pageInfo.list}">
                         <td>
                           <label class="lyear-checkbox checkbox-primary">
-                            <input type="checkbox" name="ids[]" value="1"><span></span>
+                            <input type="checkbox" name="ids[]" value="1" th:value="${order.id}"><span></span>
                           </label>
                         </td>
-                        <td>20190909</td>
-                        <td>123456789</td>
-                        <td>30￥</td>
-                        <td>张三</td>
-                        <td>已发货</td>
-                        
+                        <td th:text="${#dates.format(order.orderTime,'yyyy-MM-dd HH:mm:ss')}">20190909</td>
+                        <td th:text="${order.orderCode}">123456789</td>
+                        <td th:text="${order.total}">30￥</td>
+                        <td th:text="${order.userId.userName}">张三</td>
+                        <td th:if="${order.status==1}">未付款</td>
+                        <td th:if="${order.status==2}">未发货</td>
+                        <td th:if="${order.status==3}">已发货</td>
+                        <td th:if="${order.status==4}">已收货</td>
+                        <td th:if="${order.status==5}">已取消</td>
                         <td>
                           <div class="btn-group">
-                            <a class="btn btn-xs btn-default" href="orderUpdate.html" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
-                            <a class="btn btn-xs btn-default" href="#!" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                            <a class="btn btn-xs btn-default" href="orderDetails.html" th:href="@{'/admin/order/orderDetails.html'(id=${order.id})}" title="查看" data-toggle="tooltip">
+                              <i class="mdi mdi-pencil"></i>
+                            </a>
+                            <a class="btn btn-xs btn-default" th:onclick="delivery([[${order.id}]],[[${order.status}]])" id="delivery" title="发货" data-toggle="tooltip">
+                              <i class="mdi mdi-check"></i>
+                            </a>
                           </div>
                         </td>
                       </tr>   
@@ -105,19 +113,34 @@ table{
                   </table>
                 </div>
                 <ul class="pagination">
-                  <li class="disabled"><span>«</span></li>
-                  <li class="active"><span>1</span></li>
-                  <li><a href="#1">2</a></li>
-                  <li><a href="#1">3</a></li>
-                  <li><a href="#1">4</a></li>
-                  <li><a href="#1">5</a></li>
-                  <li><a href="#1">6</a></li>
-                  <li><a href="#1">7</a></li>
-                  <li><a href="#1">8</a></li>
-                  <li class="disabled"><span>...</span></li>
-                  <li><a href="#!">14452</a></li>
-                  <li><a href="#!">14453</a></li>
-                  <li><a href="#!">»</a></li>
+
+                  <li>
+                    <a th:if="${not pageInfo.isFirstPage}" th:href="@{${'orderList.html'}(pageNum=${pageInfo.pageNum-1},pageSize=${pageInfo.pageSize})}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    <a th:if="${pageInfo.isFirstPage}" href="javascript:void(0);" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+
+                  <li th:each="pageNo : ${#numbers.sequence(1, pageInfo.pages)}">
+                    <a th:if="${pageInfo.pageNum eq pageNo}" class="bg-info" href="javascript:void(0);">
+                      <span th:text="${pageNo}"></span>
+                    </a>
+
+                    <a  th:if="${not (pageInfo.pageNum eq pageNo)}" th:href="@{${'orderList.html'}(pageNum=${pageNo},pageSize=${pageInfo.pageSize})}">
+                      <span th:text="${pageNo}"></span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a th:if="${not pageInfo.isLastPage}" th:href="@{${'orderList.html'}(pageNum=${pageInfo.pageNum+1},pageSize=${pageInfo.pageSize})}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    <a th:if="${pageInfo.isLastPage}" href="javascript:void(0);" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
                 </ul>
        
               </div>
@@ -141,6 +164,27 @@ $(function(){
         $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
     });
 });
+
+function delivery(id,status){
+  if (status == 2) {
+    $.ajax({
+      type: 'POST',
+      url: "[[@{/admin/order/delivery}]]",
+      data: {"id": id},
+      dataType: "json",
+      success: function (res) {
+        alert("发货成功");
+        location.reload();
+      },
+      error: function (res) {
+        alert(res.msg);
+      }
+    });
+  }else {
+    alert("订单状态不能发货")
+  }
+}
+
 </script>
 </body>
 </html>

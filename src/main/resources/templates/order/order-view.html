@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>个人中心</title>
+    <title>订单详情页</title>
+    <link rel="icon" th:href="@{/img/favicon.ico}" type="image/ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="./css/reset1.css" th:href="@{/css/reset1.css}">
@@ -51,11 +52,12 @@
                                 <h2 class="subtitle" th:text="${order.orderCode}">订单号：5190929775307636                        <span class="tag tag-subsidy"></span>
                                 </h2>
                                 <div class="actions" th:if="${order.status}==1">
-                                    <a id="J_cancelOrder" class="btn btn-small btn-line-gray" title="取消订单" th:onclick="cancelOrder([[${order.id}]])">取消订单</a>
-                                    <a id="J_payOrder" class="btn btn-small btn-primary" title="立即付款" th:onclick="pay([[${order.id}]])">立即付款</a>
+                                    <a href="javascript:void(0);" class="btn btn-small btn-line-gray" title="取消订单" th:onclick="cancelOrder([[${order.id}]])">取消订单</a>
+                                    <a href="javascript:void(0);" class="btn btn-small btn-primary" title="立即付款" th:onclick="pay([[${order.id}]])">立即付款</a>
                                 </div>
                                 <div class="actions" th:if="${order.status}==2">
-                                    <a id="J_cancelOrder" class="btn btn-small btn-line-gray" th:onclick="cancelOrder([[${order.id}]])" title="取消订单">取消订单</a>
+                                    <a  href="javascript:void(0);" class="btn btn-small btn-line-gray" th:onclick="cancelOrder([[${order.id}]])" title="取消订单">取消订单</a>
+                                    <a href="javascript:void(0);" class="btn btn-small btn-primary" title="立即付款" id="receipt" th:onclick="receipt([[${order.id}]])">立即收货</a>
                                 </div>
                                 <div class="actions" th:if="${order.status}==3">
                                 </div>
@@ -123,7 +125,7 @@
                                             </td>
                                             <td class="col col-name">
                                                 <p class="name">
-                                                    <a target="_blank" href=""  onclick="" th:href="@{${'/product'}(id= ${cart.productId.id})}" th:text="${cart.productId.title}">小米手环4 NFC版 黑色</a>
+                                                    <a target="_blank" href="javascript:void(0);"  onclick="" th:href="@{${'/product'}(id= ${cart.productId.id})}" th:text="${cart.productId.title}">小米手环4 NFC版 黑色</a>
                                                 </p>
                                             </td>
                                             <td class="col col-price">
@@ -242,37 +244,23 @@
             data:{"id":id},
             dataType: "json",
             success: function (res) {
-                alert(res.msg);
                 alert("付款成功");
+                location.reload();
             },
             error:function (res) {
                 alert(res.msg);
             }
         });
     }
-    function  pay(id) {
-        $.ajax({
-            type: 'POST',
-            url: "[[@{/order/pay}]]",
-            data:{"id":id},
-            dataType: "json",
-            success: function (res) {
-                alert(res.msg);
-                alert("付款成功");
-            },
-            error:function (res) {
-                alert(res.msg);
-            }
-        });
-    }function  cancelOrder(id) {
+   function  cancelOrder(id) {
         $.ajax({
             type: 'POST',
             url: "[[@{/order/cancelOrder}]]",
             data:{"id":id},
             dataType: "json",
             success: function (res) {
-                alert(res.msg);
-                alert("收货成功");
+                alert("取消订单成功");
+                location.reload();
             },
             error:function (res) {
                 alert(res.msg);
@@ -280,6 +268,21 @@
         });
     }
 
+    function  receipt(id) {
+        $.ajax({
+            type: 'POST',
+            url: "[[@{/order/receipt}]]",
+            data:{"id":id},
+            dataType: "json",
+            success: function (res) {
+                alert("收货成功");
+                location.reload();
+            },
+            error:function (res) {
+                alert(res.msg);
+            }
+        });
+    }
 
 </script>
 </html>

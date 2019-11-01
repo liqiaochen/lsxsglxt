@@ -93,7 +93,6 @@ public class UserService {
      */
     public User loginUser(String name, String password){
         User user = userMapper.selectUserOne(name, password);
-
         if (user!=null){
             System.out.println(user);
             return user;
@@ -144,10 +143,18 @@ public class UserService {
 
     }
 
-
     public Boolean updateUserAddress(Useraddress useraddress,Integer userId){
         useraddress.setUserId(userId);
         Integer integer = userAddresMapper.updateUserAddress(useraddress);
+        if (integer!=null){
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean insertUserAddress(Useraddress useraddress,Integer userId){
+        useraddress.setUserId(userId);
+        Integer integer = userAddresMapper.insertUserAddress(useraddress);
         if (integer!=null){
             return true;
         }

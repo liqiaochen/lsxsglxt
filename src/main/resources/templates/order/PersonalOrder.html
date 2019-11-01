@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>个人中心</title>
+    <title>个人订单页</title>
+    <link rel="icon" th:href="@{/img/favicon.ico}" type="image/ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="./css/reset1.css" th:href="@{/css/reset1.css}">
@@ -60,10 +61,13 @@
                         <div class="more clearfix">
                             <ul class="filter-list J_orderType">
                                 <li class="first active" th:class="${status}==0?'first active':'first'">
-                                    <a href="#">全部有效订单</a>
+                                    <a href="#" th:href="@{'/order/showOrderPage'(status=0)}">全部订单</a>
                                 </li>
                                 <li class="" th:class="${status}==1?'active':''">
                                     <a href="#" th:href="@{'/order/showOrderPage'(status=1)}">待支付</a>
+                                </li>
+                                <li class="" th:class="${status}==2?'active':''">
+                                    <a href="#" th:href="@{'/order/showOrderPage'(status=2)}">待发货</a>
                                 </li>
                                 <li class="" th:class="${status}==3?'active':''">
                                     <a href="#" th:href="@{'/order/showOrderPage'(status=3)}">待收货</a>
@@ -89,10 +93,13 @@
                             <div class="more clearfix">
                                 <ul class="filter-list J_orderType">
                                     <li class="first active" th:class="${status}==0?'first active':'first'">
-                                        <a href="#">全部有效订单</a>
+                                        <a href="#" th:href="@{'/order/showOrderPage'(status=0)}">全部订单</a>
                                     </li>
                                     <li class="" th:class="${status}==1?'active':''">
                                         <a href="#" th:href="@{'/order/showOrderPage'(status=1)}">待支付</a>
+                                    </li>
+                                    <li class="" th:class="${status}==2?'active':''">
+                                        <a href="#" th:href="@{'/order/showOrderPage'(status=2)}">待发货</a>
                                     </li>
                                     <li class="" th:class="${status}==3?'active':''">
                                         <a href="#" th:href="@{'/order/showOrderPage'(status=3)}">待收货</a>
@@ -149,13 +156,31 @@
                                                     </td>
                                                     <td class="order-actions" th:if="${order.status==1}">
                                                         <a class="btn btn-small btn-primary"
-                                                           href="" id="pay" th:onclick="pay([[${order.id}]])"
+                                                           href="javascript:void(0);" id="pay" th:onclick="pay([[${order.id}]])"
                                                                                  >立即付款</a>
                                                         <a  target="_blank"
                                                             class="btn btn-small btn-line-gray"
                                                             href="order-view.html" th:href="@{'/order/orderItem'(id=${order.id})}">订单详情</a>
                                                     </td>
-                                                    <td class="order-actions" th:if="${order.status!=1}">
+                                                    <td class="order-actions" th:if="${order.status==2}">
+                                                        <a  target="_blank"
+                                                            class="btn btn-small btn-line-gray"
+                                                            href="order-view.html" th:href="@{'/order/orderItem'(id=${order.id})}">订单详情</a>
+                                                    </td>
+                                                    <td class="order-actions" th:if="${order.status==3}">
+                                                        <a class="btn btn-small btn-primary"
+                                                           href="javascript:void(0);" id="receipt" th:onclick="receipt([[${order.id}]])"
+                                                        >立即收货</a>
+                                                        <a  target="_blank"
+                                                            class="btn btn-small btn-line-gray"
+                                                            href="order-view.html" th:href="@{'/order/orderItem'(id=${order.id})}">订单详情</a>
+                                                    </td>
+                                                    <td class="order-actions" th:if="${order.status==4}">
+                                                        <a  target="_blank"
+                                                            class="btn btn-small btn-line-gray"
+                                                            href="order-view.html" th:href="@{'/order/orderItem'(id=${order.id})}">订单详情</a>
+                                                    </td>
+                                                    <td class="order-actions" th:if="${order.status==5}">
                                                         <a  target="_blank"
                                                             class="btn btn-small btn-line-gray"
                                                             href="order-view.html" th:href="@{'/order/orderItem'(id=${order.id})}">订单详情</a>
@@ -171,7 +196,7 @@
                                 <div>
                                     <div class="xm-pagenavi">
                                         <li>
-                                            <a th:if="${not orderPageInfo.isFirstPage}" class="numbers first" th:href="@{${'/order/showOrderPage'}(pageNum=${pageInfo.pageNum-1},pageSize=${pageInfo.pageSize})}">
+                                            <a th:if="${not orderPageInfo.isFirstPage}" class="numbers first" th:href="@{${'/order/showOrderPage'}(pageNum=${orderPageInfo.pageNum-1},pageSize=${orderPageInfo.pageSize},status=${status})}">
                                                 <span class="iconfont"></span>
                                             </a>
                                             <a th:if="${orderPageInfo.isFirstPage}" href="javascript:void(0);"class="numbers first">
@@ -182,13 +207,13 @@
                                             <a th:if="${orderPageInfo.pageNum eq pageNo}" class="current numbers" href="javascript:void(0);">
                                                 <span th:text="${pageNo}"></span>
                                             </a>
-                                            <a  th:if="${not (orderPageInfo.pageNum eq pageNo)}" class="numbers" th:href="@{${'/order/showOrderPage'}(pageNum=${pageNo},pageSize=${pageInfo.pageSize})}">
+                                            <a  th:if="${not (orderPageInfo.pageNum eq pageNo)}" class="numbers" th:href="@{${'/order/showOrderPage'}(pageNum=${pageNo},pageSize=${orderPageInfo.pageSize},status=${status})}">
                                                 <span th:text="${pageNo}"></span>
                                             </a>
                                         </li>
 
                                         <li>
-                                            <a th:if="${not orderPageInfo.isLastPage}" class="numbers last" th:href="@{${'/order/showOrderPage'}(pageNum=${pageInfo.pageNum+1},pageSize=${pageInfo.pageSize})}" aria-label="Next">
+                                            <a th:if="${not orderPageInfo.isLastPage}" class="numbers last" th:href="@{${'/order/showOrderPage'}(pageNum=${orderPageInfo.pageNum+1},pageSize=${orderPageInfo.pageSize},status=${status})}" aria-label="Next">
                                                 <span class="iconfont"></span>
                                             </a>
                                             <a th:if="${orderPageInfo.isLastPage}" href="javascript:void(0);" class="numbers last">
@@ -220,13 +245,29 @@
             data:{"id":id},
             dataType: "json",
             success: function (res) {
-                alert(res.msg);
                 alert("付款成功");
+                location.reload();
             },
             error:function (res) {
                 alert(res.msg);
             }
         });
     }
+    function  receipt(id) {
+        $.ajax({
+            type: 'POST',
+            url: "[[@{/order/receipt}]]",
+            data:{"id":id},
+            dataType: "json",
+            success: function (res) {
+                alert("收货成功");
+                location.reload();
+            },
+            error:function (res) {
+                alert(res.msg);
+            }
+        });
+    }
+
 </script>
 </html>

@@ -38,6 +38,13 @@ public class AdminShopController {
     @Autowired
     private ShopService shopService;
 
+    /**
+     * 分页，起始页默认1，分页大小默认5
+     * @param pageNum
+     * @param pageSize
+     * @param modelAndView
+     * @return
+     */
     @LoginRequired(name = "admin")
     @RequestMapping("/shopList.html")
     public ModelAndView shopList(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize , ModelAndView modelAndView){

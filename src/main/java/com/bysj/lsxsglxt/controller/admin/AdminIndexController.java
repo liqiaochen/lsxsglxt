@@ -29,13 +29,14 @@ public class AdminIndexController {
 
     @RequestMapping("/orderUpdate.html")
     public String reAdminOrderUpdate(){
-        return "admin/orderUpdate";
+
+        return "orderDetails";
     }
 
-    @RequestMapping("/shopList.html")
+    /*@RequestMapping("/shopList.html")
     public String reAdminShopList(){
         return "admin/shopList";
-    }
+    }*/
 
     @RequestMapping("/shopAdd.html")
     public String reAdminShopAdd(){

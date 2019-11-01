@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>锡货超市</title>
+    <link rel="icon" th:href="@{/img/favicon.ico}" type="image/ico">
+    <title>购买详情页</title>
     <!--<link href="css/public.css" type="text/css" rel="stylesheet">-->
     <!--<link rel="stylesheet" type="text/css" href="css/base.css">-->
     <script type="text/javascript" src="js/jquery_cart.js"></script>
@@ -98,7 +99,7 @@
                         </div>
                         <div class="box-bd">
                             <div class="clearfix xm-address-list" id="checkoutAddrList">
-                                <dl class="item" th:each="address,item : ${session.user.useraddress}" th:class="${item.first?'item selected':'item'}">
+                                <dl th:if="${session.user.useraddress.size()!=0}" class="item" th:each="address,item : ${session.user.useraddress}" th:class="${item.first?'item selected':'item'}">
                                     <input type="radio" name="addressId" hidden="hidden" th:checked="${item.first?true:false}"  value="1" th:value="${address.id}">
                                     <dt>
                                         <strong class="itemConsignee" th:text="${address.consignee}">潘骏杰</strong>
@@ -116,6 +117,10 @@
                                         </a>
                                     </dd>
                                 </dl>
+                                    <a  class="item use-new-addr"  href="PersonalAddress.html" target="_blank" th:href="@{/PersonalAddress.html}" >
+                                    <span class="iconfont icon-add"><img src="images/add_cart.png"></span>
+                                    使用新地址
+                                    </a>
                             </div>
                         </div>
                     </div>
@@ -260,12 +265,12 @@
                                         <div class="item-row">
                                             <div class="col col-1">
                                                 <div class="g-pic">
-                                                    <a target="_blank" th:href="@{'/shop/product'(id=${cart.productId.id})}">
+                                                    <a target="_blank" th:href="@{'/shop/product'(id=${cart.productId})}">
                                                         <img src="../../../../a1/T11lLgB5YT1RXrhCrK!40x40.jpg"  width="40" height="40" th:src="${cart.imgUrl}" th:alt="${cart.title}">
                                                     </a>
                                                 </div>
                                                 <div class="g-info" >
-                                                    <a href="" target="_blank" th:href="@{'/shop/product'(id=${cart.productId.id})}">
+                                                    <a href="" target="_blank" th:href="@{'/shop/product'(id=${cart.productId})}">
                                                         <span th:text="${cart.title}">小米T恤 忍者米兔双截棍 军绿 XXL</span>
                                                     </a>
                                                 </div>

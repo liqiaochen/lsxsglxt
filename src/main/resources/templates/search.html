@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="icon" th:href="@{/img/favicon.ico}" type="image/ico">
     <meta charset="UTF-8">
     <title>搜索页</title>
     <meta name="viewport" content="width=1226">
@@ -33,7 +34,7 @@
         </div>
     </div>
     <div class="search-reuslt">
-        <div class="reuslt-order"  th:if="${pageInfo.list}!=null">
+        <div class="reuslt-order"  th:if="${pageInfo.list.size()}!=0">
                  <div class="goods-list-box">
                     <div class="goods-list clearfix">
                         <div class="goods-item" th:each ="product :${pageInfo.list}">
@@ -81,7 +82,7 @@
                      </div>
                 </div>
     </div>
-        <div th:if="${pageInfo.list}==null">
+        <div th:if="${pageInfo.list.size()}==0">
             <ul>
                 <span>没有商品了</span>
             </ul>

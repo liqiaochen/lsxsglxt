@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>订单更新 </title>
+  <div th:replace="common/adminstatic :: adminstatic"></div>
+<!--标签插件-->
+  <link rel="stylesheet" th:href="@{/js/jquery-tags-input/jquery.tagsinput.min.css}">
+  <script th:src="@{/js/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+</head>
+<style type="text/css">
+
+  .table tbody tr td{
+    vertical-align: middle;
+    text-align: center;
+  }
+  th {
+    text-align: center;
+  }
+  .table tbody tr td img{
+    width: 80px;
+    height: 80px;
+  }
+  table{
+    table-layout:fixed;
+  }
+</style>
+
+<body>
+<div class="lyear-layout-web">
+  <div class="lyear-layout-container">
+    <aside th:include="common/adminAside :: adminAside('orderUpdate.html')" class="lyear-layout-sidebar"></aside>
+    <header th:include="common/adminHead :: adminHead" class="lyear-layout-header"></header>
+    <!--页面主要内容-->
+    <main class="lyear-layout-content">
+      
+      <div class="container-fluid">
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h4>基本信息：</h4>
+                <br>
+                <table class="table table-bordered">
+                  <thead>
+                  <tr>
+                    <th>订单编号</th>
+                    <th>支付方式</th>
+                    <th>总金额</th>
+                    <th>订单状态</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td th:text="${order.orderCode}">123456789</td>
+                    <td th:text="${order.payment}">30￥</td>
+                    <td th:text="${order.total}">30￥</td>
+                    <td th:if="${order.status==1}">未付款</td>
+                    <td th:if="${order.status==2}">未发货</td>
+                    <td th:if="${order.status==3}">已发货</td>
+                    <td th:if="${order.status==4}">已收货</td>
+                    <td th:if="${order.status==5}">已取消</td>
+                  </tr>
+                  </tbody>
+                </table>
+
+
+                <h4>客户信息：</h4>
+                <br>
+                <table class="table table-bordered">
+                  <thead>
+                  <tr>
+                    <th>联系人</th>
+                    <th>电话</th>
+                    <th>收货地址</th>
+                    <th>邮编</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td th:text="${order.orderItemId.addressId.consignee}">小王</td>
+                    <td th:text="${order.orderItemId.addressId.phone}">154312512</td>
+                    <td><span th:text="${order.orderItemId.addressId.region}"></span>
+                      <span th:text="${order.orderItemId.addressId.street}"></span>
+                    </td>
+                    <td th:text="${order.orderItemId.addressId.zipCode}">10023</td>
+                  </tr>
+                  </tbody>
+                </table>
+
+                <h4>时间线：</h4>
+                <br>
+                <table class="table table-bordered">
+                  <thead>
+                  <tr>
+                    <th>下单时间</th>
+                    <th>付款时间</th>
+                    <th>发货时间</th>
+                    <th>收货时间</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td th:text="${#dates.format(order.orderItemId.createTime,'yyyy-MM-dd HH:mm:ss')}">小王</td>
+                    <td th:text="${#dates.format(order.orderItemId.payTime,'yyyy-MM-dd HH:mm:ss')}">154312512</td>
+                    <td th:text="${#dates.format(order.orderItemId.shipTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:text="${#dates.format(order.orderItemId.confirmTime,'yyyy-MM-dd HH:mm:ss')}">10023</td>
+                  </tr>
+                  </tbody>
+                </table>
+              <br>
+             <h4>商品信息：</h4>
+                <br>
+                <table class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th>商品图片</th>
+                    <th>商品名称</th>
+                    <th>商品编码</th>
+                    <th>商品单价</th>
+                    <th>商品数量</th>
+                    <th>商品总价</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="cart :${order.carts}">
+                    <td><img  src="images/gallery/15.jpg" width="80px" height="80px"
+                              th:each="pic : ${cart.productId.picId}" th:if="${pic.level}==1"  th:src="${pic.url}" th:alt="${pic.title}">
+                    </td>
+                    <td th:text="${cart.productId.title}">火龙果</td>
+                    <td th:text="${cart.productId.code}">12131321</td>
+                    <td th:text="${cart.productId.price}">30</td>
+                    <td th:text="${cart.num}">2</td>
+                    <td th:text="${cart.total}">60</td>
+                  </tr>
+                  </tbody>
+                </table>
+                  <br>
+
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </main>
+    <!--End 页面主要内容-->
+  </div>
+</div>
+</body>
+</html>

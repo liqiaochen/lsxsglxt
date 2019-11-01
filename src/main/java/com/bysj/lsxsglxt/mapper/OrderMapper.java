@@ -17,6 +17,14 @@ public interface OrderMapper {
     Order selectById(Integer id);
 
     /**
+     * 查询所有订单
+     * @return
+     */
+    @Select("select * from `order`")
+    @ResultMap("BaseResultMap")
+    List<Order> selectOrderAll();
+
+    /**
      * 通过用户id查询订单
      * @param userId
      * @return

@@ -53,6 +53,11 @@ public class CartController {
         return  ServerResponse.createBySuccess("提交成功", "");
     }
 
+    /**
+     * 取消订单
+     * @param httpSession
+     * @return
+     */
     @RequestMapping("/quxiao")
     @ResponseBody
     public ServerResponse quxiao(HttpSession httpSession){

@@ -19,10 +19,6 @@ public class Order {
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date orderTime;
     /**
-     * 下单人的姓名
-     */
-    private String userName;
-    /**
      * 总计
      */
     private Double total;

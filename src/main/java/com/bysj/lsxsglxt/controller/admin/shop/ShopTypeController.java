@@ -27,6 +27,13 @@ public class ShopTypeController {
     @Autowired
     private ShopTypeService shopTypeService;
 
+    /**
+     * 商品类别展示并分页
+     * @param pageNum
+     * @param pageSize
+     * @param modelAndView
+     * @return
+     */
     @LoginRequired(name = "admin")
     @RequestMapping("/shopType.html")
     public ModelAndView reAdminShopType(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize , ModelAndView modelAndView){

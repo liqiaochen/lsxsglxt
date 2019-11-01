@@ -37,6 +37,19 @@ public class OrderService {
 
     @Autowired
     private UseraddressMapper useraddressMapper;
+
+    /**
+     * 查询所有的订单,并分页
+     * @return
+     */
+    public PageInfo<Order> showOrderAllPage(Integer pageNum,Integer pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+        List<Order> orders = orderMapper.selectOrderAll();
+        PageInfo<Order> pageTypeInfo = new PageInfo<>(orders);
+        return pageTypeInfo;
+    }
+
+
     /**
      * 查询用户的订单,并分页
      * @param userId
@@ -105,7 +118,6 @@ public class OrderService {
            order.setOrderItemId(orderitem);
            System.out.println("--------------"+orderitem);
            order.setUserId(user);
-           order.setUserName(user.getUserName());
            order.setOrderCode(orderCode);
            order.setOrderTime(now);
            order.setStatus(1);
@@ -167,6 +179,23 @@ public class OrderService {
 
     }
 
+public ServerResponse updateOrderStatusAdmin(int status,Integer orderId,String name) {
+    Date now = new Date();
+    orderMapper.updateOrderStatus(status,orderId);
+    Order order = orderMapper.selectById(orderId);
+    Orderitem orderItem = order.getOrderItemId();
+    Integer orderItemId = orderItem.getId();
+    if (status == 3) {
+        orderitemMapper.updateOrderItemStatusDeliver(orderItemId, status, now, name);
+        return ServerResponse.createBySuccess("发货成功","");
+    }
+    return ServerResponse.createByError("出现了意外");
+}
+    /**
+     *
+     * @param pojo
+     * @return
+     */
     private Cart ConverCart(CartPojo pojo) {
         Cart cart;
         cart   = new Cart();

@@ -29,21 +29,23 @@ public class UserController {
     private   UserService userService ;
 
     @RequestMapping("/login")
-    public String login(String userName, String passWord, HttpSession session) {
-
-        User login = userService.loginUser(userName, passWord);
-
-        if (login!=null){
-            session.setAttribute("user",login);
-            return "redirect:index.html";
-        }else {
-            String msg="用户名密码错误";
-            try {
-                msg = URLEncoder.encode(msg,"UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+    public String loginUser(String userName, String passWord, HttpSession httpSession) {
+        if (userName!=null && !userName.isEmpty()) {
+            User login = userService.loginUser(userName, passWord);
+            if (login != null) {
+                httpSession.setAttribute("user", login);
+                return "redirect:index.html";
+            } else {
+                String msg = "用户名密码错误";
+                try {
+                    msg = URLEncoder.encode(msg, "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                return "redirect:login.html?msg=" + msg;
             }
-            return "redirect:login.html?msg="+msg;
+        }else {
+            return "redirect:login.html?msg=用户名不能为空";
         }
     }
 
@@ -99,14 +101,23 @@ public class UserController {
         return userAddress;
     }
     @RequestMapping("/userAddress/update")
-    public String updateUserAddress(Useraddress useraddress,HttpSession session ,RedirectAttributes redirectAttributes){
+    public String updateUserAddress(Useraddress useraddress,HttpSession session ,RedirectAttributes redirectAttributes) {
         User user = (User) session.getAttribute("user");
-        Boolean aBoolean = userService.updateUserAddress(useraddress, user.getId());
-        if (aBoolean){
-            redirectAttributes.addFlashAttribute("msg","保存成功");
-        }else {
-            redirectAttributes.addFlashAttribute("msg","保存失败");
+        Integer id = useraddress.getId();
+        ServerResponse<Useraddress> userAddressServerResponse = userService.selectUserAddressOne(id);
+        Boolean aBoolean;
+        if (userAddressServerResponse.checkIsSuccess()) {
+            aBoolean = userService.updateUserAddress(useraddress, user.getId());
+        } else {
+            aBoolean = userService.insertUserAddress(useraddress, user.getId());
+            if (aBoolean) {
+                redirectAttributes.addFlashAttribute("msg", "保存成功");
+            } else {
+                redirectAttributes.addFlashAttribute("msg", "保存失败");
+            }
         }
+        User user1 = userService.loginUser(user.getUserName(), user.getPassWord());
+        userService.reSession(user1, session);
         return "redirect:/PersonalAddress.html";
     }
 }

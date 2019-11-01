@@ -3,13 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" th:href="@{/img/favicon.ico}" type="image/ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/carts.css">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./iconfont/iconfont.css">
     <link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">
-    <title>我的购物车-小米商城</title>
+    <title>我的购物车</title>
 </head>
 
 <body>
@@ -56,10 +57,11 @@
                                <div class="col col-check">
                                    <div class="ipt">
                                        <input type="checkbox" name="ids[]" th:value="${cart.id}" value="1">
+                                       <input type="hidden"   th:value="${cart.productId.id}"/>
                                    </div>
                                </div>
                                <div class="col col-img">
-                                    <a href="#">
+                                    <a href="#" target="_blank" th:href="@{'/shop/product'(id=${cart.productId.id})}">
                                        <img src="./images/mi9-80.png" alt="" th:each="pic : ${cart.productId.picId}" th:if="${pic.level}==0"  th:src="${pic.url}" th:alt="${pic.title}">
                                    </a>
                                </div>
@@ -149,7 +151,8 @@
     function deleteCat(id){
         $.ajax({
             type: 'POST',
-            url: "[[@{/cart/quxiao}]]",
+            url: "[[@{/cart/delete}]]",
+            data:{"id":id},
             dataType: "json",
             success: function (res) {
                 alert(res.msg);
@@ -224,6 +227,7 @@
             var carts = new Array();
             for (var i =0 ; i <length; i++ ){
                 var id = $(options[i]).val();
+                var productId = $(options[i]).next().val();
                 var nextAll = $(options[i]).parent().parent().nextAll();
                 console.log(nextAll)
                 console.log($(nextAll[0]).children().children())
@@ -239,6 +243,7 @@
                 cartPojo.price = price;
                 cartPojo.num = num;
                 cartPojo.total = total;
+                cartPojo.productId=productId;
                 carts.push(cartPojo);
             }
             var cartTotalPrice = $("#J_cartTotalPrice").text();

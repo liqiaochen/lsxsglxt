@@ -95,19 +95,20 @@ public interface ProductMapper {
 
 
     /**
-     * 查询所有的热门商品或者不热门商品并且是上架的，按照编号升序
+     * 查询所有的热门商品或者不热门商品并且是上架的，按照销量降序,只显示前10条
      * @param hot
      * @return
      */
     @Select("select product.*"+
             "from product \n"+
             "    WHERE product.hot = #{hot} and product.status=1 \n" +
-            "    ORDER BY code ASC \n")
+            "    ORDER BY turnover DESC \n" +
+            "   LIMIT 0,10")
     @ResultMap("BaseResultMap")
     List<Product> hotList(Integer hot);
 
     /**
-     * 查询所有的热门商品或者不热门商品并且是上架的并按照类别Id分类，按照编号升序
+     * 查询所有的热门商品或者不热门商品并且是上架的并按照类别Id分类，按照销量降序
      * @param hot
      * @param typeId
      * @return
@@ -115,19 +116,20 @@ public interface ProductMapper {
     @Select("select product.*"+
             "from product \n" +
             "    WHERE product.hot = #{hot} and product.status=1 and product.type_id=#{typeId} \n" +
-            "    ORDER BY code ASC \n")
+            "    ORDER BY turnover DESC \n")
     @ResultMap("BaseResultMap")
     List<Product> hotListAndType(@Param("hot") Integer hot,@Param("typeId") Integer typeId);
 
     /**
-     * 查询所有的推荐商品或者不推荐的商品并且是上架的，按照编号升序
+     * 查询所有的推荐商品或者不推荐的商品并且是上架的，按照销量降序，只显示前5条。
      * @param recommend
      * @return
      */
     @Select("select product.*"+
             "from product \n"+
             "    WHERE product.recommend = #{recommend} and product.status=1 \n" +
-            "    ORDER BY code ASC \n")
+            "    ORDER BY turnover DESC \n" +
+            "    LIMIT 0,5")
     @ResultMap("BaseResultMap")
     List<Product> recommendList(Integer recommend);
 

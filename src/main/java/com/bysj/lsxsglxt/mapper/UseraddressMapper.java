@@ -37,9 +37,23 @@ public interface UseraddressMapper {
     @ResultMap("userAddress")
     Useraddress selectById(Integer id);
 
+    /**
+     * 通过id修改用户地址
+     * @param userAddres
+     * @return
+     */
     @Update("UPDATE `useraddress` SET `consignee` = #{consignee}," +
             " `phone` = #{phone}, `zipCode` = #{zipCode}, `Street` = #{street}, " +
             "`Region` = #{region}," +
             " `Tag` = #{tag}, `user_id` = #{userId} WHERE `id` = #{id};")
     Integer  updateUserAddress(Useraddress userAddres);
+
+    /**
+     * 增加用户地址
+     * @param userAddres
+     * @return
+     */
+    @Insert("INSERT INTO `useraddress`( `consignee`, `phone`, `zipCode`, `Street`, `Region`, `Tag`, `user_id`)" +
+            " VALUES ( #{consignee},#{phone},#{zipCode}, #{street},#{region}, #{tag}, #{userId});")
+    Integer  insertUserAddress(Useraddress userAddres);
 }
